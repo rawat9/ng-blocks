@@ -1,0 +1,111 @@
+<div appAnimateOnScroll class="opacity-0 translate-y-8 transition-all duration-700 ease-out [&.animate-visible]:opacity-100 [&.animate-visible]:translate-y-0">
+  @for (c of components(); track c.title) {
+    <div class="py-16" appNgTabs>
+      <div class="mb-1 flex items-center justify-between px-1">
+        <h2 class="font-semibold text-neutral-900 dark:text-neutral-100">
+          {{ c.title }}
+        </h2>
+
+        <div class="flex items-center gap-2">
+          <!-- Viewport Toggle Group -->
+          <div class="flex items-center rounded-md border p-0.5 shadow-none">
+            <div appNgToggleGroup [variant]="'default'" [size]="'sm'" class="hidden md:flex gap-0.5 *:data-[slot=toggle-group-item]:size-6! *:data-[slot=toggle-group-item]:rounded-sm!">
+              <button
+                appNgToggleGroupItem
+                [attr.aria-pressed]="viewport() === 'desktop'"
+                (click)="viewport.set('desktop')"
+                title="Desktop"
+              >
+                <ng-icon name="lucideMonitor" size="16" />
+              </button>
+              <button
+                appNgToggleGroupItem
+                [attr.aria-pressed]="viewport() === 'tablet'"
+                (click)="viewport.set('tablet')"
+                title="Tablet"
+              >
+                <ng-icon name="lucideTablet" size="16" />
+              </button>
+              <button
+                appNgToggleGroupItem
+                [attr.aria-pressed]="viewport() === 'mobile'"
+                (click)="viewport.set('mobile')"
+                title="Mobile"
+              >
+                <ng-icon name="lucideSmartphone" size="16" />
+              </button>
+
+              <!-- Separator -->
+              <div class="h-4 w-px bg-neutral-300 dark:bg-neutral-600"></div>
+
+              <button
+                appNgToggleGroupItem
+                (click)="openInNewTab()"
+                title="Fullscreen"
+              >
+                <ng-icon name="lucideFullscreen" size="16" />
+              </button>
+            </div>
+          </div>
+
+          <div appNgTabList selectionMode="follow" [(selectedTab)]="selected" [id]="`tab-${c.title}`">
+            <div appNgTab value="preview" class="px-3 py-2 text-sm font-medium">
+              Preview
+            </div>
+            <div appNgTab value="code" class="px-3 py-2 text-sm font-medium">
+              Code
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="min-h-[530px] max-h-[930px] rounded-2xl bg-neutral-50/50 dark:bg-neutral-800/30 overflow-hidden flex">
+        <div appNgTabPanel [preserveContent]="true" [value]="'preview'" [hidden]="selected() !== 'preview'"
+             class="flex items-center justify-center border rounded-2xl w-full transition-all duration-300 ease-out"
+             [class.max-w-full]="viewport() === 'desktop'"
+             [class.max-w-[768px]]="viewport() === 'tablet'"
+             [class.max-w-[375px]]="viewport() === 'mobile'"
+             [class.mx-auto]="viewport() !== 'desktop'">
+          <ng-template ngTabContent>
+            <ng-container *ngComponentOutlet="c.component"></ng-container>
+          </ng-template>
+        </div>
+        <div appNgTabPanel [preserveContent]="true" [value]="'code'" [hidden]="selected() !== 'code'" class="overflow-hidden max-h-[530px] border rounded-2xl">
+          <ng-template ngTabContent>
+            <div class="bg-code text-code-foreground flex md:h-full">
+              <div class="w-72">
+                <div id="file-tree" class="border-r border-neutral-200 dark:border-neutral-700/50 h-full">
+                  <div class="h-12 border-b border-neutral-200 dark:border-neutral-700/50 px-4 flex items-center text-sm font-medium">
+                    Files
+                  </div>
+                  <div class="flex flex-col text-sm overflow-y-auto flex-1">
+                    @for (file of files(); track file.path) {
+                      <button
+                        class="text-left py-2 px-4 hover:bg-code-hover/50 data-[selected=true]:bg-code-hover/70 flex items-center gap-2 transition-colors"
+                        [attr.data-selected]=" selectedFile() === file.path" (click)="selectFile(file.path)">
+                        <span class="truncate">{{ file.name }}</span>
+                      </button>
+                    }
+                  </div>
+                </div>
+              </div>
+              <figure data-rehype-pretty-code-figure="" class="mx-0! mt-0 flex min-w-0 flex-1 flex-col border-none">
+                <figcaption
+                  class="text-code-foreground [&_svg]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-b border-neutral-200 dark:border-neutral-700/50 px-4 py-2 [&_svg]:size-4 [&_svg]:opacity-70"
+                  [attr.data-language]="'angular-ts'">
+                  {{ selectedFile() }}
+                  <div class="ml-auto flex items-center gap-2">
+                    <button appButton [variant]="'ghost'" [size]="'icon'">
+                      <ng-icon name="lucideCopy" [size]="'20px'" />
+                    </button>
+                  </div>
+                </figcaption>
+                <div class="no-scrollbar overflow-auto" [innerHTML]="code()"></div>
+              </figure>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  }
+</div>

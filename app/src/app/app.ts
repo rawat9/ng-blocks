@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { Header } from '../components/header/header'
 
 @Component({
-  imports: [NxWelcome, RouterModule],
+  imports: [Header, RouterOutlet],
   selector: 'app-root',
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <main class="h-full">
+      <app-header></app-header>
+      <router-outlet></router-outlet>
+    </main>
+  `,
 })
-export class App {
-  protected title = 'app';
-}
+export class App {}

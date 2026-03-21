@@ -1,0 +1,140 @@
+<div class="relative min-h-[calc(100vh-4rem)] py-12 md:py-20 px-4 scroll-smooth max-w-6xl mx-auto">
+  <!-- Hero Section -->
+  <section class="text-center mx-auto max-w-4xl pt-12 md:pt-20">
+    <!-- Badge -->
+    <div
+      class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 drop-shadow-2xl rounded-full border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 text-sm text-neutral-600 dark:text-neutral-400 animate-shimmer animate-fade-in-up"
+      style="--animation-delay: 0ms"
+    >
+      <ng-icon name="lucideCode" class="text-neutral-500 dark:text-neutral-400" size="16" />
+      <span>Open Source</span>
+    </div>
+
+    <!-- Animated headline -->
+    <h1
+      class="font-bold text-4xl md:text-5xl lg:text-7xl tracking-tight text-neutral-900 dark:text-neutral-50"
+    >
+      <span class="inline-block animate-fade-in-up" style="--animation-delay: 100ms">
+        Beautiful
+      </span>
+      <span
+        class="inline-block ml-3 md:ml-4 mr-2 animate-fade-in-up"
+        style="--animation-delay: 200ms"
+      >
+        components
+      </span>
+      <br class="hidden sm:block" />
+      <span
+        class="inline-block mt-4 bg-linear-to-r from-neutral-900 via-neutral-700 to-neutral-500 dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-500 bg-clip-text text-transparent animate-fade-in-up"
+        style="--animation-delay: 300ms"
+      >
+        for Angular
+      </span>
+    </h1>
+
+    <!-- Tagline -->
+    <p
+      class="mt-6 md:mt-8 text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up"
+      style="--animation-delay: 400ms"
+    >
+      A collection of beautifully designed, accessible, and copy-paste ready
+      components. Built on Angular Aria with Tailwind CSS.
+    </p>
+
+    <a
+      [routerLink]="'/blocks'"
+      class="mt-12"
+      style="--animation-delay: 350ms"
+      appButton
+    >
+      Browse components
+    </a>
+  </section>
+
+  <!-- Component Cards Grid -->
+  <section id="components" class="mt-20 md:mt-32">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (block of blocks; track block.route; let i = $index) {
+        <a
+          [routerLink]="`/blocks/${block.route}`"
+          class="card group relative rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700/50 bg-neutral-50/50 dark:bg-neutral-800/30 cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-neutral-900/5 dark:hover:shadow-neutral-900/30 hover:border-neutral-300 dark:hover:border-neutral-600 animate-stagger-reveal"
+          [style.--animation-delay]="i * 150 + 'ms'"
+          [style.view-transition-name]="'card-' + block.title.toLowerCase()"
+        >
+          <!-- Card image -->
+          <div
+            class="aspect-4/3 overflow-hidden bg-neutral-100 dark:bg-neutral-800 group-hover:animate-glow-pulse"
+          >
+            <img
+              [alt]="block.title + ' Components'"
+              [src]="block.image"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
+
+          <!-- Card content -->
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">
+                  {{ block.title }}
+                </h3>
+              </div>
+              @if (block.badge) {
+                <span
+                  class="px-2 py-0.5 text-xs font-medium rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300"
+                >
+                  {{ block.badge }}
+                </span>
+              }
+            </div>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">
+              {{ block.description }}
+            </p>
+
+            <!-- Hover arrow -->
+            <div
+              class="mt-4 flex items-center text-sm font-medium text-neutral-600 dark:text-neutral-400 transition-colors duration-300 group-hover:text-neutral-900 dark:group-hover:text-neutral-100"
+            >
+              <span
+                class="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-current after:transition-all after:duration-300 group-hover:after:w-full"
+              >
+                View components
+              </span>
+              <ng-icon
+                name="lucideArrowRight"
+                class="ml-1 transition-transform duration-300 group-hover:translate-x-1"
+                size="16"
+              />
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- Footer section -->
+  <section
+    appAnimateOnScroll
+    class="mt-32 pb-12 text-center opacity-0 translate-y-8 transition-all duration-700 ease-out [&.animate-visible]:opacity-100 [&.animate-visible]:translate-y-0"
+  >
+    <p class="text-neutral-500 dark:text-neutral-400">
+      Built with ❤️ using
+      <a
+        href="https://angular.dev"
+        target="_blank"
+        class="font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+      >
+        Angular
+      </a>
+      &
+      <a
+        href="https://analogjs.org"
+        target="_blank"
+        class="font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+      >
+        AnalogJS
+      </a>
+    </p>
+  </section>
+</div>

@@ -1,0 +1,283 @@
+/** region Input */
+.cn-input {
+  @apply dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 disabled:bg-input/50 dark:disabled:bg-input/80 h-8 rounded-lg border bg-transparent px-2.5 py-1 text-base transition-colors file:h-6 file:text-sm file:font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] md:text-sm;
+}
+
+/** endregion Input */
+
+/** region Label */
+.cn-label {
+  @apply gap-2 text-sm leading-none font-medium group-data-[disabled=true]:opacity-50 peer-disabled:opacity-50;
+}
+
+/** endregion Label */
+
+/** region Button */
+.cn-button {
+  @apply focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4;
+}
+
+.cn-button-variant-default {
+  @apply bg-primary text-primary-foreground [a]:hover:bg-primary/80;
+}
+
+.cn-button-variant-outline {
+  @apply border-border bg-background hover:bg-muted hover:text-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 aria-expanded:bg-muted aria-expanded:text-foreground;
+}
+
+.cn-button-variant-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground;
+}
+
+.cn-button-variant-ghost {
+  @apply hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 aria-expanded:bg-muted aria-expanded:text-foreground;
+}
+
+.cn-button-variant-destructive {
+  @apply bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30;
+}
+
+.cn-button-variant-link {
+  @apply text-primary underline-offset-4 hover:underline;
+}
+
+.cn-button-size-xs {
+  @apply h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3;
+}
+
+.cn-button-size-sm {
+  @apply h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5;
+}
+
+.cn-button-size-default {
+  @apply h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2;
+}
+
+.cn-button-size-lg {
+  @apply h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3;
+}
+
+.cn-button-size-icon-xs {
+  @apply size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3;
+}
+
+.cn-button-size-icon-sm {
+  @apply size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg;
+}
+
+.cn-button-size-icon {
+  @apply size-8;
+}
+
+.cn-button-size-icon-lg {
+  @apply size-9;
+}
+
+/** endregion Button */
+
+/** region Accordion */
+.cn-accordion-item {
+  @apply not-last:border-b;
+}
+
+.cn-accordion-trigger {
+  @apply focus-visible:ring-ring/50 focus-visible:border-ring focus-visible:after:border-ring **:data-[slot=accordion-trigger-icon]:text-muted-foreground rounded-lg py-2.5 text-left text-sm font-medium hover:underline focus-visible:ring-[3px] **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4;
+}
+
+.cn-accordion-content {
+  @apply text-sm;
+}
+
+.cn-accordion-content-inner {
+  @apply pt-0 pb-2.5;
+}
+
+/** endregion Accordion */
+
+/** region Tabs */
+.cn-tabs {
+  @apply gap-2;
+}
+
+.cn-tabs-list {
+  @apply rounded-lg p-0.75 aria-[orientation=horizontal]:h-8 data-[variant=line]:rounded-none;
+}
+
+.cn-tabs-trigger {
+  @apply gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium group-data-[variant=default]/tabs-list:aria-selected:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg:not([class*='size-'])]:size-4;
+}
+
+.cn-tabs-content {
+  @apply text-sm;
+}
+
+/** endregion Tabs */
+
+/** region Toggle */
+.cn-toggle {
+  @apply hover:text-foreground aria-pressed:bg-muted focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive data-[state=on]:bg-muted gap-1 rounded-lg text-sm font-medium transition-all [&_svg:not([class*='size-'])]:size-4;
+}
+
+.cn-toggle-variant-default {
+  @apply bg-transparent;
+}
+
+.cn-toggle-variant-outline {
+  @apply border-input hover:bg-muted border bg-transparent;
+}
+
+.cn-toggle-size-default {
+  @apply h-8 min-w-8 px-2;
+}
+
+.cn-toggle-size-sm {
+  @apply h-7 min-w-7 rounded-[min(var(--radius-md),12px)] px-1.5 text-[0.8rem];
+}
+
+.cn-toggle-size-lg {
+  @apply h-9 min-w-9 px-2.5;
+}
+
+/** endregion Toggle */
+
+/** region Toggle Group */
+.cn-toggle-group {
+  @apply rounded-lg data-[size=sm]:rounded-[min(var(--radius-md),10px)];
+}
+
+.cn-toggle-group-item {
+  @apply group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-lg group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-lg group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-lg group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-lg;
+}
+
+/** endregion Toggle Group */
+
+/* MARK: Landing Page Animations */
+
+/* Fade in up animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--animation-delay, 0ms);
+}
+
+/* Slow bounce for scroll indicator */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite ease-in-out;
+}
+
+/* Shimmer effect for badge */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Reusable card view transitions - apply via inline style: style="view-transition-name: card-name" */
+[style*="view-transition-name:"] {
+  contain: layout;
+}
+
+/* Generic view transition timing for all named transitions */
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Swipe navigation transitions */
+@keyframes slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Apply slide animations during view transitions */
+.slide-left::view-transition-old(root) {
+  animation: slide-out-left 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-left::view-transition-new(root) {
+  animation: slide-in-right 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-right::view-transition-old(root) {
+  animation: slide-out-right 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-right::view-transition-new(root) {
+  animation: slide-in-left 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/** endregion Landing Page Animations */
+
