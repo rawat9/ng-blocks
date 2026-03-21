@@ -1,0 +1,77 @@
+import {
+  Tab,
+  TabContent,
+  TabList,
+  TabPanel,
+  Tabs as NgTabs,
+} from '@angular/aria/tabs'
+import { Component, computed, input, model } from '@angular/core'
+import type { ClassValue } from 'clsx'
+import { cn } from '../../../lib/utils'
+
+type TabsVariant = 'default' | 'underline'
+
+@Component({
+  selector: 'app-tabs',
+  imports: [TabList, Tab, NgTabs, TabPanel, TabContent],
+  template: `
+    <div
+      ngTabs
+      class="flex flex-col gap-2 data-[orientation=vertical]:flex-row overflow-hidden"
+    >
+      <div
+        ngTabList
+        selectionMode="follow"
+        [(selectedTab)]="selectedTab"
+        [class]="_computedClass()"
+      >
+        <div ngTab value="preview" [class]="tabClass()">Preview</div>
+        <div ngTab value="code" [class]="tabClass()">Code</div>
+      </div>
+      <div class="flex-1 overflow-hidden rounded-md border border-muted">
+        <div
+          ngTabPanel
+          [preserveContent]="true"
+          value="preview"
+          [hidden]="selectedTab() !== 'preview'"
+        >
+          <ng-template ngTabContent>Panel 1</ng-template>
+        </div>
+        <div
+          ngTabPanel
+          [preserveContent]="true"
+          value="code"
+          [hidden]="selectedTab() !== 'code'"
+        >
+          <ng-template ngTabContent>Panel 2</ng-template>
+        </div>
+      </div>
+    </div>
+  `,
+})
+export class Tabs {
+  public readonly userClass = input<ClassValue>('', { alias: 'class' })
+
+  public readonly variant = input<TabsVariant>('default')
+
+  public readonly selectedTab = model<string>('preview')
+
+  protected readonly _computedClass = computed(() =>
+    cn(
+      'relative z-0 flex w-fit items-center justify-center gap-x-0.5 text-muted-foreground',
+      this.variant() === 'default'
+        ? 'rounded-lg bg-muted p-0.5 text-muted-foreground/72'
+        : 'data-[orientation=vertical]:px-1 data-[orientation=horizontal]:py-1 *:data-[slot=tabs-trigger]:hover:bg-accent',
+      this.userClass(),
+    ),
+  )
+
+  protected readonly tabClass = computed(() =>
+    cn(
+      "[&_svg]:-mx-0.5 flex shrink-0 grow cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent font-medium text-base outline-none transition-[color,background-color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring aria-disabled:pointer-events-none aria-disabled:opacity-64 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+      'hover:text-muted-foreground aria-selected:text-foreground aria-selected:shadow-sm aria-selected:bg-background',
+      'h-9 gap-1.5 px-[calc(--spacing(2.5)-1px)] sm:h-8',
+      'data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start',
+    ),
+  )
+}
