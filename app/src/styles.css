@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import './preset.css';
 @import "styles/style-nova.css" layer(base);
 
 @custom-variant style-nova (&:where(.style-vega *));
@@ -67,8 +69,8 @@ html, body {
 
 :root {
   --radius: 0.625rem;
-  --container: oklch(1 0 0);
-  --background: oklch(0.985 0 0);
+  --background: oklch(1 0 0);
+  --container: oklch(0.985 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -111,8 +113,8 @@ html, body {
 }
 
 .dark {
-  --container: oklch(0.145 0 0);
-  --background: oklch(0.205 0 0);
+  --container: oklch(0.205 0 0);
+  --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);

@@ -5,7 +5,7 @@ import { cn } from '../../lib/utils'
 import type { ClassValue } from 'clsx'
 
 const buttonVariants = cva(
-  'cn-button inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none',
+  'cn-button inline-flex items-center justify-center whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&_ng-icon]:pointer-events-none shrink-0 [&_ng-icon]:shrink-0 outline-none group/button select-none',
   {
     variants: {
       variant: {
