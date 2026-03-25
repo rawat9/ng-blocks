@@ -14,30 +14,6 @@ import { blocks } from '../../../blocks/registry'
     }),
   ],
   template: `
-    <!-- Page header -->
-    <!--    <div-->
-    <!--      class="mb-8 opacity-0"-->
-    <!--      [class.animate-fade-in-up]="isLoaded()"-->
-    <!--      [style.&#45;&#45;animation-delay]="'0ms'"-->
-    <!--    >-->
-    <!--      <p class="mb-1.5 text-xs font-semibold uppercase tracking-widest text-violet-500 dark:text-violet-400">-->
-    <!--        Browse-->
-    <!--      </p>-->
-    <!--      <h1 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">-->
-    <!--        All Blocks-->
-    <!--      </h1>-->
-    <!--      <p class="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">-->
-    <!--        {{ blocks.length }} categories of beautifully designed, copy-paste ready Angular components.-->
-    <!--      </p>-->
-    <!--    </div>-->
-
-    <!--    <div-->
-    <!--      class="h-px mb-8 bg-neutral-200 dark:bg-neutral-800 opacity-0"-->
-    <!--      [class.animate-fade-in-up]="isLoaded()"-->
-    <!--      [style.&#45;&#45;animation-delay]="'50ms'"-->
-    <!--    ></div>-->
-
-    <!-- Cards grid -->
     <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
       @for (block of blocks; track block.route; let i = $index) {
         <a

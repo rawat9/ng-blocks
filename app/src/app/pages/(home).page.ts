@@ -5,10 +5,11 @@ import { AnimateOnScrollDirective } from '../../directives'
 import { lucideArrowRight, lucideCode } from '@ng-icons/lucide'
 import { blocks } from '../../blocks/registry'
 import { Button } from '../../components/ui/button'
+import { Header } from '../../components/header/header'
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, NgIcon, AnimateOnScrollDirective, Button],
+  imports: [RouterLink, NgIcon, AnimateOnScrollDirective, Button, Header],
   providers: [
     provideIcons({
       lucideArrowRight,

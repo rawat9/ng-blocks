@@ -21,9 +21,9 @@ import { Button } from '../ui/button'
 import { Tab, TabList, TabPanel, Tabs } from '../ui/tabs'
 import { AnimateOnScrollDirective } from '../../directives'
 import { TabContent } from '@angular/aria/tabs'
-import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
 import { codeToHtml } from 'shiki'
 import { NgComponentOutlet } from '@angular/common'
+import { HttpClient } from '@angular/common/http'
 
 interface FileItem {
   path: string
@@ -40,8 +40,6 @@ const blockSources = import.meta.glob('../../blocks/**/*.ts', {
   selector: 'app-block-viewer',
   imports: [
     NgIcon,
-    ToggleGroup,
-    ToggleGroupItem,
     AnimateOnScrollDirective,
     Tabs,
     TabList,
@@ -66,6 +64,8 @@ export class BlockViewer implements OnInit {
   private readonly sanitizer = inject(DomSanitizer)
 
   block = input.required<string>()
+
+  private readonly http = inject(HttpClient)
 
   viewport = signal<'desktop' | 'tablet' | 'mobile'>('desktop')
   selected = model('preview')
@@ -102,6 +102,9 @@ export class BlockViewer implements OnInit {
 
   async ngOnInit() {
     // Setup source files
+    this.http.get('/api/v1/source/accordion').subscribe((res) => {
+      console.log(res)
+    })
     this.sourceModules = this.getBlockSources()
 
     const fileList: FileItem[] = Object.keys(this.sourceModules).map(

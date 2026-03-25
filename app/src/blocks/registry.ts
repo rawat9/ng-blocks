@@ -1,5 +1,6 @@
 import { Type } from '@angular/core'
 import { AiShimmer } from './ai/ai-1'
+import { AiChat } from './ai/ai-2'
 import { Accordion1 } from './accordion/accordion-1'
 import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
@@ -26,6 +27,10 @@ export const blocks: Block[] = [
       {
         title: 'AI Shimmer',
         component: AiShimmer,
+      },
+      {
+        title: 'AI Chat',
+        component: AiChat,
       },
     ],
     badge: 'NEW',
