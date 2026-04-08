@@ -1,7 +1,7 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 @import './preset.css';
-@import "styles/style-nova.css" layer(base);
+@import 'styles/style-nova.css' layer(base);
 
 @custom-variant style-nova (&:where(.style-vega *));
 @custom-variant dark (&:is(.dark *));
@@ -10,7 +10,10 @@ html,
 body {
   display: block;
   height: 100%;
-  font-family: Google Sans, Inter, sans-serif;
+  font-family:
+    Google Sans,
+    Inter,
+    sans-serif;
 }
 
 @theme inline {
@@ -190,7 +193,7 @@ body {
 }
 
 @utility scrollbar {
-  scrollbar-color: var(--color-background) transparent;
+  scrollbar-color: var(--color-primary) transparent;
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
@@ -202,7 +205,6 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: red;
     border-radius: var(--radius);
   }
 }
@@ -259,7 +261,7 @@ body {
     position: relative;
     @apply -mx-1 md:-mx-1;
 
-    &:has([data-rehype-pretty-code-title]) [data-slot="copy-button"] {
+    &:has([data-rehype-pretty-code-title]) [data-slot='copy-button'] {
       top: calc(var(--spacing) * 1.5) !important;
     }
   }
@@ -333,7 +335,7 @@ body {
       left: 0;
       width: 2px;
       height: 100%;
-      content: "";
+      content: '';
       background-color: color-mix(in oklab,
           var(--muted-foreground) 50%,
           transparent);
