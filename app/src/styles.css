@@ -6,7 +6,8 @@
 @custom-variant style-nova (&:where(.style-vega *));
 @custom-variant dark (&:is(.dark *));
 
-html, body {
+html,
+body {
   display: block;
   height: 100%;
   font-family: Google Sans, Inter, sans-serif;
@@ -160,16 +161,20 @@ html, body {
   * {
     @apply border-border outline-ring/50;
   }
+
   ::selection {
     @apply bg-selection text-selection-foreground;
   }
+
   html {
     @apply overscroll-y-none scroll-smooth;
   }
+
   body {
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -181,6 +186,24 @@ html, body {
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@utility scrollbar {
+  scrollbar-color: var(--color-background) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: red;
+    border-radius: var(--radius);
   }
 }
 
@@ -210,15 +233,15 @@ html, body {
       @apply !mt-0;
     }
 
-    &:first-child > h3:first-child {
+    &:first-child>h3:first-child {
       @apply !mt-0;
     }
 
-    > h3 {
+    >h3 {
       @apply !mt-16;
     }
 
-    > h3 + p {
+    >h3+p {
       @apply !mt-2;
     }
   }
@@ -311,11 +334,9 @@ html, body {
       width: 2px;
       height: 100%;
       content: "";
-      background-color: color-mix(
-        in oklab,
-        var(--muted-foreground) 50%,
-        transparent
-      );
+      background-color: color-mix(in oklab,
+          var(--muted-foreground) 50%,
+          transparent);
     }
   }
 
