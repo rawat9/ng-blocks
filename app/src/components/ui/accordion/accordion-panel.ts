@@ -8,7 +8,7 @@ import { cn } from '../../../lib/utils'
   hostDirectives: [
     {
       directive: NgAccordionPanel,
-      inputs: ['panelId'],
+      inputs: ['id'],
     },
   ],
   host: {

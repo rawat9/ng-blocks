@@ -1,5 +1,16 @@
-import { afterNextRender, Component, computed, inject, signal } from '@angular/core'
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router'
+import {
+  afterNextRender,
+  Component,
+  computed,
+  inject,
+  signal,
+} from '@angular/core'
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import {
   lucideArrowLeft,
@@ -12,7 +23,7 @@ import {
   lucidePanelTop,
   lucideSearch,
   lucideTable,
-  lucideX
+  lucideX,
 } from '@ng-icons/lucide'
 import { filter } from 'rxjs/operators'
 import { toSignal } from '@angular/core/rxjs-interop'
@@ -69,7 +80,7 @@ const NAV_ITEMS = [
 
       <!-- Sidebar -->
       <aside
-        class="fixed md:sticky top-0 z-60 h-full md:z-auto bg-background md:h-screen w-64 shrink-0 flex-col border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out md:flex md:translate-x-0"
+        class="fixed md:sticky top-0 z-60 h-full md:z-auto bg-background md:h-screen w-72 shrink-0 flex-col border-neutral-200 dark:border-neutral-800 transition-transform duration-300 ease-in-out md:flex md:translate-x-0"
         [class.-translate-x-full]="!sidebarOpen()"
         [class.translate-x-0]="sidebarOpen()"
       >
@@ -136,7 +147,7 @@ const NAV_ITEMS = [
 
       <!-- Main content -->
       <div
-        class="flex flex-1 flex-col border mr-2 my-2 rounded-xl no-scrollbar dark:bg-black/40 overflow-y-auto h-[calc(100vh-16px)]"
+        class="flex flex-1 flex-col border mr-2 my-2 rounded-xl no-scrollbar bg-white dark:bg-black/40 overflow-y-auto h-[calc(100vh-16px)]"
       >
         <!-- Mobile top bar -->
         <div
@@ -168,14 +179,14 @@ const NAV_ITEMS = [
         </div>
 
         <!-- Page content -->
-        <div class="container px-6 mx-auto py-8 md:px-16 md:py-10 max-w-4xl">
+        <div class="max-w-5xl w-full px-6 mx-auto py-8 md:px-16 md:py-10">
           <router-outlet></router-outlet>
         </div>
       </div>
     </div>
   `,
 })
-export default class blocksPage {
+export default class BlocksPage {
   private readonly router = inject(Router)
   readonly theme = inject(ThemeService)
 

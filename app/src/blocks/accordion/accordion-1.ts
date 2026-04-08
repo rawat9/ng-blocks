@@ -26,7 +26,7 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     <div>
       <button
         appNgAccordionTrigger
-        [panelId]="'1'"
+        [panel]="panel1"
         #trigger1="ngAccordionTrigger"
       >
         What is Angular?
@@ -44,7 +44,7 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
       </button>
       <div
         appNgAccordionPanel
-        [panelId]="'1'"
+        #panel1="ngAccordionPanel"
         class="overflow-hidden text-gray-500"
       >
         <ng-template appNgAccordionContent>
@@ -57,8 +57,8 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     <div>
       <button
         appNgAccordionTrigger
-        [panelId]="'2'"
-        #trigger1="ngAccordionTrigger"
+        [panel]="panel2"
+        #trigger2="ngAccordionTrigger"
       >
         What is React?
         <ng-icon appNgAccordionIcon name="lucideChevronDown" />
@@ -75,7 +75,7 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
       </button>
       <div
         appNgAccordionPanel
-        [panelId]="'2'"
+        #panel2="ngAccordionPanel"
         class="overflow-hidden text-gray-500"
       >
         <ng-template appNgAccordionContent>

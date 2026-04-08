@@ -8,7 +8,7 @@ import { cn } from '../../../lib/utils'
   hostDirectives: [
     {
       directive: NgTabPanel,
-      inputs: ['value'],
+      inputs: ['id', 'value'],
     },
   ],
   host: {

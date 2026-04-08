@@ -8,7 +8,7 @@ import { cn } from '../../../lib/utils'
   hostDirectives: [
     {
       directive: NgTab,
-      inputs: ['value', 'disabled'],
+      inputs: ['id', 'value', 'disabled'],
     },
   ],
   host: {

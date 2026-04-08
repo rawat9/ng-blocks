@@ -10,6 +10,8 @@ import { RouteMeta } from '@analogjs/router'
 import { blocks } from '../../../blocks/registry'
 import { Router } from '@angular/router'
 import { BlockViewer } from '../../../components/block-viewer/block-viewer'
+import { LowerCasePipe } from '@angular/common'
+import { AnimateOnScrollDirective } from '../../../directives'
 
 export const routeMeta: RouteMeta = {
   title: (route) => {
@@ -32,35 +34,30 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   selector: 'app-block-page',
-  imports: [BlockViewer],
+  imports: [BlockViewer, LowerCasePipe, AnimateOnScrollDirective],
   template: `
-    <!-- Page Header -->
     <div
       class="mb-8 opacity-0"
       [class.animate-fade-in-up]="isLoaded()"
       [style.--animation-delay]="'50ms'"
     >
-      <!-- Label -->
       <p
         class="mb-1.5 text-xs font-semibold uppercase tracking-widest text-violet-500 dark:text-violet-400"
       >
         Components
       </p>
 
-      <!-- Title -->
       <h1
-        class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 capitalize"
+        class="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 capitalize"
       >
-        {{ block() }}
+        {{ block() | lowercase }}
       </h1>
 
-      <!-- Description -->
       <p class="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">
         {{ getBlockInfo().description }}
       </p>
     </div>
 
-    <!-- Divider -->
     <div
       class="mb-8 h-px bg-neutral-200 dark:bg-neutral-800 opacity-0"
       [class.animate-fade-in-up]="isLoaded()"
@@ -68,7 +65,11 @@ export const routeMeta: RouteMeta = {
     ></div>
 
     <!-- Components -->
-    <app-block-viewer [block]="block()"></app-block-viewer>
+    <div appAnimateOnScroll class="opacity-0 translate-y-8 transition-all duration-700 ease-out [&.animate-visible]:opacity-100 [&.animate-visible]:translate-y-0">
+      @for (c of getBlockInfo().components; track c.title) {
+        <app-block-viewer [block]="block()" [title]="c.title" [component]="c.component" [path]="c.path"></app-block-viewer>
+      }
+    </div>
   `,
 })
 export default class BlockPage {
@@ -93,6 +94,7 @@ export default class BlockPage {
         description: 'The requested block does not exist in the registry.',
         route: '',
         image: '',
+        components: [],
       }
     }
 

@@ -1,64 +1,62 @@
-<div appAnimateOnScroll class="opacity-0 translate-y-8 transition-all duration-700 ease-out [&.animate-visible]:opacity-100 [&.animate-visible]:translate-y-0">
-  @for (c of components(); track c.title) {
-    <div class="py-16" appNgTabs>
-      <div class="mb-1 flex items-center justify-between px-1">
-        <h2 class="font-semibold text-neutral-900 dark:text-neutral-100">
-          {{ c.title }}
-        </h2>
-
-        <div class="flex items-center gap-2">
-          <div appNgTabList selectionMode="follow" [(selectedTab)]="selected" [id]="`tab-${c.title}`">
-            <div appNgTab value="preview" class="px-3 py-2 text-sm font-medium">
-              Preview
-            </div>
-            <div appNgTab value="code" class="px-3 py-2 text-sm font-medium">
-              Code
-            </div>
-          </div>
+<div class="py-16" appNgTabs>
+  <div class="mb-1 flex items-center justify-between px-1">
+    <h2 class="font-semibold text-neutral-900 dark:text-neutral-100">
+      {{ title() }}
+    </h2>
+    <div class="flex items-center gap-2">
+      <div appNgTabList selectionMode="follow" [(selectedTab)]="selectedTab">
+        <div appNgTab value="preview" class="px-3 py-2 text-sm font-medium">
+          Preview
+        </div>
+        <div appNgTab value="code" class="px-3 py-2 text-sm font-medium">
+          Code
         </div>
       </div>
-
-      <div appNgTabPanel [preserveContent]="true" [value]="'preview'" [hidden]="selected() !== 'preview'"
-           class="relative flex-1 p-12 flex items-center justify-center border rounded-2xl w-full transition-all duration-100 ease-out">
-        <ng-template ngTabContent>
-          <ng-container *ngComponentOutlet="c.component"></ng-container>
-        </ng-template>
-      </div>
-      <div appNgTabPanel [preserveContent]="true" [value]="'code'" [hidden]="selected() !== 'code'" class="overflow-hidden max-h-[530px] border rounded-2xl">
-        <ng-template ngTabContent>
-          <div class="bg-code text-code-foreground flex md:h-full">
-            <div class="w-72">
-              <div id="file-tree" class="border-r border-neutral-200 dark:border-neutral-700/50 h-full">
-                <div class="h-12 border-b border-neutral-200 dark:border-neutral-700/50 px-4 flex items-center text-sm font-medium">
-                  Files
-                </div>
-                <div class="flex flex-col text-sm overflow-y-auto flex-1">
-                  @for (file of files(); track file.path) {
-                    <button
-                      class="text-left py-2 px-4 hover:bg-code-hover/50 data-[selected=true]:bg-code-hover/70 flex items-center gap-2 transition-colors"
-                      [attr.data-selected]=" selectedFile() === file.path" (click)="selectFile(file.path)">
-                      <span class="truncate">{{ file.name }}</span>
-                    </button>
-                  }
-                </div>
-              </div>
-            </div>
-            <figure data-rehype-pretty-code-figure="" class="mx-0! mt-0 flex min-w-0 flex-1 flex-col border-none">
-              <figcaption
-                class="text-code-foreground [&_svg]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-b border-neutral-200 dark:border-neutral-700/50 px-4 py-2 [&_svg]:size-4 [&_svg]:opacity-70"
-                [attr.data-language]="'angular-ts'">
-                {{ selectedFile() }}
-                <div class="ml-auto flex items-center gap-2">
-                  <button appButton [variant]="'ghost'" [size]="'icon'">
-                    <ng-icon name="lucideCopy" [size]="'20px'" />
-                  </button>
-                </div>
-              </figcaption>
-              <div class="no-scrollbar overflow-auto" [innerHTML]="code()"></div>
-            </figure>
-          </div>
-        </ng-template>
-      </div>
     </div>
-  }
+  </div>
+
+  <div appNgTabPanel [preserveContent]="true" [value]="'preview'" [hidden]="selectedTab() !== 'preview'"
+    class="relative flex-1 p-12 flex items-center justify-center border rounded-2xl w-full transition-all duration-100 ease-out">
+    <ng-template ngTabContent>
+      <ng-container *ngComponentOutlet="component()"></ng-container>
+    </ng-template>
+  </div>
+  <div appNgTabPanel [preserveContent]="true" [value]="'code'" [hidden]="selectedTab() !== 'code'"
+    class="overflow-hidden max-h-132.5 border rounded-2xl flex">
+    <ng-template ngTabContent>
+      <div class="bg-code text-code-foreground flex flex-col flex-1 min-h-0">
+        <!-- <div class="w-72">
+          <div id="file-tree" class="border-r border-neutral-200 dark:border-neutral-700/50 h-full">
+            <div
+              class="h-12 border-b border-neutral-200 dark:border-neutral-700/50 px-4 flex items-center text-sm font-medium">
+              Files
+            </div>
+            <div class="flex flex-col text-sm overflow-y-auto flex-1">
+              @for (file of files(); track file.path) {
+              <button
+                class="text-left py-2 px-4 hover:bg-code-hover/50 data-[selected=true]:bg-code-hover/70 flex items-center gap-2 transition-colors"
+                [attr.data-selected]="selectedFile() === file.path">
+                <span class="truncate">{{ file.name }}</span>
+              </button>
+              }
+            </div>
+          </div>
+        </div> -->
+        <figure data-rehype-pretty-code-figure=""
+          class="mx-0! mt-0 flex min-w-0 flex-1 min-h-0 overflow-hidden flex-col border-none">
+          <figcaption
+            class="text-code-foreground [&_ng-icon]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-b border-neutral-200 dark:border-neutral-700/50 px-4 py-2 [&_ng-icon]:size-4 [&_ng-icon]:opacity-70"
+            [attr.data-language]="'angular-ts'">
+            ai-shimmer.ts
+            <div class="ml-auto flex items-center gap-2">
+              <button appButton [variant]="'ghost'" [size]="'icon'" (click)="copyCode()">
+                <ng-icon name="lucideCopy" [size]="'16px'" />
+              </button>
+            </div>
+          </figcaption>
+          <div class="overflow-auto scrollbar flex-1" [innerHTML]="code.value()"></div>
+        </figure>
+      </div>
+    </ng-template>
+  </div>
 </div>

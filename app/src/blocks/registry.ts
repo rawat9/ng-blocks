@@ -1,6 +1,6 @@
 import { Type } from '@angular/core'
-import { AiShimmer } from './ai/ai-1'
-import { AiChat } from './ai/ai-2'
+import { AiShimmer } from './ai/ai-shimmer'
+import { AiChat } from './ai/ai-chat'
 import { Accordion1 } from './accordion/accordion-1'
 import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
@@ -12,6 +12,7 @@ export interface Block {
   image: string
   components: {
     title: string
+    path: string
     component: Type<unknown>
   }[]
   badge?: string
@@ -26,10 +27,12 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'AI Shimmer',
+        path: 'ai-shimmer.ts',
         component: AiShimmer,
       },
       {
         title: 'AI Chat',
+        path: 'ai-chat.ts',
         component: AiChat,
       },
     ],
@@ -43,6 +46,7 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Accordion',
+        path: 'accordion',
         component: Accordion1,
       },
     ],
@@ -62,10 +66,12 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Login Form',
+        path: 'login-form',
         component: Form1,
       },
       {
         title: 'Signup Form',
+        path: 'signup-form',
         component: Form2,
       },
     ],

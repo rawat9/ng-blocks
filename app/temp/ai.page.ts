@@ -6,7 +6,7 @@ import {
   lucideMessageSquare,
   lucideSparkles,
 } from '@ng-icons/lucide'
-import { AiShimmer } from '../src/blocks/ai/ai-1'
+import { AiShimmer } from '../src/blocks/ai/ai-shimmer'
 import { AnimateOnScrollDirective } from '../src/directives'
 import { BlocksNav } from '../src/components/ui/blocks-nav'
 
