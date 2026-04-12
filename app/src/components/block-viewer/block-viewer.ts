@@ -25,11 +25,6 @@ import { HttpClient } from '@angular/common/http'
 import { File } from '../../lib/get-component-source'
 import { firstValueFrom } from 'rxjs'
 
-interface FileItem {
-  path: string
-  name: string
-}
-
 @Component({
   selector: 'app-block-viewer',
   imports: [

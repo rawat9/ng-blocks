@@ -14,7 +14,7 @@ import { blocks } from '../../../blocks/registry'
     }),
   ],
   template: `
-    <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+    <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-8 p-16">
       @for (block of blocks; track block.route; let i = $index) {
         <a
           [routerLink]="block.title.toLowerCase()"
