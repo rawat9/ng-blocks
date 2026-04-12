@@ -12,6 +12,7 @@ import { AnimateOnScrollDirective } from '../../../directives'
 import { ThemeService } from '../../../services/theme.service'
 import { cn } from '../../../lib/utils'
 import { NgComponentOutlet } from '@angular/common'
+import { Toolbar } from './_components/toolbar'
 
 export const routeMeta: RouteMeta = {
   title: (route) => {
@@ -34,79 +35,14 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   selector: 'app-block-page',
-  imports: [AnimateOnScrollDirective, NgComponentOutlet],
+  imports: [AnimateOnScrollDirective, NgComponentOutlet, Toolbar],
   template: `
-    <!-- <div
-      class="mb-8 opacity-0"
-      [class.animate-fade-in-up]="isLoaded()"
-      [style.--animation-delay]="'50ms'"
-    >
-      <p
-        class="mb-1.5 text-xs font-semibold uppercase tracking-widest text-violet-500 dark:text-violet-400"
-      >
-        Components
-      </p>
-
-      <h1
-        class="text-2xl font-semibold text-neutral-900 dark:text-neutral-50 capitalize"
-      >
-        {{ block() | lowercase }}
-      </h1>
-
-      <p class="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">
-        {{ getBlockInfo().description }}
-      </p>
-    </div> -->
-
-    <!-- <div
-      class="mb-8 h-px bg-neutral-200 dark:bg-neutral-800 opacity-0"
-      [class.animate-fade-in-up]="isLoaded()"
-      [style.--animation-delay]="'100ms'"
-    ></div> -->
-
-    <div class="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden bg-background flex flex-col p-4" [class.animate-fade-in-up]="isLoaded()" [style.--animation-delay]="'150ms'">
-      <div class="absolute top-4 right-4 z-20">
-        <div class="flex items-center gap-0.5 rounded-lg border border-border/70 bg-white/95 dark:bg-[#121212] px-1 py-1">
-          <button class="inline-flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              color="currentColor"
-              class="size-4"
-              strokeWidth="2"
-              stroke="currentColor"
-            >
-              <path d="M5 12L19 5" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" />
-              <path d="M16 9L22 13.8528M12.4128 12.4059L19.3601 18.3634M8 15.6672L15 21.5" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" />
-            </svg>
-          </button>
-          <!-- Theme toggle -->
-          <div class="[&_button]:h-7 [&_button]:w-7 [&_button]:rounded-md [&_button]:border [&_button]:border-transparent [&_button]:text-foreground/60 [&_button]:transition-all [&_button]:duration-150 hover:[&_button]:border-border/70 hover:[&_button]:bg-muted/70 hover:[&_button]:text-foreground [&_button]:focus-visible:outline-none [&_button]:focus-visible:ring-2 [&_button]:focus-visible:ring-ring/40">
-            <button class="inline-flex items-center justify-center" (click)="theme.toggle()">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                color="currentColor"
-                class="-rotate-45 size-4"
-                strokeWidth="2"
-                stroke="currentColor"
-              >
-                <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" strokeWidth="2" />
-                <path d="M5 20L19 5" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" />
-                <path d="M16 9L22 13.8528M12.4128 12.4059L19.3601 18.3634M8 15.6672L15 21.5" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+    <div class="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden bg-background flex flex-col" [class.animate-fade-in-up]="isLoaded()" [style.--animation-delay]="'150ms'">
+      <app-toolbar [(tab)]="activeTab"></app-toolbar>
     
       <div appAnimateOnScroll [class]="cn('w-full overflow-auto flex [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]', 'h-full')">
+        @if (activeTab() === 'preview') {
+        <!-- preview -->
         <div [class]="cn('w-full', 'p-10 flex items-center justify-center')">
           @let component = getBlockInfo().components.find(c => c.title === selectedComponent());
           <div className="w-full h-full flex items-center justify-center">
@@ -115,9 +51,30 @@ export const routeMeta: RouteMeta = {
              <ng-container *ngComponentOutlet="component!.component"></ng-container>
           </div>
         </div>
+        } @else {
+          <!-- code -->
+          <div class="bg-code text-code-foreground flex flex-col flex-1 min-h-0">
+            <figure data-rehype-pretty-code-figure=""
+              class="mx-0! mt-0 flex min-w-0 flex-1 min-h-0 overflow-hidden flex-col border-none">
+              <figcaption
+                class="text-code-foreground [&_ng-icon]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 px-4 py-2 [&_ng-icon]:size-4 [&_ng-icon]:opacity-70"
+                [attr.data-language]="'angular-ts'">
+                ai-shimmer.ts
+                <div class="ml-auto flex items-center gap-2">
+                  <button>
+                    Copy
+                  </button>
+                </div>
+              </figcaption>
+              <div class="overflow-auto scrollbar flex-1"></div>
+            </figure>
+          </div>
+        }
       </div>
 
-      <div class="absolute bottom-0 left-0 right-0 z-10 h-14 flex items-center">
+      <!-- Component pills -->
+      @if (activeTab() === 'preview') {
+        <div class="absolute bottom-0 left-0 right-0 z-10 h-14 flex items-center">
           <div class="flex items-center gap-1.5 px-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" >
             @for (c of getBlockInfo().components; track c.title) {
               <button
@@ -135,7 +92,8 @@ export const routeMeta: RouteMeta = {
             }
           </div>
         </div>
-  </div>
+      }
+   </div>
   `,
 })
 export default class BlockPage {
@@ -146,6 +104,8 @@ export default class BlockPage {
   readonly selectedComponent = linkedSignal(() => this.getBlockInfo().components[0]?.title ?? null)
 
   readonly cn = cn
+
+  readonly activeTab = signal<'preview' | 'code'>('preview')
 
   readonly isLoaded = signal(false)
 
