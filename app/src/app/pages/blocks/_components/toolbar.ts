@@ -43,6 +43,5 @@ export class Toolbar {
 
   showCode() {
     this.tab.update((t) => (t === 'preview' ? 'code' : 'preview'))
-    // TODO: Implement code viewer
   }
 }

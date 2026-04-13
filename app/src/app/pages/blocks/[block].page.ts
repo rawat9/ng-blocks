@@ -2,8 +2,7 @@ import {
   afterNextRender,
   Component, computed, inject,
   input,
-  linkedSignal,
-  signal
+  linkedSignal, signal
 } from '@angular/core'
 import { RouteMeta } from '@analogjs/router'
 import { blocks } from '../../../blocks/registry'
@@ -13,6 +12,9 @@ import { ThemeService } from '../../../services/theme.service'
 import { cn } from '../../../lib/utils'
 import { NgComponentOutlet } from '@angular/common'
 import { Toolbar } from './_components/toolbar'
+import { CodeViewer } from './_components/code-viewer'
+import { httpResource } from '@angular/common/http'
+import { File } from '../../../lib/get-component-source'
 
 export const routeMeta: RouteMeta = {
   title: (route) => {
@@ -35,40 +37,31 @@ export const routeMeta: RouteMeta = {
 
 @Component({
   selector: 'app-block-page',
-  imports: [AnimateOnScrollDirective, NgComponentOutlet, Toolbar],
+  imports: [AnimateOnScrollDirective, NgComponentOutlet, Toolbar, CodeViewer],
   template: `
     <div class="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden bg-background flex flex-col" [class.animate-fade-in-up]="isLoaded()" [style.--animation-delay]="'150ms'">
       <app-toolbar [(tab)]="activeTab"></app-toolbar>
     
-      <div appAnimateOnScroll [class]="cn('w-full overflow-auto flex [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]', 'h-full')">
+      <div appAnimateOnScroll [class]="cn('w-full overflow-auto flex no-scrollbar', 'h-full')">
         @if (activeTab() === 'preview') {
-        <!-- preview -->
-        <div [class]="cn('w-full', 'p-10 flex items-center justify-center')">
-          @let component = getBlockInfo().components.find(c => c.title === selectedComponent());
-          <div className="w-full h-full flex items-center justify-center">
-            <!-- <app-block-viewer [block]="block()" [title]="selectedComponent()" [component]="component!.component" [path]="component!.path"></app-block-viewer> -->
-            <!-- {resolvedActiveVariant === -1 ? children : variants[resolvedActiveVariant]?.preview} -->
-             <ng-container *ngComponentOutlet="component!.component"></ng-container>
+          <div [class]="cn('w-full', 'p-10 flex items-center justify-center')">
+            @let component = getBlockInfo().components.find(c => c === selectedComponent());
+            <div className="w-full h-full flex items-center justify-center">
+              <ng-container *ngComponentOutlet="component!.component"></ng-container>
+            </div>
           </div>
-        </div>
         } @else {
-          <!-- code -->
-          <div class="bg-code text-code-foreground flex flex-col flex-1 min-h-0">
-            <figure data-rehype-pretty-code-figure=""
-              class="mx-0! mt-0 flex min-w-0 flex-1 min-h-0 overflow-hidden flex-col border-none">
-              <figcaption
-                class="text-code-foreground [&_ng-icon]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 px-4 py-2 [&_ng-icon]:size-4 [&_ng-icon]:opacity-70"
-                [attr.data-language]="'angular-ts'">
-                ai-shimmer.ts
-                <div class="ml-auto flex items-center gap-2">
-                  <button>
-                    Copy
-                  </button>
-                </div>
-              </figcaption>
-              <div class="overflow-auto scrollbar flex-1"></div>
-            </figure>
-          </div>
+          @if (code.hasValue()) {
+            <app-code-viewer [source]="code.value()"></app-code-viewer>
+          } @else if (code.error()) {
+            <div class="w-full h-full flex items-center justify-center">
+              <p class="text-sm text-muted-foreground">Failed to load code</p>
+            </div>
+          } @else {
+            <div class="w-full h-full flex items-center justify-center"> 
+              <p class="text-sm text-muted-foreground">Loading code...</p>
+            </div>
+          }
         }
       </div>
 
@@ -78,10 +71,10 @@ export const routeMeta: RouteMeta = {
           <div class="flex items-center gap-1.5 px-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" >
             @for (c of getBlockInfo().components; track c.title) {
               <button
-                (click)="selectedComponent.set(c.title)"
+                (click)="selectedComponent.set(c)"
                 [class]="cn(
                   'shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border',
-                  selectedComponent() === c.title
+                  selectedComponent() === c
                     ? 'bg-foreground text-background border-foreground shadow-sm'
                     : 'bg-white/90 dark:bg-zinc-900/90 text-zinc-600 dark:text-zinc-400 border-zinc-200/80 dark:border-zinc-700/80 hover:text-zinc-900 dark:hover:text-zinc-100 backdrop-blur-sm shadow-sm'
                 )"
@@ -101,7 +94,7 @@ export default class BlockPage {
 
   readonly theme = inject(ThemeService)
 
-  readonly selectedComponent = linkedSignal(() => this.getBlockInfo().components[0]?.title ?? null)
+  readonly selectedComponent = linkedSignal(() => this.getBlockInfo().components[0])
 
   readonly cn = cn
 
@@ -132,4 +125,14 @@ export default class BlockPage {
 
     return block
   })
+
+  readonly path = computed(() => `${this.block().toLocaleLowerCase()}/${this.selectedComponent().path}`)
+
+  readonly code = httpResource<File | File[]>(() => ({
+    url: `/api/source`,
+    method: 'GET',
+    params: {
+      path: this.path()
+    }
+  }))
 }
