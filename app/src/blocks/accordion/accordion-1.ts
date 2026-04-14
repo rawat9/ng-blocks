@@ -4,7 +4,6 @@ import { AccordionPanel } from '../../components/ui/accordion/accordion-panel'
 import { AccordionContent } from '../../components/ui/accordion/accordion-content'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideChevronDown, lucideChevronUp } from '@ng-icons/lucide'
-import { ChevronDown, ChevronUp, LucideAngularModule } from 'lucide-angular'
 import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
 
 @Component({
@@ -15,7 +14,6 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     AccordionTrigger,
     AccordionPanel,
     AccordionContent,
-    LucideAngularModule,
     NgIcon,
     AccordionIcon,
   ],
@@ -87,7 +85,4 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     </div>
   </div>`,
 })
-export class Accordion1 {
-  readonly chevronDown = ChevronDown
-  readonly chevronUp = ChevronUp
-}
+export class Accordion1 {}
