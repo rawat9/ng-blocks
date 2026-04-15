@@ -12,7 +12,10 @@
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "#/lib/*": ["./app/src/lib/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
