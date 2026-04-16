@@ -20,7 +20,7 @@ export function getComponentSource(path: string): File | File[] {
     return {
       filename: path.split('/').pop() || '',
       contents: raw,
-      fileType: ext,
+      fileType: ext
     }
   }
 
@@ -37,7 +37,7 @@ export function getComponentSource(path: string): File | File[] {
       return {
         filename: entry.name,
         contents: raw,
-        fileType: ext,
+        fileType: ext
       }
     })
 }

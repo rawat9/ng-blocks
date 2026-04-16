@@ -2,17 +2,23 @@ import {
   afterNextRender,
   Component,
   computed,
+  HostListener,
   inject,
-  signal,
+  signal
 } from '@angular/core'
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router'
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet
+} from '@angular/router'
 import { provideIcons } from '@ng-icons/core'
 import {
   lucideBot,
   lucideFormInput,
   lucideLayoutGrid,
   lucidePanelLeft,
-  lucidePanelTop,
+  lucidePanelTop
 } from '@ng-icons/lucide'
 import { filter } from 'rxjs/operators'
 import { toSignal } from '@angular/core/rxjs-interop'
@@ -23,8 +29,11 @@ const NAV_ITEMS = [
   { name: 'AI', path: '/blocks/ai', icon: 'lucideBot' },
   { name: 'Accordion', path: '/blocks/accordion', icon: 'lucideLayoutGrid' },
   { name: 'Forms', path: '/blocks/forms', icon: 'lucideFormInput' },
-  { name: 'Tabs', path: '/blocks/tabs', icon: 'lucidePanelTop' },
+  { name: 'Tabs', path: '/blocks/tabs', icon: 'lucidePanelTop' }
 ]
+
+// TODO: refactor to use route data instead of hardcoding paths here
+const ARROW_NAV_ROUTES = ['/blocks/ai', '/blocks/accordion', '/blocks/forms']
 
 @Component({
   selector: 'app-blocks-layout',
@@ -35,17 +44,22 @@ const NAV_ITEMS = [
       lucideFormInput,
       lucideLayoutGrid,
       lucidePanelLeft,
-      lucidePanelTop,
-    }),
+      lucidePanelTop
+    })
   ],
   template: `
-    <div class="flex flex-col lg:flex-row w-full h-full min-h-screen lg:h-screen bg-muted dark:bg-background">
+    <div
+      class="flex flex-col lg:flex-row w-full h-full min-h-screen lg:h-screen bg-muted dark:bg-background"
+    >
       <div
         class="fixed top-5 left-4 sm:left-6 lg:absolute lg:top-8 lg:left-16 z-50 flex items-center gap-2.5 pointer-events-none"
       >
         <div class="pointer-events-auto">
           <div class="relative">
-            <app-floating-sidenav [navItems]="navItems" [(open)]="sidebarOpen"></app-floating-sidenav>
+            <app-floating-sidenav
+              [navItems]="navItems"
+              [(open)]="sidebarOpen"
+            ></app-floating-sidenav>
           </div>
         </div>
         <div
@@ -107,12 +121,14 @@ const NAV_ITEMS = [
       <div
         class="flex-1 lg:basis-1/2 lg:max-w-1/2 lg:h-full lg:sticky lg:top-0 order-first lg:order-last flex flex-col z-20 bg-muted/40 dark:bg-muted/40"
       >
-        <div class="relative w-full h-[55vh] lg:h-full p-4 lg:p-2 overflow-hidden">
+        <div
+          class="relative w-full h-[55vh] lg:h-full p-4 lg:pr-2 lg:pl-0 lg:py-2 overflow-hidden"
+        >
           <router-outlet></router-outlet>
         </div>
       </div>
     </div>
-  `,
+  `
 })
 export default class BlocksLayout {
   private readonly router = inject(Router)
@@ -126,7 +142,7 @@ export default class BlocksLayout {
 
   private readonly navEnd = toSignal(
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)),
-    { initialValue: null },
+    { initialValue: null }
   )
 
   /** Reactive current URL — updates on every navigation */
@@ -139,6 +155,31 @@ export default class BlocksLayout {
     const url = this.currentPath()
     return NAV_ITEMS.find((i) => url.startsWith(i.path))?.name ?? null
   })
+
+  @HostListener('window:keydown.ArrowDown', ['$event'])
+  navigateNext(event: Event): void {
+    const current = ARROW_NAV_ROUTES.findIndex((r) =>
+      this.router.url.startsWith(r)
+    )
+    if (current === -1) return
+    event.preventDefault()
+    const next = ARROW_NAV_ROUTES[(current + 1) % ARROW_NAV_ROUTES.length]
+    this.router.navigateByUrl(next)
+  }
+
+  @HostListener('window:keydown.ArrowUp', ['$event'])
+  navigatePrev(event: Event): void {
+    const current = ARROW_NAV_ROUTES.findIndex((r) =>
+      this.router.url.startsWith(r)
+    )
+    if (current === -1) return
+    event.preventDefault()
+    const prev =
+      ARROW_NAV_ROUTES[
+        (current - 1 + ARROW_NAV_ROUTES.length) % ARROW_NAV_ROUTES.length
+      ]
+    this.router.navigateByUrl(prev)
+  }
 
   constructor() {
     afterNextRender(() => {
