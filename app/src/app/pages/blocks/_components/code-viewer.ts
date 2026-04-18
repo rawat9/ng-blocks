@@ -48,9 +48,6 @@ import { lucideFile } from '@ng-icons/lucide'
               [size]="'14'"
             ></ng-icon>
             {{ selectedFile().filename }}
-            <div class="ml-auto flex items-center gap-2">
-              <button>Copy</button>
-            </div>
           </figcaption>
           <div
             class="flex flex-1 min-h-0 min-w-0 overflow-auto scrollbar"

@@ -1,33 +1,46 @@
-import { Component, inject, model } from '@angular/core'
+import { Component, inject, model, output, signal } from '@angular/core'
 import { ThemeService } from '../../../../services/theme.service'
+import { NgIcon, provideIcons } from '@ng-icons/core'
+import {
+  lucideCheck,
+  lucideCode,
+  lucideCopy,
+  lucideEye
+} from '@ng-icons/lucide'
 
 @Component({
   selector: 'app-toolbar',
-  imports: [],
+  imports: [NgIcon],
+  providers: [provideIcons({ lucideCopy, lucideCode, lucideEye, lucideCheck })],
   template: `
     <div class="absolute top-4 right-4 z-20">
       <div
-        class="flex items-center gap-0.5 rounded-lg border border-border/70 bg-white/95 dark:bg-[#121212] px-1 py-1"
+        class="flex items-center gap-0.5 rounded-lg border border-border/70 bg-sidebar px-1 py-1"
       >
-        <!-- Code -->
+        <!-- Copy -->
+        @if (tab() === 'code') {
+          <button
+            class="h-7 w-7 border flex justify-center items-center rounded-md border-transparent transition-all duration-150 hover:border-border/70 hover:bg-muted/70"
+            (click)="onCopyCode()"
+          >
+            @if (copied()) {
+              <ng-icon name="lucideCheck" size="14"></ng-icon>
+            } @else {
+              <ng-icon name="lucideCopy" size="14"></ng-icon>
+            }
+          </button>
+        }
+
+        <!-- Preview / code -->
         <button
           class="h-7 w-7 border flex justify-center items-center rounded-md border-transparent transition-all duration-150 hover:border-border/70 hover:bg-muted/70"
-          (click)="showCode()"
+          (click)="toggle()"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-4"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
-            />
-          </svg>
+          @if (tab() === 'preview') {
+            <ng-icon name="lucideCode" size="14"></ng-icon>
+          } @else {
+            <ng-icon name="lucideEye" size="14"></ng-icon>
+          }
         </button>
 
         <!-- Theme toggle -->
@@ -74,7 +87,17 @@ export class Toolbar {
 
   readonly tab = model<'preview' | 'code'>('preview')
 
-  showCode() {
+  readonly copyCode = output()
+
+  toggle() {
     this.tab.update((t) => (t === 'preview' ? 'code' : 'preview'))
+  }
+
+  readonly copied = signal(false)
+
+  onCopyCode() {
+    this.copyCode.emit()
+    this.copied.set(true)
+    setTimeout(() => this.copied.set(false), 2000)
   }
 }

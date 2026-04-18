@@ -5,7 +5,8 @@ import {
   inject,
   input,
   linkedSignal,
-  signal
+  signal,
+  viewChild
 } from '@angular/core'
 import { RouteMeta } from '@analogjs/router'
 import { blocks } from '../../../blocks/registry'
@@ -18,6 +19,7 @@ import { Toolbar } from './_components/toolbar'
 import { CodeViewer } from './_components/code-viewer'
 import { httpResource } from '@angular/common/http'
 import { File } from '../../../lib/get-component-source'
+import { Clipboard } from '@angular/cdk/clipboard'
 
 export const routeMeta: RouteMeta = {
   title: (route) => {
@@ -47,7 +49,10 @@ export const routeMeta: RouteMeta = {
       [class.animate-fade-in-up]="isLoaded()"
       [style.--animation-delay]="'150ms'"
     >
-      <app-toolbar [(tab)]="activeTab"></app-toolbar>
+      <app-toolbar
+        [(tab)]="activeTab"
+        (copyCode)="handleCopyCode()"
+      ></app-toolbar>
 
       <div
         appAnimateOnScroll
@@ -120,6 +125,8 @@ export default class BlockPage {
 
   readonly theme = inject(ThemeService)
 
+  readonly codeViewer = viewChild.required(CodeViewer)
+
   readonly selectedComponent = linkedSignal(
     () => this.getBlockInfo().components[0]
   )
@@ -165,4 +172,11 @@ export default class BlockPage {
       path: this.path()
     }
   }))
+
+  private readonly clipboard = inject(Clipboard)
+
+  handleCopyCode() {
+    const raw = this.codeViewer().selectedFile().contents
+    this.clipboard.copy(raw)
+  }
 }
