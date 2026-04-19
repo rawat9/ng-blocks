@@ -98,8 +98,8 @@ export const routeMeta: RouteMeta = {
                   cn(
                     'shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border',
                     selectedComponent() === c
-                      ? 'bg-foreground text-background border-foreground shadow-sm'
-                      : 'bg-white/90 dark:bg-zinc-900/90 text-zinc-600 dark:text-zinc-400 border-zinc-200/80 dark:border-zinc-700/80 hover:text-zinc-900 dark:hover:text-zinc-100 backdrop-blur-sm shadow-sm'
+                      ? 'bg-foreground text-background border-foreground'
+                      : 'bg-white/90 dark:bg-zinc-900/90 text-zinc-600 dark:text-zinc-400 border-zinc-200/80 dark:border-zinc-700/80 hover:text-zinc-900 dark:hover:text-zinc-100'
                   )
                 "
               >
