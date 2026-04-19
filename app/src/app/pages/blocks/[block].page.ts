@@ -12,7 +12,6 @@ import { RouteMeta } from '@analogjs/router'
 import { blocks } from '../../../blocks/registry'
 import { Router } from '@angular/router'
 import { AnimateOnScrollDirective } from '../../../directives'
-import { ThemeService } from '../../../services/theme.service'
 import { cn } from '../../../lib/utils'
 import { NgComponentOutlet } from '@angular/common'
 import { Toolbar } from './_components/toolbar'
@@ -122,8 +121,6 @@ export const routeMeta: RouteMeta = {
 })
 export default class BlockPage {
   block = input.required<string>()
-
-  readonly theme = inject(ThemeService)
 
   readonly codeViewer = viewChild.required(CodeViewer)
 

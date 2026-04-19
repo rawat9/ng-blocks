@@ -1,17 +1,28 @@
 import { Component, inject, model, output, signal } from '@angular/core'
-import { ThemeService } from '../../../../services/theme.service'
+import { ToolbarService } from '../../../../services/toolbar.service'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import {
   lucideCheck,
   lucideCode,
   lucideCopy,
-  lucideEye
+  lucideEye,
+  lucideMaximize,
+  lucideMinimize
 } from '@ng-icons/lucide'
 
 @Component({
   selector: 'app-toolbar',
   imports: [NgIcon],
-  providers: [provideIcons({ lucideCopy, lucideCode, lucideEye, lucideCheck })],
+  providers: [
+    provideIcons({
+      lucideCopy,
+      lucideCode,
+      lucideEye,
+      lucideCheck,
+      lucideMaximize,
+      lucideMinimize
+    })
+  ],
   template: `
     <div class="absolute top-4 right-4 z-20">
       <div
@@ -43,10 +54,21 @@ import {
           }
         </button>
 
+        <button
+          class="h-7 w-7 border flex justify-center items-center rounded-md border-transparent transition-all duration-150 hover:border-border/70 hover:bg-muted/70"
+          (click)="toolbarService.toggleFullscreen()"
+        >
+          @if (toolbarService.fullscreen()) {
+            <ng-icon name="lucideMinimize" size="14"></ng-icon>
+          } @else {
+            <ng-icon name="lucideMaximize" size="14"></ng-icon>
+          }
+        </button>
+
         <!-- Theme toggle -->
         <button
           class="h-7 w-7 border flex justify-center items-center rounded-md border-transparent transition-all duration-150 hover:border-border/70 hover:bg-muted/70"
-          (click)="theme.toggle()"
+          (click)="toolbarService.toggleTheme()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +105,7 @@ import {
   `
 })
 export class Toolbar {
-  readonly theme = inject(ThemeService)
+  protected readonly toolbarService = inject(ToolbarService)
 
   readonly tab = model<'preview' | 'code'>('preview')
 
