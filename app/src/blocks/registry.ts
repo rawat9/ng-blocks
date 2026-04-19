@@ -28,15 +28,15 @@ export const blocks: Block[] = [
       {
         title: 'AI Shimmer',
         path: 'ai-shimmer.ts',
-        component: AiShimmer,
+        component: AiShimmer
       },
       {
         title: 'AI Chat',
         path: 'ai-chat.ts',
-        component: AiChat,
-      },
+        component: AiChat
+      }
     ],
-    badge: 'NEW',
+    badge: 'NEW'
   },
   {
     title: 'Accordion',
@@ -46,17 +46,17 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Accordion',
-        path: 'accordion',
-        component: Accordion1,
-      },
-    ],
+        path: 'accordion-1.ts',
+        component: Accordion1
+      }
+    ]
   },
   {
     title: 'Tabs',
     description: 'Organize content into switchable panels',
     route: '/tabs',
     image: 'https://blocks.so/thumbnails/dialogs.svg',
-    components: [],
+    components: []
   },
   {
     title: 'Forms',
@@ -66,14 +66,14 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Login Form',
-        path: 'login-form',
-        component: Form1,
+        path: 'form-1.ts',
+        component: Form1
       },
       {
         title: 'Signup Form',
-        path: 'signup-form',
-        component: Form2,
-      },
-    ],
-  },
+        path: 'form-2.ts',
+        component: Form2
+      }
+    ]
+  }
 ]

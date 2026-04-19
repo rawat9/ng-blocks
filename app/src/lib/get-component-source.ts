@@ -1,7 +1,7 @@
 import fs from 'fs'
-import path from 'path'
+import { join, extname } from 'path'
 
-const EXAMPLES_DIR = path.join(process.cwd(), 'app/src/blocks')
+const EXAMPLES_DIR = join(process.cwd(), 'app/src/blocks')
 
 export interface File {
   filename: string
@@ -9,22 +9,35 @@ export interface File {
   fileType: string
 }
 
-export function getComponentSource(directory: string): File[] {
-  const dirPath = path.join(EXAMPLES_DIR, directory)
+export function getComponentSource(path: string): File | File[] {
+  const isFile = extname(path) !== ''
+
+  if (isFile) {
+    const filePath = join(EXAMPLES_DIR, path)
+    const raw = fs.readFileSync(filePath, 'utf8')
+    const ext = extname(path).replace('.', '')
+
+    return {
+      filename: path.split('/').pop() || '',
+      contents: raw,
+      fileType: ext
+    }
+  }
+
+  const dirPath = join(EXAMPLES_DIR, path)
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })
 
   return entries
     .filter((entry) => entry.isFile())
     .map((entry) => {
-      const filePath = path.join(dirPath, entry.name)
+      const filePath = join(dirPath, entry.name)
       const raw = fs.readFileSync(filePath, 'utf8')
-      const contents = raw.replace(/@\/registry\/map/g, '@/components/ui/map')
-      const ext = path.extname(entry.name).replace('.', '')
+      const ext = extname(entry.name).replace('.', '')
 
       return {
         filename: entry.name,
-        contents,
-        fileType: ext,
+        contents: raw,
+        fileType: ext
       }
     })
 }
