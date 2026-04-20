@@ -10,6 +10,7 @@ import {
   viewChild
 } from '@angular/core'
 import {
+  ActivatedRoute,
   NavigationEnd,
   Router,
   RouterLink,
@@ -27,6 +28,7 @@ import { filter } from 'rxjs/operators'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { ToolbarService } from '../../services/toolbar.service'
 import { Section, InstallCommand, FloatingSidenav } from './_components'
+import { blocks } from '../../blocks/registry'
 
 const NAV_ITEMS = [
   { name: 'AI', path: '/blocks/ai', icon: 'lucideBot' },
@@ -65,24 +67,24 @@ const ARROW_NAV_ROUTES = ['/blocks/ai', '/blocks/accordion', '/blocks/forms']
             ></app-floating-sidenav>
           </div>
         </div>
-        <div
-          class="inline-flex h-9 items-center gap-2 rounded-md bg-background/55 px-3.5 text-xs text-muted-foreground backdrop-blur-sm pointer-events-auto"
-        >
-          <a
-            routerLink="/blocks"
-            class="text-sm font-medium transition-colors hover:text-foreground"
+        @if (activeItemName()) {
+          <div
+            class="inline-flex h-9 items-center gap-2 rounded-md bg-background/55 px-3.5 text-xs text-muted-foreground backdrop-blur-sm pointer-events-auto"
           >
-            Blocks
-          </a>
-          @if (activeItemName()) {
+            <a
+              routerLink="/blocks"
+              class="text-sm font-medium transition-colors hover:text-foreground"
+            >
+              Blocks
+            </a>
             <span class="text-border">/</span>
             <span
               class="max-w-25 sm:max-w-45 truncate text-sm font-semibold text-foreground"
             >
               {{ activeItemName() }}
             </span>
-          }
-        </div>
+          </div>
+        }
       </div>
 
       <!-- Column left -->
@@ -101,15 +103,15 @@ const ARROW_NAV_ROUTES = ['/blocks/ai', '/blocks/accordion', '/blocks/forms']
                 <h1
                   class="text-4xl lg:text-6xl font-bold tracking-tighter bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 dark:from-white dark:via-zinc-400 dark:to-white bg-clip-text text-transparent leading-[1.1] mb-2 pb-2"
                 >
-                  {{ activeItemName() || 'Blocks' }}
+                  {{ activeItemName() || 'ng-blocks' }}
                 </h1>
-
                 <p
                   class="text-lg text-muted-foreground/90 leading-relaxed max-w-2xl font-normal"
                 >
-                  A collection of components related to collapsible content
-                  sections, allowing users to expand and collapse information as
-                  needed.
+                  {{
+                    description() ||
+                      'A collection of Angular components and templates built with the shadcn/ui design system, ready to be used in your projects.'
+                  }}
                 </p>
               </div>
             </header>
@@ -138,12 +140,16 @@ const ARROW_NAV_ROUTES = ['/blocks/ai', '/blocks/accordion', '/blocks/forms']
 export default class BlocksLayout {
   private readonly router = inject(Router)
 
-  readonly theme = inject(ToolbarService)
+  protected readonly route = inject(ActivatedRoute)
+
+  readonly toolbar = inject(ToolbarService)
 
   readonly moon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 3l0 18"></path><path d="M12 9l4.65 -4.65"></path><path d="M12 14.3l7.37 -7.37"></path><path d="M12 19.6l8.85 -8.85"></path></svg>`
 
   readonly isLoaded = signal(false)
+
   readonly sidebarOpen = signal(false)
+
   readonly navItems = NAV_ITEMS
 
   private readonly leftCol = viewChild<ElementRef<HTMLElement>>('leftCol')
@@ -165,6 +171,12 @@ export default class BlocksLayout {
     const url = this.currentPath()
     return NAV_ITEMS.find((i) => url.startsWith(i.path))?.name ?? null
   })
+
+  readonly description = computed(
+    () =>
+      blocks.find((b) => this.currentPath().includes(b.route))?.description ??
+      null
+  )
 
   @HostListener('window:keydown.ArrowDown', ['$event'])
   navigateNext(event: Event): void {
@@ -201,7 +213,7 @@ export default class BlocksLayout {
       const right = this.rightCol()?.nativeElement
       if (!left || !right) return
 
-      const fs = this.theme.fullscreen()
+      const fs = this.toolbar.fullscreen()
 
       const easing = 'cubic-bezier(0.22, 1, 0.36, 1)'
       left.style.transition = `flex-basis 500ms ${easing}, max-width 500ms ${easing}, opacity 280ms ease, border-color 220ms ease`

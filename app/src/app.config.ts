@@ -2,12 +2,12 @@ import { provideFileRouter, requestContextInterceptor } from '@analogjs/router'
 import {
   provideHttpClient,
   withFetch,
-  withInterceptors,
+  withInterceptors
 } from '@angular/common/http'
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
+  provideZonelessChangeDetection
 } from '@angular/core'
 import { provideClientHydration } from '@angular/platform-browser'
 import { withComponentInputBinding, withViewTransitions } from '@angular/router'
@@ -20,11 +20,11 @@ export const appConfig: ApplicationConfig = {
     provideFileRouter(withViewTransitions(), withComponentInputBinding()),
     provideClientHydration(),
     provideNgIconsConfig({
-      size: '20px',
+      size: '20px'
     }),
     provideHttpClient(
       withFetch(),
-      withInterceptors([requestContextInterceptor]),
-    ),
-  ],
+      withInterceptors([requestContextInterceptor])
+    )
+  ]
 }

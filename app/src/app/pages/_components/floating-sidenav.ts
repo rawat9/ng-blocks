@@ -59,7 +59,7 @@ import { filter } from 'rxjs'
       id="blocks-floating-sidebar"
       aria-label="Blocks navigation"
       tabindex="0"
-      class="absolute top-12 left-0 z-50 w-[min(18rem,calc(100vw-2.5rem))] origin-top-left rounded-2xl border border-border p-1 bg-sidebar text-sm shadow-[0_24px_80px_-32px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition-all duration-200 ease-out lg:w-72"
+      class="absolute select-none top-12 left-0 z-50 w-[min(18rem,calc(100vw-2.5rem))] origin-top-left rounded-2xl border border-border p-1 bg-sidebar text-sm shadow-[0_24px_80px_-32px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition-all duration-200 ease-out lg:w-72"
       [class]="sidebarPanelClass()"
       [attr.aria-hidden]="!open()"
       (mouseleave)="closeSidebar()"
@@ -101,11 +101,6 @@ import { filter } from 'rxjs'
             <span class="min-w-0 flex-1">
               <span class="block truncate text-[0.95rem] font-medium">
                 {{ item.name }}
-              </span>
-              <span
-                class="block truncate text-[0.72rem] text-zinc-500 dark:text-zinc-400"
-              >
-                {{ item.path.replace('/blocks/', '') }}
               </span>
             </span>
           </a>
