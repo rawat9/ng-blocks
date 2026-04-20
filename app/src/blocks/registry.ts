@@ -10,6 +10,7 @@ export interface Block {
   description: string
   route: string
   image: string
+  darkImage: string
   components: {
     title: string
     path: string
@@ -23,7 +24,8 @@ export const blocks: Block[] = [
     title: 'AI',
     description: 'Chat interfaces, prompts, and AI-powered components',
     route: '/ai',
-    image: 'https://blocks.so/thumbnails/ai.svg',
+    image: '/thumbnails/ai.svg',
+    darkImage: '/thumbnails/ai-dark.svg',
     components: [
       {
         title: 'AI Shimmer',
@@ -42,7 +44,8 @@ export const blocks: Block[] = [
     title: 'Accordion',
     description: 'Expandable content sections with smooth animations',
     route: '/accordion',
-    image: 'https://blocks.so/thumbnails/ai.svg',
+    image: '/thumbnails/accordion.svg',
+    darkImage: '/thumbnails/accordion-dark.svg',
     components: [
       {
         title: 'Accordion',
@@ -55,14 +58,16 @@ export const blocks: Block[] = [
     title: 'Tabs',
     description: 'Organize content into switchable panels',
     route: '/tabs',
-    image: 'https://blocks.so/thumbnails/dialogs.svg',
+    image: '/thumbnails/tabs.svg',
+    darkImage: '/thumbnails/tabs-dark.svg',
     components: []
   },
   {
     title: 'Forms',
     description: 'Input fields, validation, and form layouts',
     route: '/forms',
-    image: 'https://blocks.so/thumbnails/dialogs.svg',
+    image: '/thumbnails/forms.svg',
+    darkImage: '/thumbnails/forms-dark.svg',
     components: [
       {
         title: 'Login Form',

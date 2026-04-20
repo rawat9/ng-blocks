@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="375" fill="none" viewBox="0 0 600 375">
+  <rect width="600" height="375" fill="#171717"/>
+  <!-- Chat bubbles pattern -->
+  <rect x="80" y="90" width="260" height="52" rx="12" fill="#262626"/>
+  <rect x="100" y="104" width="140" height="8" rx="4" fill="#404040"/>
+  <rect x="100" y="120" width="90" height="8" rx="4" fill="#404040"/>
+  <rect x="260" y="162" width="260" height="72" rx="12" fill="#fafafa"/>
+  <rect x="280" y="176" width="160" height="8" rx="4" fill="#d4d4d4"/>
+  <rect x="280" y="192" width="120" height="8" rx="4" fill="#d4d4d4"/>
+  <rect x="280" y="208" width="80" height="8" rx="4" fill="#d4d4d4"/>
+  <rect x="80" y="254" width="200" height="52" rx="12" fill="#262626"/>
+  <rect x="100" y="268" width="120" height="8" rx="4" fill="#404040"/>
+  <rect x="100" y="284" width="70" height="8" rx="4" fill="#404040"/>
+  <!-- Sparkle dots -->
+  <circle cx="504" cy="178" r="4" fill="#525252" opacity="0.6"/>
+  <circle cx="520" cy="168" r="3" fill="#525252" opacity="0.4"/>
+  <circle cx="512" cy="194" r="2.5" fill="#525252" opacity="0.3"/>
+</svg>
