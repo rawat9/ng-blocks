@@ -9,8 +9,8 @@ import {
   viewChild
 } from '@angular/core'
 import { RouteMeta } from '@analogjs/router'
-import { blocks } from '../../../blocks/registry'
-import { Router } from '@angular/router'
+import { blocks, Block } from '../../../blocks/registry'
+import { ActivatedRoute, Router } from '@angular/router'
 import { AnimateOnScrollDirective } from '../../../directives'
 import { cn } from '../../../lib/utils'
 import { NgComponentOutlet } from '@angular/common'
@@ -60,7 +60,7 @@ export const routeMeta: RouteMeta = {
         @if (activeTab() === 'preview') {
           <div [class]="cn('w-full', 'p-10 flex items-center justify-center')">
             @let component =
-              getBlockInfo().components.find(c => c === selectedComponent());
+              getBlockInfo().components.find((c) => c === selectedComponent());
             <div className="w-full h-full flex items-center justify-center">
               <ng-container
                 *ngComponentOutlet="component!.component"
@@ -92,7 +92,7 @@ export const routeMeta: RouteMeta = {
           >
             @for (c of getBlockInfo().components; track c.title) {
               <button
-                (click)="selectedComponent.set(c)"
+                (click)="selectComponent(c)"
                 [class]="
                   cn(
                     'shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border',
@@ -120,9 +120,13 @@ export const routeMeta: RouteMeta = {
   `
 })
 export default class BlockPage {
-  block = input.required<string>()
+  public readonly block = input.required<string>()
 
   readonly codeViewer = viewChild.required(CodeViewer)
+
+  private readonly router = inject(Router)
+
+  private readonly route = inject(ActivatedRoute)
 
   readonly selectedComponent = linkedSignal(
     () => this.getBlockInfo().components[0]
@@ -137,7 +141,30 @@ export default class BlockPage {
   constructor() {
     afterNextRender(() => {
       this.isLoaded.set(true)
+
+      // Restore selected component from URL fragment
+      const fragment = this.route.snapshot.fragment
+      if (fragment) {
+        const match = this.getBlockInfo().components.find(
+          (c) => this.toSlug(c.title) === fragment
+        )
+        if (match) {
+          this.selectedComponent.set(match)
+        }
+      }
     })
+  }
+
+  selectComponent(c: Block['components'][number]) {
+    this.selectedComponent.set(c)
+    this.router.navigate([], {
+      fragment: this.toSlug(c.title),
+      replaceUrl: true
+    })
+  }
+
+  private toSlug(title: string): string {
+    return title.toLowerCase().replace(/\s+/g, '-')
   }
 
   readonly getBlockInfo = computed(() => {
