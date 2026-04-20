@@ -2,29 +2,41 @@ import {
   afterNextRender,
   Component,
   computed,
+  effect,
+  ElementRef,
+  HostListener,
   inject,
   signal,
+  viewChild
 } from '@angular/core'
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router'
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet
+} from '@angular/router'
 import { provideIcons } from '@ng-icons/core'
 import {
   lucideBot,
   lucideFormInput,
   lucideLayoutGrid,
   lucidePanelLeft,
-  lucidePanelTop,
+  lucidePanelTop
 } from '@ng-icons/lucide'
 import { filter } from 'rxjs/operators'
 import { toSignal } from '@angular/core/rxjs-interop'
-import { ThemeService } from '../../services/theme.service'
+import { ToolbarService } from '../../services/toolbar.service'
 import { Section, InstallCommand, FloatingSidenav } from './_components'
 
 const NAV_ITEMS = [
   { name: 'AI', path: '/blocks/ai', icon: 'lucideBot' },
   { name: 'Accordion', path: '/blocks/accordion', icon: 'lucideLayoutGrid' },
   { name: 'Forms', path: '/blocks/forms', icon: 'lucideFormInput' },
-  { name: 'Tabs', path: '/blocks/tabs', icon: 'lucidePanelTop' },
+  { name: 'Tabs', path: '/blocks/tabs', icon: 'lucidePanelTop' }
 ]
+
+// TODO: refactor to use route data instead of hardcoding paths here
+const ARROW_NAV_ROUTES = ['/blocks/ai', '/blocks/accordion', '/blocks/forms']
 
 @Component({
   selector: 'app-blocks-layout',
@@ -35,17 +47,22 @@ const NAV_ITEMS = [
       lucideFormInput,
       lucideLayoutGrid,
       lucidePanelLeft,
-      lucidePanelTop,
-    }),
+      lucidePanelTop
+    })
   ],
   template: `
-    <div class="flex flex-col lg:flex-row w-full h-full min-h-screen lg:h-screen bg-muted dark:bg-background">
+    <div
+      class="flex flex-col lg:flex-row w-full h-full min-h-screen lg:h-screen bg-muted dark:bg-background"
+    >
       <div
         class="fixed top-5 left-4 sm:left-6 lg:absolute lg:top-8 lg:left-16 z-50 flex items-center gap-2.5 pointer-events-none"
       >
         <div class="pointer-events-auto">
           <div class="relative">
-            <app-floating-sidenav [navItems]="navItems" [(open)]="sidebarOpen"></app-floating-sidenav>
+            <app-floating-sidenav
+              [navItems]="navItems"
+              [(open)]="sidebarOpen"
+            ></app-floating-sidenav>
           </div>
         </div>
         <div
@@ -70,6 +87,7 @@ const NAV_ITEMS = [
 
       <!-- Column left -->
       <div
+        #leftCol
         class="w-full lg:basis-1/2 lg:max-w-1/2 h-full flex flex-col relative z-10 bg-muted/40 dark:bg-muted/40"
       >
         <div
@@ -105,18 +123,22 @@ const NAV_ITEMS = [
 
       <!-- Column right -->
       <div
+        #rightCol
         class="flex-1 lg:basis-1/2 lg:max-w-1/2 lg:h-full lg:sticky lg:top-0 order-first lg:order-last flex flex-col z-20 bg-muted/40 dark:bg-muted/40"
       >
-        <div class="relative w-full h-[55vh] lg:h-full p-4 lg:p-2 overflow-hidden">
+        <div
+          class="relative w-full h-[55vh] lg:h-full p-4 lg:pr-2 lg:pl-2 lg:py-2 overflow-hidden"
+        >
           <router-outlet></router-outlet>
         </div>
       </div>
     </div>
-  `,
+  `
 })
 export default class BlocksLayout {
   private readonly router = inject(Router)
-  readonly theme = inject(ThemeService)
+
+  readonly theme = inject(ToolbarService)
 
   readonly moon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M12 3l0 18"></path><path d="M12 9l4.65 -4.65"></path><path d="M12 14.3l7.37 -7.37"></path><path d="M12 19.6l8.85 -8.85"></path></svg>`
 
@@ -124,9 +146,13 @@ export default class BlocksLayout {
   readonly sidebarOpen = signal(false)
   readonly navItems = NAV_ITEMS
 
+  private readonly leftCol = viewChild<ElementRef<HTMLElement>>('leftCol')
+
+  private readonly rightCol = viewChild<ElementRef<HTMLElement>>('rightCol')
+
   private readonly navEnd = toSignal(
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)),
-    { initialValue: null },
+    { initialValue: null }
   )
 
   /** Reactive current URL — updates on every navigation */
@@ -140,9 +166,62 @@ export default class BlocksLayout {
     return NAV_ITEMS.find((i) => url.startsWith(i.path))?.name ?? null
   })
 
+  @HostListener('window:keydown.ArrowDown', ['$event'])
+  navigateNext(event: Event): void {
+    const current = ARROW_NAV_ROUTES.findIndex((r) =>
+      this.router.url.startsWith(r)
+    )
+    if (current === -1) return
+    event.preventDefault()
+    const next = ARROW_NAV_ROUTES[(current + 1) % ARROW_NAV_ROUTES.length]
+    this.router.navigateByUrl(next)
+  }
+
+  @HostListener('window:keydown.ArrowUp', ['$event'])
+  navigatePrev(event: Event): void {
+    const current = ARROW_NAV_ROUTES.findIndex((r) =>
+      this.router.url.startsWith(r)
+    )
+    if (current === -1) return
+    event.preventDefault()
+    const prev =
+      ARROW_NAV_ROUTES[
+        (current - 1 + ARROW_NAV_ROUTES.length) % ARROW_NAV_ROUTES.length
+      ]
+    this.router.navigateByUrl(prev)
+  }
+
   constructor() {
     afterNextRender(() => {
       this.isLoaded.set(true)
+    })
+
+    effect(() => {
+      const left = this.leftCol()?.nativeElement
+      const right = this.rightCol()?.nativeElement
+      if (!left || !right) return
+
+      const fs = this.theme.fullscreen()
+
+      const easing = 'cubic-bezier(0.22, 1, 0.36, 1)'
+      left.style.transition = `flex-basis 500ms ${easing}, max-width 500ms ${easing}, opacity 280ms ease, border-color 220ms ease`
+      right.style.transition = `flex-basis 500ms ${easing}, max-width 500ms ${easing}`
+
+      if (fs) {
+        left.style.flexBasis = '0%'
+        left.style.maxWidth = '0%'
+        left.style.opacity = '0'
+        left.style.overflow = 'hidden'
+        right.style.flexBasis = '100%'
+        right.style.maxWidth = '100%'
+      } else {
+        left.style.flexBasis = ''
+        left.style.maxWidth = ''
+        left.style.opacity = ''
+        left.style.overflow = ''
+        right.style.flexBasis = ''
+        right.style.maxWidth = ''
+      }
     })
   }
 }

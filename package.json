@@ -7,7 +7,9 @@
   },
   "keywords": [
     "angular",
-    "zoneless"
+    "zoneless",
+    "shadcn",
+    "ui"
   ],
   "license": "MIT",
   "scripts": {

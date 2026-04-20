@@ -1,4 +1,11 @@
-import { Component, computed, inject, input, model, output } from '@angular/core'
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  model,
+  output
+} from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideTerminal } from '@ng-icons/lucide'
 import { NavigationEnd, Router, RouterLink } from '@angular/router'
@@ -9,8 +16,8 @@ import { filter } from 'rxjs'
   selector: 'app-floating-sidenav',
   viewProviders: [
     provideIcons({
-      lucideTerminal,
-    }),
+      lucideTerminal
+    })
   ],
   template: `
     <button
@@ -28,8 +35,23 @@ import { filter } from 'rxjs'
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-          <rect x="1" y="2" width="16" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.4" />
-          <rect x="1" y="2" width="5.5" height="14" rx="2.5" fill="currentColor" />
+        <rect
+          x="1"
+          y="2"
+          width="16"
+          height="14"
+          rx="2.5"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
+        <rect
+          x="1"
+          y="2"
+          width="5.5"
+          height="14"
+          rx="2.5"
+          fill="currentColor"
+        />
       </svg>
     </button>
 
@@ -45,9 +67,11 @@ import { filter } from 'rxjs'
     >
       <div
         class="mb-2 flex items-center justify-between rounded-xl border border-zinc-200/60 bg-zinc-50/80 px-3 py-2 dark:border-zinc-800/60 dark:bg-zinc-950/40"
-        >
+      >
         <div class="space-y-0.5">
-          <p class="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400">
+          <p
+            class="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400"
+          >
             Navigation
           </p>
           <p class="text-sm font-semibold text-foreground">Blocks</p>
@@ -78,7 +102,9 @@ import { filter } from 'rxjs'
               <span class="block truncate text-[0.95rem] font-medium">
                 {{ item.name }}
               </span>
-              <span class="block truncate text-[0.72rem] text-zinc-500 dark:text-zinc-400">
+              <span
+                class="block truncate text-[0.72rem] text-zinc-500 dark:text-zinc-400"
+              >
                 {{ item.path.replace('/blocks/', '') }}
               </span>
             </span>
@@ -87,12 +113,13 @@ import { filter } from 'rxjs'
       </nav>
     </aside>
   `,
-  imports: [NgIcon, RouterLink],
+  imports: [NgIcon, RouterLink]
 })
 export class FloatingSidenav {
   readonly open = model(false)
 
-  readonly navItems = input.required<{ name: string; path: string; icon: string }[]>()
+  readonly navItems =
+    input.required<{ name: string; path: string; icon: string }[]>()
 
   readonly router = inject(Router)
 
@@ -101,12 +128,12 @@ export class FloatingSidenav {
   readonly sidebarPanelClass = computed(() =>
     this.open()
       ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
-      : 'pointer-events-none -translate-y-2 scale-95 opacity-0',
+      : 'pointer-events-none -translate-y-2 scale-95 opacity-0'
   )
 
   private readonly navEnd = toSignal(
     this.router.events.pipe(filter((e) => e instanceof NavigationEnd)),
-    { initialValue: null },
+    { initialValue: null }
   )
 
   /** Reactive current URL — updates on every navigation */
