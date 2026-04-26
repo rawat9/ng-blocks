@@ -4,14 +4,14 @@ import { RouterLink } from '@angular/router'
 import { Button } from '../../components/ui/button'
 
 export const routeMeta: RouteMeta = {
-  title: 'Page not found',
+  title: 'Page not found'
 }
 
 @Component({
   selector: 'app-not-found',
   imports: [RouterLink, Button],
   host: {
-    class: 'h-full flex flex-col items-center justify-center',
+    class: 'h-full flex flex-col items-center justify-center'
   },
   template: `
     <div class="-mt-[25%] mb-8 flex gap-4 items-center">
@@ -21,6 +21,6 @@ export const routeMeta: RouteMeta = {
     <a routerLink="/" size="sm" appButton class="text-xs" variant="link"
       >Back home</a
     >
-  `,
+  `
 })
 export default class PageNotFound {}

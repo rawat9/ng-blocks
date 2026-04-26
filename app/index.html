@@ -1,39 +1,41 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ng-blocks</title>
+    <base href="/" />
+    <meta
+      name="description"
+      content="A collection of beautifully designed, accessible, and copy-paste ready components. Built on Angular Aria with Tailwind CSS."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/analog.svg" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <title>ng-blocks</title>
-  <base href="/" />
-  <meta name="description" content="A collection of reusable Angular components built with Tailwind CSS" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="/analog.svg" />
-  <link rel="stylesheet" href="/src/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-    rel="stylesheet">
+    <script>
+      ;(function () {
+        try {
+          const storedTheme = localStorage.getItem('theme')
+          const prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+          ).matches
 
-  <script>
-    ; (function () {
-      try {
-        const storedTheme = localStorage.getItem('theme')
-        const prefersDark = window.matchMedia(
-          '(prefers-color-scheme: dark)',
-        ).matches
+          if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark')
+          }
+        } catch (e) {}
+      })()
+    </script>
+  </head>
 
-        if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-          document.documentElement.classList.add('dark')
-        }
-      } catch (e) { }
-    })()
-  </script>
-</head>
-
-<body>
-  <app-root></app-root>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+  <body>
+    <app-blocks></app-blocks>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

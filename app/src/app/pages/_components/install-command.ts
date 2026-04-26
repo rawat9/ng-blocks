@@ -14,51 +14,72 @@ interface PackageManager {
     provideIcons({
       simpleNpm,
       simplePnpm,
-      simpleBun,
-    }),
+      simpleBun
+    })
   ],
-  template: `
-    <div class="w-full max-w-full">
-      <div class="relative rounded-xl border border-border overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 font-mono text-sm leading-relaxed text-foreground">
-        <div class="flex items-center border-b border-border/40 bg-neutral-50/50 dark:bg-zinc-900/20 overflow-x-auto no-scrollbar">
-          @for (packageManager of packageManagers; track packageManager.name) {
-            <button (click)="selected.set(packageManager.name)" 
-            [class]="cn(
-              'flex items-center gap-2 border-r border-border/40 px-4 py-2.5 text-xs font-medium transition-all min-w-fit outline-none hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50',
-                selected() === packageManager.name ? 
-                  'bg-transparent text-zinc-950 dark:text-zinc-50 font-semibold' : 'bg-zinc-100/30 dark:bg-zinc-800/10 text-muted-foreground/80 hover:text-foreground'
-              )">
-              <ng-icon [name]="packageManager.icon" [class]="cn('h-3 w-3', selected() === packageManager.name ? 'text-zinc-950 dark:text-zinc-50' : 'text-muted-foreground/70')"></ng-icon>
-              <span>{{ packageManager.name }}</span>
-            </button>
-          }
-          <div class="flex-1"></div>
-        </div>
+  template: ` <div class="w-full max-w-full">
+    <div
+      class="relative rounded-xl border border-border overflow-hidden font-mono text-sm leading-relaxed text-foreground"
+    >
+      <div
+        class="flex items-center border-b border-border/40 overflow-x-auto no-scrollbar"
+      >
+        @for (packageManager of packageManagers; track packageManager.name) {
+          <button
+            (click)="selected.set(packageManager.name)"
+            [class]="
+              cn(
+                'flex items-center gap-2 border-r border-border/40 px-4 py-2.5 text-xs font-medium transition-all min-w-fit outline-none hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50',
+                selected() === packageManager.name
+                  ? 'bg-transparent text-zinc-950 dark:text-zinc-50 font-semibold'
+                  : 'bg-zinc-100/30 dark:bg-zinc-800/10 text-muted-foreground/80 hover:text-foreground'
+              )
+            "
+          >
+            <ng-icon
+              [name]="packageManager.icon"
+              [size]="'16'"
+              [class]="
+                cn(
+                  selected() === packageManager.name
+                    ? 'text-zinc-950 dark:text-zinc-50'
+                    : 'text-muted-foreground/70'
+                )
+              "
+            ></ng-icon>
+            <span>{{ packageManager.name }}</span>
+          </button>
+        }
+        <div class="flex-1"></div>
+      </div>
 
-        <div class="relative flex items-center p-4">
-          <div class="flex-1 overflow-x-auto whitespace-nowrap no-scrollbar pr-12">
-            <span class="mr-2 text-muted-foreground/40 select-none">$</span>
-            <span class="text-zinc-950 dark:text-zinc-100">{{ commands[selected()] }}</span>
-            <span class="text-muted-foreground"> accordion</span>
-          </div>
-
-          <div class="absolute right-0 top-0 bottom-0 pl-16 pr-4 flex items-center bg-linear-to-l from-zinc-100 via-zinc-100/90 to-transparent dark:from-zinc-900 dark:via-zinc-900/90 dark:to-transparent">
-          </div>
+      <div class="relative flex items-center p-4 bg-code">
+        <div
+          class="flex-1 overflow-x-auto whitespace-nowrap no-scrollbar pr-12"
+        >
+          <span class="mr-2 text-muted-foreground/40 select-none">$</span>
+          <span>{{ commands[selected()] }}</span>
+          <span class="text-muted-foreground"> accordion</span>
         </div>
       </div>
-    </div>`,
-  imports: [NgIcon],
+    </div>
+  </div>`,
+  imports: [NgIcon]
 })
 export class InstallCommand {
   readonly commands: Record<PackageManager['name'], string> = {
     pnpm: 'pnpm dlx shadcn@latest add',
     npm: 'npx shadcn@latest add',
-    bun: 'bunx --bun shadcn@latest add',
+    bun: 'bunx --bun shadcn@latest add'
   }
 
   readonly selected = model<PackageManager['name']>('npm')
 
-  protected readonly packageManagers = [{ name: 'npm', icon: 'simpleNpm' }, { name: 'pnpm', icon: 'simplePnpm' }, { name: 'bun', icon: 'simpleBun' }]
+  protected readonly packageManagers = [
+    { name: 'npm', icon: 'simpleNpm' },
+    { name: 'pnpm', icon: 'simplePnpm' },
+    { name: 'bun', icon: 'simpleBun' }
+  ]
 
   protected readonly cn = cn
 }

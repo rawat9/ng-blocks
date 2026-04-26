@@ -1,4 +1,11 @@
-import { Component, inject, model, output, signal } from '@angular/core'
+import {
+  Component,
+  ChangeDetectionStrategy,
+  inject,
+  model,
+  output,
+  signal
+} from '@angular/core'
 import { ToolbarService } from '../../../../services/toolbar.service'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import {
@@ -13,7 +20,8 @@ import {
 @Component({
   selector: 'app-toolbar',
   imports: [NgIcon],
-  providers: [
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  viewProviders: [
     provideIcons({
       lucideCopy,
       lucideCode,

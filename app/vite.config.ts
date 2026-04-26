@@ -17,7 +17,7 @@ function myPlugin(): Plugin {
         code = `export default \`${source.replace(/`/g, '\\`').replace(/\${/g, '\\${')}\`;`
       }
       return code
-    },
+    }
   }
 }
 
@@ -28,32 +28,31 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: '../dist/./app/client',
       reportCompressedSize: true,
-      target: ['es2020'],
+      target: ['es2020']
     },
-
     server: {
       fs: {
-        allow: ['.'],
-      },
+        allow: ['.']
+      }
     },
     plugins: [
       analog({
         prerender: {
-          routes: ['/', '/404.html'],
-        },
+          routes: ['/', '/404.html']
+        }
       }),
       nxViteTsPaths(),
-      myPlugin(),
+      myPlugin()
     ],
     test: {
       globals: true,
       environment: 'jsdom',
       setupFiles: ['src/test-setup.ts'],
       include: ['**/*.spec.ts'],
-      reporters: ['default'],
+      reporters: ['default']
     },
     define: {
-      'import.meta.vitest': mode !== 'production',
-    },
+      'import.meta.vitest': mode !== 'production'
+    }
   }
 })

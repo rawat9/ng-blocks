@@ -2,6 +2,6 @@ import { render } from '@analogjs/router/server'
 import '@angular/platform-server/init'
 
 import { config } from './app.config.server'
-import { App } from './app/app'
+import Blocks from './app/pages/(blocks).page'
 
-export default render(App, config)
+export default render(Blocks, config)

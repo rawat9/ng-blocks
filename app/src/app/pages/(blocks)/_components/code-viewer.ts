@@ -1,5 +1,6 @@
 import {
   afterNextRender,
+  ChangeDetectionStrategy,
   Component,
   inject,
   input,
@@ -15,6 +16,7 @@ import { lucideFile } from '@ng-icons/lucide'
 
 @Component({
   selector: 'app-code-viewer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgIcon],
   viewProviders: [
     provideIcons({

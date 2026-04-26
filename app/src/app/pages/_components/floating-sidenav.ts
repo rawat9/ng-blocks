@@ -1,8 +1,8 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
-  input,
   model,
   output
 } from '@angular/core'
@@ -11,12 +11,25 @@ import { lucideTerminal } from '@ng-icons/lucide'
 import { NavigationEnd, Router, RouterLink } from '@angular/router'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { filter } from 'rxjs'
+import {
+  lucideBot,
+  lucideFormInput,
+  lucideLayoutGrid,
+  lucidePanelLeft,
+  lucidePanelTop
+} from '@ng-icons/lucide'
 
 @Component({
   selector: 'app-floating-sidenav',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [
     provideIcons({
-      lucideTerminal
+      lucideTerminal,
+      lucideBot,
+      lucideFormInput,
+      lucideLayoutGrid,
+      lucidePanelLeft,
+      lucidePanelTop
     })
   ],
   template: `
@@ -79,12 +92,12 @@ import { filter } from 'rxjs'
         <span
           class="inline-flex min-w-8 items-center justify-center rounded-full border border-zinc-200/70 px-2 py-1 text-[0.7rem] font-medium text-zinc-500 dark:border-zinc-800/70 dark:text-zinc-400"
         >
-          {{ navItems().length }}
+          {{ navItems.length }}
         </span>
       </div>
 
       <nav class="space-y-1">
-        @for (item of navItems(); track item.path) {
+        @for (item of navItems; track item.path) {
           <a
             [routerLink]="item.path"
             class="group flex items-center gap-3 rounded-xl px-3 py-2.5 outline-none transition-all duration-200"
@@ -113,8 +126,12 @@ import { filter } from 'rxjs'
 export class FloatingSidenav {
   readonly open = model(false)
 
-  readonly navItems =
-    input.required<{ name: string; path: string; icon: string }[]>()
+  readonly navItems = [
+    { name: 'AI', path: '/ai', icon: 'lucideBot' },
+    { name: 'Accordion', path: '/accordion', icon: 'lucideLayoutGrid' },
+    { name: 'Forms', path: '/forms', icon: 'lucideFormInput' },
+    { name: 'Tabs', path: '/tabs', icon: 'lucidePanelTop' }
+  ]
 
   readonly router = inject(Router)
 

@@ -2,13 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 
 @Component({
+  selector: 'app-blocks',
   imports: [RouterOutlet],
-  selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <main class="h-full">
-      <router-outlet></router-outlet>
-    </main>
-  `,
+  template: `<router-outlet></router-outlet>`
 })
-export class App {}
+export default class Blocks {}

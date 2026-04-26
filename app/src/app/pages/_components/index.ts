@@ -1,3 +1,5 @@
 export { FloatingSidenav } from './floating-sidenav'
 export { InstallCommand } from './install-command'
 export { Section } from './section'
+export { CodeBlock } from './code-block'
+export { BlocksLayout } from './blocks-layout'

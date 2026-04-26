@@ -3,12 +3,11 @@ import { cn } from '../../../lib/utils'
 
 @Component({
   selector: 'app-section',
+  host: {
+    class: 'block'
+  },
   template: `
-    <div
-      [class]="cn('scroll-mt-20', userClass())"
-      id="{{ sectionId() }}"
-      [attr.data-section-title]="title()"
-    >
+    <div id="{{ sectionId() }}" [attr.data-section-title]="title()">
       <div class="flex items-center gap-4 mb-6">
         @if (step()) {
           <ng-container>
@@ -30,15 +29,15 @@ import { cn } from '../../../lib/utils'
         <ng-content></ng-content>
       </div>
     </div>
-  `,
+  `
 })
 export class Section {
-  readonly userClass = input<string>()
+  readonly userClass = input<string>('', { alias: 'class' })
 
   readonly id = input<string>()
 
   readonly sectionId = computed(
-    () => this.id() || this.title().toLowerCase().replace(/\s+/g, '-'),
+    () => this.id() || this.title().toLowerCase().replace(/\s+/g, '-')
   )
 
   readonly step = input<number>()

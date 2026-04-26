@@ -24,9 +24,7 @@
           "mode": "production"
         }
       },
-      "outputs": [
-        "{workspaceRoot}/dist/apps/app"
-      ]
+      "outputs": ["{workspaceRoot}/dist/apps/app"]
     },
     "serve": {
       "executor": "@analogjs/platform:vite-dev-server",
