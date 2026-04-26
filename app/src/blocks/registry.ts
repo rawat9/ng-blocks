@@ -11,6 +11,8 @@ export interface Block {
   route: string
   image: string
   darkImage: string
+  import: string
+  usage: string
   components: {
     title: string
     path: string
@@ -26,6 +28,10 @@ export const blocks: Block[] = [
     route: '/ai',
     image: '/thumbnails/ai.svg',
     darkImage: '/thumbnails/ai-dark.svg',
+    import: `import { AiShimmer } from 'ng-blocks/ai/ai-shimmer'`,
+    usage: `
+      <AiShimmer text="Loading..." duration="5"></AiShimmer>
+    `,
     components: [
       {
         title: 'AI Shimmer',
@@ -46,6 +52,10 @@ export const blocks: Block[] = [
     route: '/accordion',
     image: '/thumbnails/accordion.svg',
     darkImage: '/thumbnails/accordion-dark.svg',
+    import: `import { Accordion1 } from 'ng-blocks/accordion/accordion-1'`,
+    usage: `
+      <Accordion1></Accordion1>
+    `,
     components: [
       {
         title: 'Accordion',
@@ -59,6 +69,14 @@ export const blocks: Block[] = [
     description: 'Organize content into switchable panels',
     route: '/tabs',
     image: '/thumbnails/tabs.svg',
+    import: `import { Tabs } from 'ng-blocks/tabs/tabs'`,
+    usage: `
+      <Tabs>
+        <Tab title="Tab 1">Content for Tab 1</Tab>
+        <Tab title="Tab 2">Content for Tab 2</Tab>
+        <Tab title="Tab 3">Content for Tab 3</Tab>
+      </Tabs>
+    `,
     darkImage: '/thumbnails/tabs-dark.svg',
     components: []
   },
@@ -68,6 +86,10 @@ export const blocks: Block[] = [
     route: '/forms',
     image: '/thumbnails/forms.svg',
     darkImage: '/thumbnails/forms-dark.svg',
+    import: `import { Form1 } from 'ng-blocks/forms/form-1'`,
+    usage: `
+      <Form1></Form1>
+    `,
     components: [
       {
         title: 'Login Form',

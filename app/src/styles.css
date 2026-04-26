@@ -159,6 +159,11 @@ body {
     @apply border-border outline-ring/50;
   }
 
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(gray 50%, transparent) transparent;
+  }
+
   ::selection {
     @apply bg-selection text-selection-foreground;
   }
@@ -183,44 +188,6 @@ body {
 
   &::-webkit-scrollbar {
     display: none;
-  }
-}
-
-@utility scrollbar {
-  scrollbar-color: color-mix(
-      in oklab,
-      var(--color-background) 82%,
-      var(--color-foreground) 18%
-    )
-    transparent;
-  scrollbar-width: thin;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: color-mix(
-      in oklab,
-      var(--color-background) 82%,
-      var(--color-foreground) 18%
-    );
-    border-radius: var(--radius);
-    border: 2px solid transparent;
-    background-clip: padding-box;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(
-      in oklab,
-      var(--color-background) 74%,
-      var(--color-foreground) 26%
-    );
   }
 }
 

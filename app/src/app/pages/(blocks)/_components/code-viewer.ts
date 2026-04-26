@@ -52,7 +52,7 @@ import { lucideFile } from '@ng-icons/lucide'
             {{ selectedFile().filename }}
           </figcaption>
           <div
-            class="flex flex-1 min-h-0 min-w-0 overflow-auto scrollbar"
+            class="flex flex-1 min-h-0 min-w-0 overflow-auto"
             [innerHTML]="code()"
           ></div>
         </figure>

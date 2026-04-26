@@ -1,4 +1,4 @@
-import { Component, model } from '@angular/core'
+import { Component, input, model } from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { cn } from '../../../lib/utils'
 import { simplePnpm, simpleNpm, simpleBun } from '@ng-icons/simple-icons'
@@ -29,10 +29,10 @@ interface PackageManager {
             (click)="selected.set(packageManager.name)"
             [class]="
               cn(
-                'flex items-center gap-2 border-r border-border/40 px-4 py-2.5 text-xs font-medium transition-all min-w-fit outline-none hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50',
+                'flex items-center gap-2 border-r border-border/40 px-4 py-2.5 text-xs font-medium transition-all min-w-fit outline-none',
                 selected() === packageManager.name
-                  ? 'bg-transparent text-zinc-950 dark:text-zinc-50 font-semibold'
-                  : 'bg-zinc-100/30 dark:bg-zinc-800/10 text-muted-foreground/80 hover:text-foreground'
+                  ? 'font-semibold bg-background'
+                  : 'text-muted-foreground/70'
               )
             "
           >
@@ -53,13 +53,13 @@ interface PackageManager {
         <div class="flex-1"></div>
       </div>
 
-      <div class="relative flex items-center p-4 bg-code">
+      <div class="relative flex items-center p-4 bg-background">
         <div
           class="flex-1 overflow-x-auto whitespace-nowrap no-scrollbar pr-12"
         >
           <span class="mr-2 text-muted-foreground/40 select-none">$</span>
           <span>{{ commands[selected()] }}</span>
-          <span class="text-muted-foreground"> accordion</span>
+          <span class="text-muted-foreground"> {{ block() }}</span>
         </div>
       </div>
     </div>
@@ -67,6 +67,8 @@ interface PackageManager {
   imports: [NgIcon]
 })
 export class InstallCommand {
+  readonly block = input.required<string>()
+
   readonly commands: Record<PackageManager['name'], string> = {
     pnpm: 'pnpm dlx shadcn@latest add',
     npm: 'npx shadcn@latest add',

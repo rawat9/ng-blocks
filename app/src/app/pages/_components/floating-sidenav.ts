@@ -10,7 +10,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideTerminal } from '@ng-icons/lucide'
 import { NavigationEnd, Router, RouterLink } from '@angular/router'
 import { toSignal } from '@angular/core/rxjs-interop'
-import { filter } from 'rxjs'
+import { filter } from 'rxjs/operators'
 import {
   lucideBot,
   lucideFormInput,

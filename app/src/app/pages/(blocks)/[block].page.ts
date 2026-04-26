@@ -77,10 +77,13 @@ export const routeMeta: RouteMeta = {
     >
       <div left-column>
         <app-section title="Installation" class="scroll-mt-20 pt-10">
-          <app-install-command />
+          <app-install-command [block]="block()" />
         </app-section>
-        <app-section title="Usage" class="pt-10 scroll-mt-20">
-          <app-code-block></app-code-block>
+        <app-section title="Usage" class="pt-10 scroll-mt-20 gap-4">
+          <app-code-block [code]="import()"></app-code-block>
+          <app-code-block [code]="usage()"></app-code-block>
+        </app-section>
+        <app-section title="API Reference" class="pt-10 scroll-mt-20">
         </app-section>
       </div>
       <div
@@ -178,6 +181,13 @@ export default class BlockPage {
     () => this.getBlockInfo().components[0]
   )
 
+  readonly import = computed(() => {
+    console.log('here')
+    return this.getBlockInfo().import.trim()
+  })
+
+  readonly usage = computed(() => this.getBlockInfo().usage.trim())
+
   readonly cn = cn
 
   readonly activeTab = signal<'preview' | 'code'>('preview')
@@ -224,7 +234,9 @@ export default class BlockPage {
         description: 'The requested block does not exist in the registry.',
         route: '',
         image: '',
-        components: []
+        components: [],
+        import: '',
+        usage: ''
       }
     }
 
