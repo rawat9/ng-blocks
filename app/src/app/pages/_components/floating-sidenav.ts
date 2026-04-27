@@ -72,7 +72,7 @@ import {
       id="blocks-floating-sidebar"
       aria-label="Blocks navigation"
       tabindex="0"
-      class="absolute select-none top-12 left-0 z-50 w-[min(18rem,calc(100vw-2.5rem))] origin-top-left rounded-2xl border border-border p-1 bg-sidebar text-sm shadow-[0_24px_80px_-32px_rgba(0,0,0,0.45)] backdrop-blur-2xl transition-all duration-200 ease-out lg:w-72"
+      class="absolute select-none top-10 text-sm left-0 z-50 w-[min(18rem,calc(100vw-2.5rem))] p-1 lg:w-64 origin-(--transform-origin) ease-out transition-all duration-100 rounded-2xl border bg-sidebar not-dark:bg-clip-padding shadow-lg/5 outline-none before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] focus:outline-none dark:before:shadow-[0_-1px_--theme(--color-white/6%)]"
       [class]="sidebarPanelClass()"
       [attr.aria-hidden]="!open()"
       (mouseleave)="closeSidebar()"

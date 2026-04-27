@@ -182,7 +182,6 @@ export default class BlockPage {
   )
 
   readonly import = computed(() => {
-    console.log('here')
     return this.getBlockInfo().import.trim()
   })
 

@@ -19,7 +19,7 @@ interface PackageManager {
   ],
   template: ` <div class="w-full max-w-full">
     <div
-      class="relative rounded-xl border border-border overflow-hidden font-mono text-sm leading-relaxed text-foreground"
+      class="relative rounded-xl border border-border/40 overflow-hidden font-mono text-sm leading-relaxed text-foreground"
     >
       <div
         class="flex items-center border-b border-border/40 overflow-x-auto no-scrollbar"

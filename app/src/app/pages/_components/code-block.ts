@@ -13,12 +13,12 @@ import { CopyButton } from './copy-button'
       lucideCode
     })
   ],
-  template: ` <div>
-    <figure data-rehype-pretty-code-figure="" class="border">
+  template: `
+    <figure data-rehype-pretty-code-figure="" class="border border-border/50">
       <app-copy-button [code]="code()"></app-copy-button>
       <div [innerHTML]="htmlToRender()"></div>
     </figure>
-  </div>`
+  `
 })
 export class CodeBlock {
   readonly htmlToRender = signal<SafeHtml | null>(null)
