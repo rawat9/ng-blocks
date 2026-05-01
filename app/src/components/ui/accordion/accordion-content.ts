@@ -6,8 +6,7 @@ import { AccordionContent as NgAccordionContent } from '@angular/aria/accordion'
   hostDirectives: [NgAccordionContent],
   host: {
     'data-slot': 'accordion-content',
-    class:
-      'cn-accordion-content-inner [&_a]:hover:text-foreground h-(--accordion-panel-height) data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_p:not(:last-child)]:mb-4',
-  },
+    class: 'pt-0 pb-4'
+  }
 })
 export class AccordionContent {}

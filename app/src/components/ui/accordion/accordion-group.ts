@@ -8,18 +8,16 @@ import { cn } from '../../../lib/utils'
   hostDirectives: [
     {
       directive: NgAccordionGroup,
-      inputs: ['multiExpandable', 'disabled'],
-    },
+      inputs: ['multiExpandable', 'disabled']
+    }
   ],
   host: {
     'data-slot': 'accordion-group',
-    '[class]': '_computedClass()',
-  },
+    '[class]': '_computedClass()'
+  }
 })
 export class AccordionGroup {
   public readonly _class = input<ClassValue>('', { alias: 'class' })
 
-  protected readonly _computedClass = computed(() =>
-    cn('cn-accordion flex w-full flex-col', this._class()),
-  )
+  protected readonly _computedClass = computed(() => cn('', this._class()))
 }

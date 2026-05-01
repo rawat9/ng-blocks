@@ -15,13 +15,10 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     AccordionPanel,
     AccordionContent,
     NgIcon,
-    AccordionIcon,
+    AccordionIcon
   ],
-  host: {
-    class: 'flex w-full',
-  },
-  template: ` <div appNgAccordionGroup>
-    <div>
+  template: ` <div appNgAccordionGroup class="w-100 space-y-2">
+    <div class="flex flex-col border rounded-md px-4">
       <button
         appNgAccordionTrigger
         [panel]="panel1"
@@ -29,22 +26,8 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
       >
         What is Angular?
         <ng-icon appNgAccordionIcon name="lucideChevronDown" />
-        <!--      <lucide-icon-->
-        <!--        data-slot="accordion-trigger-icon"-->
-        <!--        [name]="chevronDown"-->
-        <!--        class="cn-accordion-trigger-icon pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"-->
-        <!--      />-->
-        <!--      <lucide-icon-->
-        <!--        data-slot="accordion-trigger-icon"-->
-        <!--        [name]="chevronUp"-->
-        <!--        class="cn-accordion-trigger-icon pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"-->
-        <!--      />-->
       </button>
-      <div
-        appNgAccordionPanel
-        #panel1="ngAccordionPanel"
-        class="overflow-hidden text-gray-500"
-      >
+      <div appNgAccordionPanel #panel1="ngAccordionPanel">
         <ng-template appNgAccordionContent>
           Angular is a platform and framework for building single-page client
           applications using HTML and TypeScript. It is developed and maintained
@@ -52,7 +35,7 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
         </ng-template>
       </div>
     </div>
-    <div>
+    <div class="flex flex-col border rounded-md px-4">
       <button
         appNgAccordionTrigger
         [panel]="panel2"
@@ -60,29 +43,27 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
       >
         What is React?
         <ng-icon appNgAccordionIcon name="lucideChevronDown" />
-        <!--      <lucide-icon-->
-        <!--        data-slot="accordion-trigger-icon"-->
-        <!--        [name]="chevronDown"-->
-        <!--        class="cn-accordion-trigger-icon pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"-->
-        <!--      />-->
-        <!--      <lucide-icon-->
-        <!--        data-slot="accordion-trigger-icon"-->
-        <!--        [name]="chevronUp"-->
-        <!--        class="cn-accordion-trigger-icon pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"-->
-        <!--      />-->
       </button>
       <div
         appNgAccordionPanel
         #panel2="ngAccordionPanel"
-        class="overflow-hidden text-gray-500"
+        class="overflow-hidden"
       >
         <ng-template appNgAccordionContent>
           React is a platform and framework for building single-page client
           applications using HTML and TypeScript. It is developed and maintained
-          by Google.
+          by Meta (formerly Facebook).
         </ng-template>
       </div>
     </div>
-  </div>`,
+  </div>`
 })
-export class Accordion1 {}
+export class Accordion1 {
+  readonly panel = {
+    id: 'panel1'
+  }
+
+  readonly panel2 = {
+    id: 'panel2'
+  }
+}

@@ -99,21 +99,19 @@ export const routeMeta: RouteMeta = {
 
         <div
           appAnimateOnScroll
-          [class]="cn('w-full overflow-auto flex no-scrollbar', 'h-full')"
+          class="w-full overflow-auto flex no-scrollbar h-full"
         >
           @if (activeTab() === 'preview') {
             <div
-              [class]="cn('w-full', 'p-10 flex items-center justify-center')"
+              class="w-full p-10 flex items-center justify-center max-w-[80%] mx-auto"
             >
               @let component =
                 getBlockInfo().components.find(
                   (c) => c === selectedComponent()
                 );
-              <div className="w-full h-full flex items-center justify-center">
-                <ng-container
-                  *ngComponentOutlet="component!.component"
-                ></ng-container>
-              </div>
+              <ng-container
+                *ngComponentOutlet="component!.component"
+              ></ng-container>
             </div>
           } @else {
             @if (code.hasValue()) {
