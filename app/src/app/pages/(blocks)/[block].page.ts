@@ -13,9 +13,9 @@ import {
 import { RouteMeta } from '@analogjs/router'
 import { blocks, Block } from '../../../blocks/registry'
 import { ActivatedRoute, Router } from '@angular/router'
-import { AnimateOnScrollDirective } from '../../../directives'
+import { AnimateOnScrollDirective, FullDirective } from '../../../directives'
 import { cn } from '../../../lib/utils'
-import { NgComponentOutlet } from '@angular/common'
+import { JsonPipe, NgComponentOutlet } from '@angular/common'
 import { Toolbar } from './_components/toolbar'
 import { CodeViewer } from './_components/code-viewer'
 import { httpResource } from '@angular/common/http'
@@ -30,7 +30,7 @@ import {
 import { injectResponse } from '@analogjs/router/tokens'
 
 // TODO: refactor to use route data instead of hardcoding paths here
-const ARROW_NAV_ROUTES = ['/ai', '/accordion', '/forms']
+const ARROW_NAV_ROUTES = ['/ai', '/accordion', '/forms', '/diagram']
 
 export const routeMeta: RouteMeta = {
   title: (route) => {
@@ -63,6 +63,8 @@ export const routeMeta: RouteMeta = {
     AnimateOnScrollDirective,
     NgComponentOutlet,
     Toolbar,
+    JsonPipe,
+    FullDirective,
     CodeViewer,
     Section,
     CodeBlock,
@@ -99,16 +101,13 @@ export const routeMeta: RouteMeta = {
 
         <div
           appAnimateOnScroll
-          class="w-full overflow-auto flex no-scrollbar h-full"
+          class="w-full overflow-auto flex no-scrollbar h-full items-center"
         >
           @if (activeTab() === 'preview') {
-            <div
-              class="w-full p-10 flex items-center justify-center max-w-[80%] mx-auto"
-            >
-              @let component =
-                getBlockInfo().components.find(
-                  (c) => c === selectedComponent()
-                );
+            @let component =
+              getBlockInfo().components.find((c) => c === selectedComponent());
+
+            <div appFull [centered]="getBlockInfo().title !== 'Diagram'">
               <ng-container
                 *ngComponentOutlet="component!.component"
               ></ng-container>
