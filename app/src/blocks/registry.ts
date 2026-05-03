@@ -4,6 +4,7 @@ import { AiChat } from './ai/ai-chat'
 import { Accordion1 } from './accordion/accordion-1'
 import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
+import { Workflow1 } from './diagram/workflow-1'
 
 export interface Block {
   title: string
@@ -100,6 +101,24 @@ export const blocks: Block[] = [
         title: 'Signup Form',
         path: 'form-2.ts',
         component: Form2
+      }
+    ]
+  },
+  {
+    title: 'Diagram',
+    description: 'Flowcharts, org charts, and visual representations of data',
+    route: '/diagram',
+    image: '/thumbnails/diagrams.svg',
+    darkImage: '/thumbnails/diagrams-dark.svg',
+    import: `import { Diagram1 } from 'ng-blocks/diagrams/diagram-1'`,
+    usage: `
+      <Diagram1></Diagram1>
+    `,
+    components: [
+      {
+        title: 'Workflow 1',
+        path: 'workflow-1.ts',
+        component: Workflow1
       }
     ]
   }

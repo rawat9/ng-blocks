@@ -1,0 +1,80 @@
+@import 'ng-diagram/styles.css';
+
+:root {
+  --ngd-shadow: var(--color-neutral-900);
+
+  /* Dot color */
+  --ngd-background-dot-color: var(--color-neutral-400);
+
+  --ngd-txt-primary-default: var(--color-neutral-800);
+  --ngd-nav-button-primary-default: var(--color-neutral-600);
+  --ngd-nav-button-primary-pressed: var(--color-accent-600);
+  --ngd-nav-button-primary-hover: var(--color-neutral-900);
+  --ngd-nav-button-primary-disabled: var(--color-neutral-450);
+
+  --ngd-diagram-background-color: var(--color-neutral-200);
+  --ngd-ui-bg-primary-default: var(--color-neutral-100);
+  --ngd-ui-bg-tertiary-default: var(--color-neutral-200);
+  --ngd-ui-stroke-primary-focus: var(--color-neutral-500);
+  --ngd-pt-stroke-primary-default: var(--color-neutral-600);
+
+  --ngd-node-bg-primary-default: var(--color-primary-foreground);
+  --ngd-node-stroke-primary-default: var(--color-neutral-400);
+  --ngd-node-stroke-primary-hover: var(--color-neutral-500);
+  --ngd-node-port-fill-default: var(--color-neutral-100);
+  --ngd-node-port-fill-active: var(--color-neutral-500);
+  --ngd-node-port-stroke-default: var(--color-neutral-500);
+  --ngd-node-port-stroke-active: var(--color-neutral-100);
+
+  --ngd-transform-box: var(--color-neutral-600);
+  --ngd-focus-ring-node-active: var(--color-neutral-300);
+  --ngd-button-gray-bg-default: var(--color-neutral-500);
+  --ngd-button-gray-bg-hover: var(--color-neutral-600);
+  --ngd-button-gray-bg-active: var(--color-neutral-650);
+
+  --ngd-default-edge-label-bg-primary-default: var(--color-primary-foreground);
+  --ngd-background-line-minor-color: var(--color-neutral-400);
+  --ngd-background-line-major-color: var(--color-neutral-500);
+  --ngd-ui-border-color: var(--color-neutral-300);
+  --ngd-minimap-bg-primary-default: var(--color-neutral-100);
+  --ngd-minimap-stroke-primary-default: var(--color-neutral-400);
+}
+
+.dark {
+  --ngd-txt-primary-default: var(--color-neutral-100);
+
+  /* Dot color */
+  --ngd-background-dot-color: var(--color-neutral-800);
+
+  --ngd-nav-button-primary-default: var(--color-neutral-400);
+  --ngd-nav-button-primary-pressed: var(--color-neutral-500);
+  --ngd-nav-button-primary-hover: var(--color-neutral-900);
+  --ngd-nav-button-primary-disabled: var(--color-neutral-600);
+
+  --ngd-diagram-background-color: var(--colors-neutral-800);
+  --ngd-ui-bg-primary-default: var(--color-neutral-700);
+  --ngd-ui-bg-tertiary-default: var(--color-neutral-800);
+  --ngd-ui-stroke-primary-focus: var(--color-neutral-500);
+  --ngd-pt-stroke-primary-default: var(--color-neutral-200);
+
+  --ngd-node-bg-primary-default: var(--color-primary-foreground);
+  --ngd-node-stroke-primary-default: var(--color-neutral-600);
+  --ngd-node-stroke-primary-hover: var(--color-neutral-400);
+  --ngd-node-port-fill-default: var(--color-neutral-100);
+  --ngd-node-port-fill-active: var(--color-neutral-500);
+  --ngd-node-port-stroke-default: var(--color-neutral-500);
+  --ngd-node-port-stroke-active: var(--color-neutral-100);
+
+  --ngd-transform-box: var(--color-neutral-300);
+  --ngd-focus-ring-node-active: var(--color-neutral-800);
+  --ngd-button-gray-bg-default: var(--color-neutral-700);
+  --ngd-button-gray-bg-hover: var(--color-neutral-600);
+  --ngd-button-gray-bg-active: var(--color-neutral-500);
+
+  --ngd-default-edge-label-bg-primary-default: var(--color-primary-foreground);
+  --ngd-background-line-minor-color: var(--color-neutral-700);
+  --ngd-background-line-major-color: var(--color-neutral-600);
+  --ngd-ui-border-color: var(--color-neutral-700);
+  --ngd-minimap-bg-primary-default: var(--color-neutral-700);
+  --ngd-minimap-stroke-primary-default: var(--color-neutral-600);
+}

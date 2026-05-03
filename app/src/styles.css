@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 @import './preset.css';
 @import 'styles/style-nova.css' layer(base);
+@import './components/ui/workflow/preset.css';
 
 @custom-variant style-nova (&:where(.style-vega *));
 @custom-variant dark (&:is(.dark *));
