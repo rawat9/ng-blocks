@@ -10,10 +10,13 @@ import {
   lucideArrowRight,
   lucideBox,
   lucideComponent,
-  lucideLayers
+  lucideGithub,
+  lucideLayers,
+  lucideSparkles,
+  lucideZap
 } from '@ng-icons/lucide'
 import { blocks } from '../../../blocks/registry'
-import { cn } from '../../../lib/utils'
+import { cn } from '#lib/utils'
 import { BlocksLayout } from '../_components'
 
 @Component({
@@ -25,45 +28,104 @@ import { BlocksLayout } from '../_components'
       lucideArrowRight,
       lucideBox,
       lucideComponent,
-      lucideLayers
+      lucideGithub,
+      lucideLayers,
+      lucideSparkles,
+      lucideZap
     })
   ],
   template: `
     <app-blocks-layout
       [description]="'A collection of beautifully designed, accessible, and copy-paste ready components. Built on Angular Aria with Tailwind CSS.'"
     >
-      <div left-column></div>
+      <!-- Left column: Stats + Quick Links -->
+      <div left-column class="space-y-12">
+        <!-- Feature pills -->
+        <div
+          class="flex flex-wrap gap-2"
+          [class.animate-fade-in-up]="isLoaded()"
+          [style.--animation-delay]="'350ms'"
+        >
+          <span
+            class="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/70 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground hover:border-border"
+          >
+            <ng-icon name="lucideZap" size="12" class="text-amber-500" />
+            Zoneless
+          </span>
+          <span
+            class="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/70 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground hover:border-border"
+          >
+            <ng-icon name="lucideSparkles" size="12" class="text-violet-500" />
+            Copy & Paste
+          </span>
+          <span
+            class="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/70 backdrop-blur-sm px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground hover:border-border"
+          >
+            <ng-icon
+              name="lucideComponent"
+              size="12"
+              class="text-emerald-500"
+            />
+            Accessible
+          </span>
+        </div>
+
+        <!-- CTA -->
+        <div
+          class="flex items-center gap-3"
+          [class.animate-fade-in-up]="isLoaded()"
+          [style.--animation-delay]="'500ms'"
+        >
+          <a
+            [routerLink]="blocks[0].title.toLowerCase()"
+            class="inline-flex items-center gap-2 rounded-lg bg-foreground text-background px-4 py-2.5 text-sm font-medium transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
+          >
+            Browse Components
+            <ng-icon name="lucideArrowRight" size="14" />
+          </a>
+          <a
+            href="https://github.com/rawat9/ng-blocks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:bg-muted active:scale-[0.98]"
+          >
+            <ng-icon name="lucideGithub" size="14" />
+            GitHub
+          </a>
+        </div>
+      </div>
+
       <div
         right-column
-        class="grid sm:grid-cols-2 xl:grid-cols-3 p-16 gap-5 px-6 sm:px-10 pb-10"
+        class="group/cards grid sm:grid-cols-2 xl:grid-cols-3 p-16 gap-5 px-6 sm:px-10 pb-10"
       >
         @for (block of blocks; track block.route; let i = $index) {
           <a
             [routerLink]="block.title.toLowerCase()"
-            class="group relative flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/3 dark:hover:shadow-black/20 hover:border-border"
+            class="group relative flex flex-col rounded-2xl border bg-muted/50 not-dark:bg-clip-padding shadow-xs/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-black/20 hover:border-border group-has-[a:hover]/cards:opacity-50 group-has-[a:hover]/cards:blur-xs hover:!opacity-100 hover:!blur-none"
             [class.animate-fade-in-up]="isLoaded()"
             [style.--animation-delay]="100 + i * 120 + 'ms'"
             [style.view-transition-name]="'card-' + block.title.toLowerCase()"
           >
             <!-- Thumbnail -->
-            <div class="relative aspect-16/10 overflow-hidden bg-muted/50">
+            <div class="relative aspect-16/10 overflow-hidden p-1 rounded-2xl">
               <img
                 [src]="block.image"
                 [alt]="block.title"
                 width="600"
                 height="375"
-                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] dark:hidden"
+                class="w-full h-full rounded-2xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] dark:hidden"
               />
               <img
                 [src]="block.darkImage"
                 [alt]="block.title"
                 width="600"
                 height="375"
-                class="hidden w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] dark:block"
+                class="hidden w-full h-full rounded-2xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] dark:block"
               />
               <!-- Gradient overlay on hover -->
               <div
-                class="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                class="absolute inset-0 bg-linear-to-t dark:from-black/40 from-white/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               ></div>
 
               <!-- Badge -->
