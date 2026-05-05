@@ -15,7 +15,7 @@ import { blocks, Block } from '../../../blocks/registry'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AnimateOnScrollDirective, FullDirective } from '../../../directives'
 import { cn } from '../../../lib/utils'
-import { JsonPipe, NgComponentOutlet } from '@angular/common'
+import { NgComponentOutlet } from '@angular/common'
 import { Toolbar } from './_components/toolbar'
 import { CodeViewer } from './_components/code-viewer'
 import { httpResource } from '@angular/common/http'
@@ -63,7 +63,6 @@ export const routeMeta: RouteMeta = {
     AnimateOnScrollDirective,
     NgComponentOutlet,
     Toolbar,
-    JsonPipe,
     FullDirective,
     CodeViewer,
     Section,

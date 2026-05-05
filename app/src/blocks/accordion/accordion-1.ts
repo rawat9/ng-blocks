@@ -58,12 +58,4 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     </div>
   </div>`
 })
-export class Accordion1 {
-  readonly panel = {
-    id: 'panel1'
-  }
-
-  readonly panel2 = {
-    id: 'panel2'
-  }
-}
+export class Accordion1 {}

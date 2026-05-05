@@ -17,11 +17,17 @@
       "defaultConfiguration": "production",
       "configurations": {
         "development": {
+          "optimization": false,
           "mode": "development"
         },
         "production": {
           "sourcemap": false,
-          "mode": "production"
+          "mode": "production",
+          "optimization": {
+            "styles": {
+              "inlineCritical": false
+            }
+          }
         }
       },
       "outputs": ["{workspaceRoot}/dist/apps/app"]
