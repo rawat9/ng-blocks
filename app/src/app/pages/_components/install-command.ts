@@ -1,6 +1,6 @@
 import { Component, input, model } from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
-import { cn } from '../../../lib/utils'
+import { cn } from '#lib/utils'
 import { simplePnpm, simpleNpm, simpleBun } from '@ng-icons/simple-icons'
 
 interface PackageManager {

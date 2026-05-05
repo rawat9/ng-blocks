@@ -234,7 +234,8 @@
 
 /* Slow bounce for scroll indicator */
 @keyframes bounce-slow {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -268,7 +269,7 @@
 }
 
 /* Reusable card view transitions - apply via inline style: style="view-transition-name: card-name" */
-[style*="view-transition-name:"] {
+[style*='view-transition-name:'] {
   contain: layout;
 }
 
@@ -342,4 +343,3 @@
 }
 
 /** endregion Landing Page Animations */
-

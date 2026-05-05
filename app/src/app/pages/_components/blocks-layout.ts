@@ -9,7 +9,7 @@ import {
   viewChild
 } from '@angular/core'
 import { FloatingSidenav } from './floating-sidenav'
-import { ToolbarService } from '../../../services/toolbar.service'
+import { ToolbarService } from '#services/toolbar.service'
 import { RouterLink } from '@angular/router'
 
 @Component({

@@ -7,7 +7,7 @@ import {
   linkedSignal,
   signal
 } from '@angular/core'
-import { File } from '../../../../lib/get-component-source'
+import { File } from '#lib/get-component-source'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { codeToHtml } from 'shiki'
 import { NgIcon, provideIcons } from '@ng-icons/core'

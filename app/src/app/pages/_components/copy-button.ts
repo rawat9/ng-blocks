@@ -6,8 +6,8 @@ import {
 } from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideCheck, lucideCopy } from '@ng-icons/lucide'
-import { cn } from '../../../lib/utils'
-import { Button } from '../../../components/ui/button'
+import { cn } from '#lib/utils'
+import { Button } from '#components/ui/button'
 
 @Component({
   selector: 'app-copy-button',
