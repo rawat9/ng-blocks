@@ -70,9 +70,9 @@ export class InstallCommand {
   readonly block = input.required<string>()
 
   readonly commands: Record<PackageManager['name'], string> = {
-    pnpm: 'pnpm dlx shadcn@latest add',
-    npm: 'npx shadcn@latest add',
-    bun: 'bunx --bun shadcn@latest add'
+    pnpm: 'pnpm dlx @ng-blocks/cli@latest add',
+    npm: 'npx @ng-blocks/cli add',
+    bun: 'bunx --bun @ng-blocks/cli add'
   }
 
   readonly selected = model<PackageManager['name']>('npm')
