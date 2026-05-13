@@ -25,7 +25,7 @@ const moonSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
       <a routerLink="/" class="flex items-center text-xl font-semibold">
         <span>ng-blocks</span>
       </a>
-      <nav class="flex gap-1 items-center justify-center">
+      <nav class="flex items-center justify-center gap-1">
         <a
           appButton
           [variant]="'ghost'"

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         secondary: 'cn-button-variant-secondary',
         ghost: 'cn-button-variant-ghost',
         destructive: 'cn-button-variant-destructive',
-        link: 'cn-button-variant-link',
+        link: 'cn-button-variant-link'
       },
       size: {
         default: 'cn-button-size-default',
@@ -24,14 +24,14 @@ const buttonVariants = cva(
         icon: 'cn-button-size-icon',
         'icon-xs': 'cn-button-size-icon-xs',
         'icon-sm': 'cn-button-size-icon-sm',
-        'icon-lg': 'cn-button-size-icon-lg',
-      },
+        'icon-lg': 'cn-button-size-icon-lg'
+      }
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default',
-    },
-  },
+      size: 'default'
+    }
+  }
 )
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>
@@ -40,8 +40,8 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>
   selector: 'button[appButton], a[appButton]',
   host: {
     'data-slot': 'button',
-    '[class]': 'buttonClass()',
-  },
+    '[class]': 'buttonClass()'
+  }
 })
 export class Button {
   public readonly _class = input<ClassValue>('', { alias: 'class' })
@@ -55,8 +55,8 @@ export class Button {
       this._class(),
       buttonVariants({
         variant: this.variant(),
-        size: this.size(),
-      }),
-    ),
+        size: this.size()
+      })
+    )
   )
 }

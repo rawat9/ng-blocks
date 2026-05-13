@@ -4,9 +4,9 @@ import {
   form,
   FormField,
   required,
-  submit,
+  submit
 } from '@angular/forms/signals'
-import { Button } from '../../components/ui/button'
+import { Button } from '#components/ui/button'
 
 interface LoginData {
   email: string
@@ -16,7 +16,7 @@ interface LoginData {
 @Component({
   selector: 'app-forms-2',
   template: `
-    <form class="flex flex-col gap-3 h-full" (submit)="onSubmit($event)">
+    <form class="flex h-full flex-col gap-3" (submit)="onSubmit($event)">
       <div class="grid w-full max-w-sm items-center gap-2">
         <label
           for="email"
@@ -65,12 +65,12 @@ interface LoginData {
     </form>
   `,
   imports: [Button, FormField],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Form2 {
   loginModel = signal<LoginData>({
     email: '',
-    password: '',
+    password: ''
   })
 
   loginForm = form(this.loginModel, (schemaPath) => {

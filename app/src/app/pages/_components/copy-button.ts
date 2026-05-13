@@ -22,7 +22,7 @@ import { Button } from '#components/ui/button'
   template: ` <button
     appButton
     variant="ghost"
-    class="absolute top-3 right-3 p-2 rounded-md transition-all duration-200 z-10"
+    class="absolute top-3 right-3 z-10 rounded-md p-2 transition-all duration-200"
     (click)="handleCopy()"
   >
     @if (copied()) {

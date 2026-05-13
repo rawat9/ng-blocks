@@ -4,7 +4,7 @@ import { Component, input } from '@angular/core'
   selector: 'app-ai-shimmer',
   standalone: true,
   template: `
-    <div class="inline-block relative overflow-hidden">
+    <div class="relative inline-block overflow-hidden">
       <span
         class="shimmer-text text-4xl font-medium"
         [style.animation-duration.s]="duration()"
@@ -38,8 +38,8 @@ import { Component, input } from '@angular/core'
           background-position: -200% center;
         }
       }
-    `,
-  ],
+    `
+  ]
 })
 export class AiShimmer {
   /**

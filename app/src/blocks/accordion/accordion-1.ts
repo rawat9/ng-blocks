@@ -18,7 +18,7 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     AccordionIcon
   ],
   template: ` <div appNgAccordionGroup class="w-100 space-y-2">
-    <div class="flex flex-col border rounded-md px-4">
+    <div class="flex flex-col rounded-md border px-4">
       <button
         appNgAccordionTrigger
         [panel]="panel1"
@@ -35,7 +35,7 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
         </ng-template>
       </div>
     </div>
-    <div class="flex flex-col border rounded-md px-4">
+    <div class="flex flex-col rounded-md border px-4">
       <button
         appNgAccordionTrigger
         [panel]="panel2"
@@ -58,12 +58,4 @@ import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
     </div>
   </div>`
 })
-export class Accordion1 {
-  readonly panel = {
-    id: 'panel1'
-  }
-
-  readonly panel2 = {
-    id: 'panel2'
-  }
-}
+export class Accordion1 {}

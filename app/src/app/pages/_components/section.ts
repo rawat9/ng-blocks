@@ -8,18 +8,18 @@ import { cn } from '#lib/utils'
   },
   template: `
     <div id="{{ sectionId() }}" [attr.data-section-title]="title()">
-      <div class="flex items-center gap-4 mb-6">
+      <div class="mb-6 flex items-center gap-4">
         @if (step()) {
           <ng-container>
             <div
-              class="flex items-center justify-center h-8 w-8 rounded-full bg-foreground text-background text-sm font-semibold shrink-0"
+              class="bg-foreground text-background flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold"
             >
               {{ step() }}
             </div>
           </ng-container>
         }
         <h2
-          class="text-2xl font-semibold tracking-tight bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 dark:from-white dark:via-zinc-400 dark:to-white bg-clip-text text-transparent pb-1"
+          class="bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 bg-clip-text pb-1 text-2xl font-semibold tracking-tight text-transparent dark:from-white dark:via-zinc-400 dark:to-white"
         >
           {{ title() }}
         </h2>

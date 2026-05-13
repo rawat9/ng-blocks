@@ -14,7 +14,7 @@ import { CopyButton } from './copy-button'
     })
   ],
   template: `
-    <figure data-rehype-pretty-code-figure="" class="border border-border/50">
+    <figure data-rehype-pretty-code-figure="" class="border-border/50 border">
       <app-copy-button [code]="code()"></app-copy-button>
       <div [innerHTML]="htmlToRender()"></div>
     </figure>

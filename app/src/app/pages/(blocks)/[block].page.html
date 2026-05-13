@@ -6,17 +6,17 @@
     <app-section title="Installation" class="scroll-mt-20 pt-10">
       <app-install-command [block]="block()" />
     </app-section>
-    <app-section title="Usage" class="pt-10 scroll-mt-20 gap-4">
+    <app-section title="Usage" class="scroll-mt-20 gap-4 pt-10">
       <app-code-block [code]="import()"></app-code-block>
       <app-code-block [code]="usage()"></app-code-block>
     </app-section>
-    <app-section title="API Reference" class="pt-10 scroll-mt-20">
+    <app-section title="API Reference" class="scroll-mt-20 pt-10">
     </app-section>
   </div>
 
   <div
     right-column
-    class="relative w-full h-full rounded-xl lg:rounded-2xl overflow-hidden bg-background flex flex-col"
+    class="bg-background relative flex h-full w-full flex-col overflow-hidden rounded-xl lg:rounded-2xl"
     [class.animate-fade-in-up]="isLoaded()"
     [style.--animation-delay]="'150ms'"
   >
@@ -27,11 +27,11 @@
 
     <div
       appAnimateOnScroll
-      class="w-full overflow-auto flex no-scrollbar h-full"
+      class="no-scrollbar flex h-full w-full overflow-auto"
     >
       @if (activeTab() === 'preview') {
       <div
-        class="w-full p-10 flex items-center justify-center max-w-[80%] mx-auto"
+        class="mx-auto flex w-full max-w-[80%] items-center justify-center p-10"
       >
         @let component = getBlockInfo().components.find((c) => c ===
         selectedComponent());
@@ -40,21 +40,21 @@
       } @else { @if (code.hasValue()) {
       <app-code-viewer [source]="code.value()"></app-code-viewer>
       } @else if (code.error()) {
-      <div class="w-full h-full flex items-center justify-center">
-        <p class="text-sm text-muted-foreground">Failed to load code</p>
+      <div class="flex h-full w-full items-center justify-center">
+        <p class="text-muted-foreground text-sm">Failed to load code</p>
       </div>
       } @else {
-      <div class="w-full h-full flex items-center justify-center">
-        <p class="text-sm text-muted-foreground">Loading code...</p>
+      <div class="flex h-full w-full items-center justify-center">
+        <p class="text-muted-foreground text-sm">Loading code...</p>
       </div>
       } }
     </div>
 
     <!-- Component pills -->
     @if (activeTab() === 'preview') {
-    <div class="absolute bottom-0 left-0 right-0 z-10 h-14 flex items-center">
+    <div class="absolute right-0 bottom-0 left-0 z-10 flex h-14 items-center">
       <div
-        class="flex items-center gap-1.5 px-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        class="flex items-center gap-1.5 overflow-x-auto px-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         @for (c of getBlockInfo().components; track c.title) {
         <button

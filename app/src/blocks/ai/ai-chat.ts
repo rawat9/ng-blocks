@@ -12,8 +12,8 @@ import { InputGroupAddon } from '../../components/ui/input-group/input-group-add
   providers: [
     provideIcons({
       lucidePlusCircle,
-      lucideMicVocal,
-    }),
+      lucideMicVocal
+    })
   ],
   template: `
     <div class="w-75">
@@ -41,8 +41,8 @@ import { InputGroupAddon } from '../../components/ui/input-group/input-group-add
     InputGroup,
     InputGroupButton,
     NgIcon,
-    InputGroupAddon,
-  ],
+    InputGroupAddon
+  ]
 })
 export class AiChat {
   /**
