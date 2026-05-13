@@ -4,6 +4,7 @@ import { AiChat } from './ai/ai-chat'
 import { Accordion1 } from './accordion/accordion-1'
 import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
+import { Tabs1 } from './tabs/tabs-1'
 
 export interface Block {
   title: string
@@ -71,14 +72,20 @@ export const blocks: Block[] = [
     image: '/thumbnails/tabs.svg',
     import: `import { Tabs } from 'ng-blocks/tabs/tabs'`,
     usage: `
-      <Tabs>
-        <Tab title="Tab 1">Content for Tab 1</Tab>
-        <Tab title="Tab 2">Content for Tab 2</Tab>
-        <Tab title="Tab 3">Content for Tab 3</Tab>
-      </Tabs>
+<Tabs>
+  <Tab title="Tab 1">Content for Tab 1</Tab>
+  <Tab title="Tab 2">Content for Tab 2</Tab>
+  <Tab title="Tab 3">Content for Tab 3</Tab>
+</Tabs>
     `,
     darkImage: '/thumbnails/tabs-dark.svg',
-    components: []
+    components: [
+      {
+        title: 'Tabs',
+        path: 'tabs-1.ts',
+        component: Tabs1
+      }
+    ]
   },
   {
     title: 'Forms',

@@ -7,7 +7,7 @@ import {
   linkedSignal,
   signal
 } from '@angular/core'
-import { File } from '#lib/get-component-source'
+import type { File } from '#lib/get-component-source'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { codeToHtml } from 'shiki'
 import { NgIcon, provideIcons } from '@ng-icons/core'
@@ -35,14 +35,14 @@ import { lucideFile } from '@ng-icons/lucide'
     }
   `,
   template: `
-    <div class="flex h-full min-h-0 min-w-0 flex-1 w-full">
+    <div class="flex h-full min-h-0 w-full min-w-0 flex-1">
       <div class="text-code-foreground flex min-h-0 min-w-0 flex-1 flex-col">
         <figure
           data-rehype-pretty-code-figure=""
-          class="mx-0! mt-0 flex min-h-0 min-w-0 flex-1 overflow-hidden flex-col border-none w-full"
+          class="mx-0! mt-0 flex min-h-0 w-full min-w-0 flex-1 flex-col overflow-hidden border-none"
         >
           <figcaption
-            class="text-code-foreground [&_ng-icon]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-neutral-200 dark:border-neutral-800 px-4 py-2 [&_ng-icon]:size-4 [&_ng-icon]:opacity-70"
+            class="text-code-foreground [&_ng-icon]:text-code-foreground flex h-12 shrink-0 items-center gap-2 border-neutral-200 px-4 py-2 dark:border-neutral-800 [&_ng-icon]:size-4 [&_ng-icon]:opacity-70"
             [attr.data-language]="'angular-ts'"
           >
             <ng-icon
@@ -52,7 +52,7 @@ import { lucideFile } from '@ng-icons/lucide'
             {{ selectedFile().filename }}
           </figcaption>
           <div
-            class="flex flex-1 min-h-0 min-w-0 overflow-auto"
+            class="flex min-h-0 min-w-0 flex-1 overflow-auto"
             [innerHTML]="code()"
           ></div>
         </figure>

@@ -1,10 +1,13 @@
 import { Component } from '@angular/core'
-import { AccordionGroup, AccordionTrigger } from '../../components/ui/accordion'
-import { AccordionPanel } from '../../components/ui/accordion/accordion-panel'
-import { AccordionContent } from '../../components/ui/accordion/accordion-content'
+import {
+  AccordionGroup,
+  AccordionPanel,
+  AccordionContent,
+  AccordionTrigger,
+  AccordionIcon
+} from '../../components/ui/accordion'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideChevronDown, lucideChevronUp } from '@ng-icons/lucide'
-import { AccordionIcon } from '../../components/ui/accordion/accordion-icon'
 
 @Component({
   selector: 'app-accordion-1',

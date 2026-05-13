@@ -29,9 +29,6 @@ import {
 } from '../_components'
 import { injectResponse } from '@analogjs/router/tokens'
 
-// TODO: refactor to use route data instead of hardcoding paths here
-const ARROW_NAV_ROUTES = ['/ai', '/accordion', '/forms']
-
 export const routeMeta: RouteMeta = {
   title: (route) => {
     const block = route.paramMap.get('block')
@@ -165,27 +162,29 @@ export default class BlockPage {
     this.clipboard.copy(raw)
   }
 
+  private readonly blockRoutes = blocks.map((b) => b.route)
+
   @HostListener('window:keydown.ArrowDown', ['$event'])
   navigateNext(event: Event): void {
-    const current = ARROW_NAV_ROUTES.findIndex((r) =>
+    const current = this.blockRoutes.findIndex((r) =>
       this.router.url.startsWith(r)
     )
     if (current === -1) return
     event.preventDefault()
-    const next = ARROW_NAV_ROUTES[(current + 1) % ARROW_NAV_ROUTES.length]
+    const next = this.blockRoutes[(current + 1) % this.blockRoutes.length]
     this.router.navigateByUrl(next)
   }
 
   @HostListener('window:keydown.ArrowUp', ['$event'])
   navigatePrev(event: Event): void {
-    const current = ARROW_NAV_ROUTES.findIndex((r) =>
+    const current = this.blockRoutes.findIndex((r) =>
       this.router.url.startsWith(r)
     )
     if (current === -1) return
     event.preventDefault()
     const prev =
-      ARROW_NAV_ROUTES[
-        (current - 1 + ARROW_NAV_ROUTES.length) % ARROW_NAV_ROUTES.length
+      this.blockRoutes[
+        (current - 1 + this.blockRoutes.length) % this.blockRoutes.length
       ]
     this.router.navigateByUrl(prev)
   }

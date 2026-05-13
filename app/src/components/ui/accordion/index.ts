@@ -1,2 +1,5 @@
 export { AccordionGroup } from './accordion-group'
 export { AccordionTrigger } from './accordion-trigger'
+export { AccordionPanel } from './accordion-panel'
+export { AccordionContent } from './accordion-content'
+export { AccordionIcon } from './accordion-icon'
