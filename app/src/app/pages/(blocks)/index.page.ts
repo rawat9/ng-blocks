@@ -43,7 +43,7 @@ import { BlocksLayout } from '../_components'
         <!-- Feature pills -->
         <div
           class="flex flex-wrap gap-2"
-          [class.animate-fade-in-up]="isLoaded()"
+          [class.animate-blur-in-up]="isLoaded()"
           [style.--animation-delay]="'350ms'"
         >
           <span
@@ -73,7 +73,7 @@ import { BlocksLayout } from '../_components'
         <!-- CTA -->
         <div
           class="flex items-center gap-3"
-          [class.animate-fade-in-up]="isLoaded()"
+          [class.animate-blur-in-up]="isLoaded()"
           [style.--animation-delay]="'500ms'"
         >
           <a
@@ -103,9 +103,8 @@ import { BlocksLayout } from '../_components'
           <a
             [routerLink]="block.title.toLowerCase()"
             class="group bg-muted/50 hover:border-border relative flex flex-col overflow-hidden rounded-2xl border shadow-xs/5 transition-all duration-500 not-dark:bg-clip-padding group-has-[a:hover]/cards:opacity-50 group-has-[a:hover]/cards:blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] hover:-translate-y-1 hover:!opacity-100 hover:shadow-lg hover:!blur-none dark:before:shadow-[0_-1px_--theme(--color-white/6%)] dark:hover:shadow-black/20"
-            [class.animate-fade-in-up]="isLoaded()"
+            [class.animate-blur-in-up]="isLoaded()"
             [style.--animation-delay]="100 + i * 120 + 'ms'"
-            [style.view-transition-name]="'card-' + block.title.toLowerCase()"
           >
             <!-- Thumbnail -->
             <div class="relative aspect-16/10 overflow-hidden rounded-2xl p-1">

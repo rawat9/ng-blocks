@@ -3,22 +3,34 @@
   [description]="getBlockInfo().description"
 >
   <div left-column>
-    <app-section title="Installation" class="scroll-mt-20 pt-10">
+    <app-section
+      title="Installation"
+      class="animate-blur-in-up scroll-mt-20 pt-10"
+      style="--animation-delay: 200ms"
+    >
       <app-install-command [block]="block()" />
     </app-section>
-    <app-section title="Usage" class="scroll-mt-20 gap-4 pt-10">
+    <app-section
+      title="Usage"
+      class="animate-blur-in-up scroll-mt-20 gap-4 pt-10"
+      style="--animation-delay: 350ms"
+    >
       <app-code-block [code]="import()"></app-code-block>
       <app-code-block [code]="usage()"></app-code-block>
     </app-section>
-    <app-section title="API Reference" class="scroll-mt-20 pt-10">
+    <app-section
+      title="API Reference"
+      class="animate-blur-in-up scroll-mt-20 pt-10"
+      style="--animation-delay: 500ms"
+    >
     </app-section>
   </div>
 
   <div
     right-column
     class="bg-background relative flex h-full w-full flex-col overflow-hidden rounded-xl lg:rounded-2xl"
-    [class.animate-fade-in-up]="isLoaded()"
-    [style.--animation-delay]="'150ms'"
+    [class.animate-blur-in-up]="isLoaded()"
+    [style.--animation-delay]="'250ms'"
   >
     <app-toolbar
       [(tab)]="activeTab"

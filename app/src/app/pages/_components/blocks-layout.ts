@@ -62,12 +62,13 @@ import { RouterLink } from '@angular/router'
             <header class="space-y-10">
               <div class="space-y-6">
                 <h1
-                  class="mb-2 bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 bg-clip-text pb-2 text-4xl leading-[1.1] font-bold tracking-tighter text-transparent lg:text-6xl dark:from-white dark:via-zinc-400 dark:to-white"
+                  class="animate-blur-in-up mb-2 bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 bg-clip-text pb-2 text-4xl leading-[1.1] font-bold tracking-tighter text-transparent lg:text-6xl dark:from-white dark:via-zinc-400 dark:to-white"
                 >
                   {{ title() || 'ng-blocks' }}
                 </h1>
                 <p
-                  class="text-muted-foreground/90 max-w-2xl text-lg leading-relaxed font-normal"
+                  class="animate-blur-in-up text-muted-foreground/90 max-w-2xl text-lg leading-relaxed font-normal"
+                  style="--animation-delay: 150ms"
                 >
                   {{ description() }}
                 </p>
