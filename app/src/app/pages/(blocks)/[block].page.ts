@@ -25,7 +25,8 @@ import {
   BlocksLayout,
   CodeBlock,
   InstallCommand,
-  Section
+  Section,
+  ApiReferenceTable
 } from '../_components'
 import { injectResponse } from '@analogjs/router/tokens'
 
@@ -64,7 +65,8 @@ export const routeMeta: RouteMeta = {
     Section,
     CodeBlock,
     InstallCommand,
-    BlocksLayout
+    BlocksLayout,
+    ApiReferenceTable
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './[block].page.html'
@@ -83,16 +85,20 @@ export default class BlockPage {
   )
 
   readonly import = computed(() => {
-    return this.getBlockInfo().import.trim()
+    return this.selectedComponent().import.trim()
   })
 
-  readonly usage = computed(() => this.getBlockInfo().usage.trim())
+  readonly usage = computed(() => this.selectedComponent().usage.trim())
 
   readonly cn = cn
 
   readonly activeTab = signal<'preview' | 'code'>('preview')
 
   readonly isLoaded = signal(false)
+
+  readonly apiReference = computed(
+    () => this.selectedComponent().apiReference ?? []
+  )
 
   constructor() {
     afterNextRender(() => {
@@ -136,7 +142,8 @@ export default class BlockPage {
         image: '',
         components: [],
         import: '',
-        usage: ''
+        usage: '',
+        apiReference: []
       }
     }
 

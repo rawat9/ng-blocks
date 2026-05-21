@@ -6,18 +6,27 @@ import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
 import { Tabs1 } from './tabs/tabs-1'
 
+export interface ApiReference {
+  name: string
+  type: string
+  required: boolean
+  default?: string
+  description: string
+}
+
 export interface Block {
   title: string
   description: string
   route: string
   image: string
   darkImage: string
-  import: string
-  usage: string
   components: {
     title: string
     path: string
+    import: string
+    usage: string
     component: Type<unknown>
+    apiReference?: ApiReference[]
   }[]
   badge?: string
 }
@@ -29,20 +38,41 @@ export const blocks: Block[] = [
     route: '/ai',
     image: '/thumbnails/ai.svg',
     darkImage: '/thumbnails/ai-dark.svg',
-    import: `import { AiShimmer } from 'ng-blocks/ai/ai-shimmer'`,
-    usage: `
-      <AiShimmer text="Loading..." duration="5"></AiShimmer>
-    `,
     components: [
       {
         title: 'AI Shimmer',
         path: 'ai-shimmer.ts',
-        component: AiShimmer
+        component: AiShimmer,
+        import: `import { AiShimmer } from 'ng-blocks/ai/ai-shimmer'`,
+        usage: `
+      <AiShimmer text="Loading..." duration="5"></AiShimmer>
+    `,
+        apiReference: [
+          {
+            name: 'text',
+            type: 'string',
+            required: false,
+            default: "'Thinking'",
+            description: 'Text to display with the shimmer effect'
+          },
+          {
+            name: 'duration',
+            type: 'number',
+            required: false,
+            default: '4',
+            description: 'Duration of the shimmer animation in seconds'
+          }
+        ]
       },
       {
         title: 'AI Chat',
         path: 'ai-chat.ts',
-        component: AiChat
+        component: AiChat,
+        import: `import { AiChat } from 'ng-blocks/ai/ai-chat'`,
+        usage: `
+      <AiChat text="Hello! How can I assist you today?"></AiChat>
+    `,
+        apiReference: []
       }
     ],
     badge: 'NEW'
@@ -53,15 +83,46 @@ export const blocks: Block[] = [
     route: '/accordion',
     image: '/thumbnails/accordion.svg',
     darkImage: '/thumbnails/accordion-dark.svg',
-    import: `import { Accordion1 } from 'ng-blocks/accordion/accordion-1'`,
-    usage: `
-      <Accordion1></Accordion1>
-    `,
     components: [
       {
         title: 'Accordion',
         path: 'accordion-1.ts',
-        component: Accordion1
+        import: `import { Accordion1 } from 'ng-blocks/accordion/accordion-1'`,
+        usage: `
+      <Accordion1></Accordion1>
+    `,
+        component: Accordion1,
+        apiReference: [
+          {
+            name: 'multiExpandable',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description:
+              'Whether multiple panels can be expanded simultaneously'
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description: 'Whether the accordion group is disabled'
+          },
+          {
+            name: 'panel',
+            type: 'AccordionPanel',
+            required: true,
+            description:
+              'Reference to the accordion panel this trigger controls'
+          },
+          {
+            name: 'expanded',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description: 'Whether the associated panel is expanded'
+          }
+        ]
       }
     ]
   },
@@ -70,20 +131,35 @@ export const blocks: Block[] = [
     description: 'Organize content into switchable panels',
     route: '/tabs',
     image: '/thumbnails/tabs.svg',
-    import: `import { Tabs } from 'ng-blocks/tabs/tabs'`,
-    usage: `
-<Tabs>
-  <Tab title="Tab 1">Content for Tab 1</Tab>
-  <Tab title="Tab 2">Content for Tab 2</Tab>
-  <Tab title="Tab 3">Content for Tab 3</Tab>
-</Tabs>
-    `,
     darkImage: '/thumbnails/tabs-dark.svg',
     components: [
       {
         title: 'Tabs',
         path: 'tabs-1.ts',
-        component: Tabs1
+        component: Tabs1,
+        import: `import { Tabs1 } from 'ng-blocks/tabs/tabs-1'`,
+        usage: ` <Tabs1></Tabs1> `,
+        apiReference: [
+          {
+            name: 'id',
+            type: 'string',
+            required: false,
+            description: 'Unique identifier for the tab'
+          },
+          {
+            name: 'value',
+            type: 'string',
+            required: false,
+            description: 'Value associated with the tab for selection tracking'
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description: 'Whether the tab is disabled'
+          }
+        ]
       }
     ]
   },
@@ -93,20 +169,24 @@ export const blocks: Block[] = [
     route: '/forms',
     image: '/thumbnails/forms.svg',
     darkImage: '/thumbnails/forms-dark.svg',
-    import: `import { Form1 } from 'ng-blocks/forms/form-1'`,
-    usage: `
-      <Form1></Form1>
-    `,
     components: [
       {
         title: 'Login Form',
         path: 'form-1.ts',
-        component: Form1
+        component: Form1,
+        import: `import { Form1 } from 'ng-blocks/forms/form-1'`,
+        usage: `
+      <Form1></Form1>
+    `
       },
       {
         title: 'Signup Form',
         path: 'form-2.ts',
-        component: Form2
+        component: Form2,
+        import: `import { Form2 } from 'ng-blocks/forms/form-2'`,
+        usage: `
+      <Form2></Form2>
+    `
       }
     ]
   }
