@@ -54,7 +54,7 @@ import { RouterLink } from '@angular/router'
         class="bg-muted/40 dark:bg-muted/40 relative z-10 flex h-full w-full flex-col lg:max-w-1/2 lg:basis-1/2"
       >
         <div
-          class="flex-1 overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          class="scroll-mask-y flex-1 scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           <div
             class="mx-auto max-w-3xl space-y-16 px-6 pt-12 pb-40 lg:space-y-20 lg:px-16 lg:pt-48"
