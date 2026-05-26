@@ -1,52 +1,45 @@
-import { Component, input } from '@angular/core'
-import { InputGroupTextarea } from '../../components/ui/input-group/input-group-textarea'
-import { InputGroup } from '../../components/ui/input-group/input-group'
-import { InputGroupButton } from '../../components/ui/input-group/input-group-button'
-import { NgIcon, provideIcons } from '@ng-icons/core'
-import { lucideMicVocal, lucidePlusCircle } from '@ng-icons/lucide'
-import { InputGroupAddon } from '../../components/ui/input-group/input-group-addon'
+import { Component, signal } from '@angular/core'
+import { TabContent } from '@angular/aria/tabs'
+import { Tabs } from '../../components/ui/tabs/tabs'
+import { TabList } from '../../components/ui/tabs/tab-list'
+import { Tab } from '../../components/ui/tabs/tab'
+import { TabPanel } from '../../components/ui/tabs/tab-panel'
 
 @Component({
-  selector: 'app-tabs',
+  selector: 'app-tabs-2',
   standalone: true,
-  providers: [
-    provideIcons({
-      lucidePlusCircle,
-      lucideMicVocal
-    })
-  ],
+  imports: [Tabs, TabList, Tab, TabPanel, TabContent],
   template: `
-    <div class="w-75">
-      <div appInputGroup>
-        <textarea
-          appInputGroupTextarea
-          placeholder="Ask AI anything"
-          class="min-h-24"
-        ></textarea>
-        <div appInputGroupAddon align="block-end">
-          <div class="flex items-center gap-1">
-            <button appInputGroupButton variant="ghost" size="icon-xs">
-              <ng-icon name="lucidePlusCircle" size="16" />
-            </button>
-            <button appInputGroupButton variant="ghost" size="icon-xs">
-              <ng-icon name="lucideMicVocal" size="16" />
-            </button>
-          </div>
+    <div appNgTabs class="w-full">
+      <div
+        appNgTabList
+        orientation="horizontal"
+        selectionMode="follow"
+        [(selectedTab)]="selectedTab"
+        class="h-9 w-60"
+      >
+        <button appNgTab value="account">Account</button>
+        <button appNgTab value="password">Password</button>
+        <button appNgTab value="settings">Settings</button>
+      </div>
+      <div class="bg-muted/40 h-36 w-60 rounded-md border p-4">
+        <div appNgTabPanel value="account" class="text-sm">
+          <ng-template ngTabContent>
+            Make changes to your account here.
+          </ng-template>
+        </div>
+        <div appNgTabPanel value="password" class="text-sm">
+          <ng-template ngTabContent> Change your password here. </ng-template>
+        </div>
+        <div appNgTabPanel value="settings" class="text-sm">
+          <ng-template ngTabContent>
+            Update your preferences here.
+          </ng-template>
         </div>
       </div>
     </div>
-  `,
-  imports: [
-    InputGroupTextarea,
-    InputGroup,
-    InputGroupButton,
-    NgIcon,
-    InputGroupAddon
-  ]
+  `
 })
 export class Tabs1 {
-  /**
-   * Text to display with the shimmer effect
-   */
-  public readonly text = input('Thinking')
+  protected readonly selectedTab = signal('account')
 }
