@@ -5,6 +5,7 @@ import { Accordion1 } from './accordion/accordion-1'
 import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
 import { Tabs1 } from './tabs/tabs-1'
+import { Dropdown1 } from './dropdown/dropdown-1'
 
 export interface ApiReference {
   name: string
@@ -162,6 +163,41 @@ export const blocks: Block[] = [
         ]
       }
     ]
+  },
+  {
+    title: 'Dropdown',
+    description: 'Menu surfaces for actions, switching, and quick context tasks',
+    route: '/dropdown',
+    image: '/thumbnails/dropdown.svg',
+    darkImage: '/thumbnails/dropdown-dark.svg',
+    components: [
+      {
+        title: 'Dropdown Menu',
+        path: 'dropdown-1.ts',
+        component: Dropdown1,
+        import: `import { Dropdown1 } from 'ng-blocks/dropdown/dropdown-1'`,
+        usage: `
+      <Dropdown1></Dropdown1>
+    `,
+        apiReference: [
+          {
+            name: 'selectedId',
+            type: 'signal<string>',
+            required: false,
+            default: "'engineering'",
+            description: 'Currently selected option in the dropdown menu'
+          },
+          {
+            name: 'isOpen',
+            type: 'signal<boolean>',
+            required: false,
+            default: 'false',
+            description: 'Controls whether the menu content is visible'
+          }
+        ]
+      }
+    ],
+    badge: 'NEW'
   },
   {
     title: 'Forms',
