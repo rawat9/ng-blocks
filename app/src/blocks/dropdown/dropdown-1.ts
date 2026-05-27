@@ -63,7 +63,9 @@ interface MenuItem {
                 (click)="select(item.id)"
               >
                 <span>{{ item.label }}</span>
-                <span class="cn-dropdown-menu-shortcut">{{ item.shortcut }}</span>
+                <span class="cn-dropdown-menu-shortcut">{{
+                  item.shortcut
+                }}</span>
                 @if (selectedId() === item.id) {
                   <ng-icon name="lucideCheck" size="14" class="ml-auto" />
                 }
@@ -130,7 +132,9 @@ export class Dropdown1 {
   }
 
   private activeIndex() {
-    const index = this.menuItems.findIndex((item) => item.id === this.selectedId())
+    const index = this.menuItems.findIndex(
+      (item) => item.id === this.selectedId()
+    )
     return index >= 0 ? index : 0
   }
 }

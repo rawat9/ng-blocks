@@ -166,7 +166,8 @@ export const blocks: Block[] = [
   },
   {
     title: 'Dropdown',
-    description: 'Menu surfaces for actions, switching, and quick context tasks',
+    description:
+      'Menu surfaces for actions, switching, and quick context tasks',
     route: '/dropdown',
     image: '/thumbnails/dropdown.svg',
     darkImage: '/thumbnails/dropdown-dark.svg',
