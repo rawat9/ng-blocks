@@ -5,6 +5,7 @@ import { Accordion1 } from './accordion/accordion-1'
 import { Form1 } from './forms/form-1'
 import { Form2 } from './forms/form-2'
 import { Tabs1 } from './tabs/tabs-1'
+import { BasicDataTable } from './data-table/basic'
 
 export interface ApiReference {
   name: string
@@ -186,6 +187,24 @@ export const blocks: Block[] = [
         import: `import { Form2 } from 'ng-blocks/forms/form-2'`,
         usage: `
       <Form2></Form2>
+    `
+      }
+    ]
+  },
+  {
+    title: 'Data Table',
+    description: 'Display tabular data with sorting, filtering, and pagination',
+    route: '/data-table',
+    image: '/thumbnails/data-table.svg',
+    darkImage: '/thumbnails/data-table-dark.svg',
+    components: [
+      {
+        title: 'Basic Data Table',
+        path: 'basic.ts',
+        component: BasicDataTable,
+        import: `import { BasicDataTable } from 'ng-blocks/data-table/basic'`,
+        usage: `
+      <BasicDataTable></BasicDataTable>
     `
       }
     ]
