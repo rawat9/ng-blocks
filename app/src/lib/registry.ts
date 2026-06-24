@@ -20,6 +20,7 @@ export interface Block {
   darkImage: string
   components: {
     title: string
+    slug: string
     path: string
     import: string
     usage: string
@@ -39,6 +40,7 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'AI Shimmer',
+        slug: 'ai-shimmer',
         path: 'ai-shimmer.ts',
         component: AiShimmer,
         import: `import { AiShimmer } from 'ng-blocks/ai/ai-shimmer'`,
@@ -64,6 +66,7 @@ export const blocks: Block[] = [
       },
       {
         title: 'AI Chat',
+        slug: 'ai-chat',
         path: 'ai-chat.ts',
         component: AiChat,
         import: `import { AiChat } from 'ng-blocks/ai/ai-chat'`,
@@ -84,6 +87,7 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Accordion',
+        slug: 'accordion',
         path: 'accordion-1.ts',
         import: `import { Accordion1 } from 'ng-blocks/accordion/accordion-1'`,
         usage: `
@@ -133,6 +137,7 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Tabs',
+        slug: 'tabs',
         path: 'tabs-1.ts',
         component: Tabs1,
         import: `import { Tabs1 } from 'ng-blocks/tabs/tabs-1'`,
@@ -171,6 +176,7 @@ export const blocks: Block[] = [
       {
         title: 'Login Form',
         path: 'form-1.ts',
+        slug: 'login-form',
         component: Form1,
         import: `import { Form1 } from 'ng-blocks/forms/form-1'`,
         usage: `
@@ -180,6 +186,7 @@ export const blocks: Block[] = [
       {
         title: 'Signup Form',
         path: 'form-2.ts',
+        slug: 'signup-form',
         component: Form2,
         import: `import { Form2 } from 'ng-blocks/forms/form-2'`,
         usage: `

@@ -8,7 +8,7 @@
       class="animate-blur-in-up scroll-mt-20 pt-10"
       style="--animation-delay: 200ms"
     >
-      <app-install-command [block]="block()" />
+      <app-install-command [block]="selectedComponent().slug" />
     </app-section>
     <app-section
       title="Usage"

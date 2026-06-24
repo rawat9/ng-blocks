@@ -59,7 +59,7 @@ interface PackageManager {
         >
           <span class="text-muted-foreground/40 mr-2 select-none">$</span>
           <span>{{ commands[selected()] }}</span>
-          <span class="text-muted-foreground"> {{ block() }}</span>
+          <span class="text-muted-foreground">{{ block() }}</span>
         </div>
       </div>
     </div>
@@ -70,9 +70,9 @@ export class InstallCommand {
   readonly block = input.required<string>()
 
   readonly commands: Record<PackageManager['name'], string> = {
-    pnpm: 'pnpm dlx @ng-blocks/cli@latest add',
-    npm: 'npx @ng-blocks/cli add',
-    bun: 'bunx --bun @ng-blocks/cli add'
+    pnpm: 'pnpm dlx shadcn@latest add rawat9/ng-blocks/',
+    npm: 'npx shadcn@latest add rawat9/ng-blocks/',
+    bun: 'bunx --bun shadcn@latest add rawat9/ng-blocks/'
   }
 
   readonly selected = model<PackageManager['name']>('npm')
