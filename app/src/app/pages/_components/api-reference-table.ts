@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core'
-import { ApiReference } from '../../../blocks/registry'
+import { ApiReference } from '../../../lib/registry'
 
 @Component({
   selector: 'app-api-reference-table',

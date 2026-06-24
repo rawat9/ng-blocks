@@ -15,8 +15,8 @@ import {
   lucideSparkles,
   lucideZap
 } from '@ng-icons/lucide'
-import { blocks } from '../../../blocks/registry'
-import { cn } from '#lib/utils'
+import { blocks } from '../../../lib/registry'
+import { cn } from 'cnfast'
 import { BlocksLayout } from '../_components'
 
 @Component({
