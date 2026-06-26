@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { join, extname } from 'path'
 
-const EXAMPLES_DIR = join(process.cwd(), 'app/src/blocks')
+const EXAMPLES_DIR = join(process.cwd(), 'libs')
 
 export interface File {
   filename: string
