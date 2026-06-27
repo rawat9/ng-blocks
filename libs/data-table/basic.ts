@@ -5,6 +5,13 @@ import {
   FlexRenderDirective,
   getCoreRowModel
 } from '@tanstack/angular-table'
+import {
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '../ui/table'
 
 interface Person {
   firstName: string
@@ -79,13 +86,20 @@ const defaultColumns: ColumnDef<Person>[] = [
 
 @Component({
   selector: 'app-basic-data-table',
-  imports: [FlexRenderDirective],
+  imports: [
+    FlexRenderDirective,
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell
+  ],
   template: `
-    <div class="p-2">
-      <table>
-        <thead>
+    <div class="p-2" appTableContainer>
+      <table appTable>
+        <thead appTableHead>
           @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-            <tr>
+            <tr appTableRow>
               @for (header of headerGroup.headers; track header.id) {
                 @if (!header.isPlaceholder) {
                   <th>
@@ -104,11 +118,11 @@ const defaultColumns: ColumnDef<Person>[] = [
             </tr>
           }
         </thead>
-        <tbody>
+        <tbody appTableBody>
           @for (row of table.getRowModel().rows; track row.id) {
-            <tr>
+            <tr appTableRow>
               @for (cell of row.getVisibleCells(); track cell.id) {
-                <td>
+                <td appTableCell>
                   <ng-container
                     *flexRender="
                       cell.column.columnDef.cell;
@@ -123,11 +137,11 @@ const defaultColumns: ColumnDef<Person>[] = [
             </tr>
           }
         </tbody>
-        <tfoot>
+        <tfoot appTableFoot>
           @for (footerGroup of table.getFooterGroups(); track footerGroup.id) {
-            <tr>
+            <tr appTableRow>
               @for (footer of footerGroup.headers; track footer.id) {
-                <th>
+                <th appTableCell>
                   <ng-container
                     *flexRender="
                       footer.column.columnDef.footer;
