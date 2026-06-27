@@ -11,10 +11,10 @@ import {
   viewChild
 } from '@angular/core'
 import { RouteMeta } from '@analogjs/router'
-import { blocks, Block } from '../../../blocks/registry'
+import { blocks, Block } from '#lib/registry'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AnimateOnScrollDirective } from '../../../directives'
-import { cn } from '#lib/utils'
+import { cn } from 'cnfast'
 import { NgComponentOutlet } from '@angular/common'
 import { Toolbar } from './_components/toolbar'
 import { CodeViewer } from './_components/code-viewer'

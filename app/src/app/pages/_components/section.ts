@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core'
-import { cn } from '#lib/utils'
+import { cn } from 'cnfast'
 
 @Component({
   selector: 'app-section',
