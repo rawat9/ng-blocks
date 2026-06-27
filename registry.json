@@ -1,0 +1,7 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ng-blocks",
+  "homepage": "https://github.com/rawat9/ng-blocks",
+  "include": ["libs/ai/registry.json"],
+  "items": []
+}
