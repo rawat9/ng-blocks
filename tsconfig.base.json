@@ -18,7 +18,8 @@
       "#/blocks/ai": ["./libs/ai/index.ts"],
       "#/blocks/accordion": ["./libs/accordion/index.ts"],
       "#/blocks/forms": ["./libs/forms/index.ts"],
-      "#/blocks/tabs": ["./libs/tabs/index.ts"]
+      "#/blocks/tabs": ["./libs/tabs/index.ts"],
+      "#/blocks/data-table": ["./libs/data-table/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

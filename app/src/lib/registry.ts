@@ -3,7 +3,7 @@ import { AiShimmer, AiChat } from '#/blocks/ai'
 import { Accordion1 } from '#/blocks/accordion'
 import { Form1, Form2 } from '#/blocks/forms'
 import { Tabs1 } from '#/blocks/tabs'
-import { BasicDataTable } from './data-table/basic'
+import { BasicDataTable } from '#/blocks/data-table'
 
 export interface ApiReference {
   name: string
@@ -205,6 +205,7 @@ export const blocks: Block[] = [
     components: [
       {
         title: 'Basic Data Table',
+        slug: 'basic-table',
         path: 'basic.ts',
         component: BasicDataTable,
         import: `import { BasicDataTable } from 'ng-blocks/data-table/basic'`,
