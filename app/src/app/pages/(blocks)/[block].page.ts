@@ -11,7 +11,7 @@ import {
   viewChild
 } from '@angular/core'
 import { RouteMeta } from '@analogjs/router'
-import { blocks, Block } from '../../../lib/registry'
+import { blocks, Block } from '#lib/registry'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AnimateOnScrollDirective } from '../../../directives'
 import { cn } from 'cnfast'
