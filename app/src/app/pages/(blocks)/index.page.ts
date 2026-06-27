@@ -16,7 +16,6 @@ import {
   lucideZap
 } from '@ng-icons/lucide'
 import { blocks } from '#lib/registry'
-import { cn } from 'cnfast'
 import { BlocksLayout } from '../_components'
 
 @Component({
@@ -172,7 +171,6 @@ import { BlocksLayout } from '../_components'
 export default class Blocks {
   readonly blocks = blocks
   readonly isLoaded = signal(false)
-  readonly cn = cn
 
   constructor() {
     afterNextRender(() => {
