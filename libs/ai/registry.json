@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "items": [
+    {
+      "name": "ai-shimmer",
+      "type": "registry:file",
+      "files": [
+        {
+          "path": "ai-shimmer.ts",
+          "type": "registry:file",
+          "target": "~/ai-shimmer.ts"
+        }
+      ]
+    },
+    {
+      "name": "ai-chat",
+      "type": "registry:file",
+      "files": [
+        {
+          "path": "ai-chat.ts",
+          "type": "registry:file",
+          "target": "~/ai-chat.ts"
+        }
+      ]
+    }
+  ]
+}
