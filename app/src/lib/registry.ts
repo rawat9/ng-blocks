@@ -2,7 +2,10 @@ import { Type } from '@angular/core'
 import { AiShimmer, AiChat } from '#/blocks/ai'
 import { Accordion1 } from '#/blocks/accordion'
 import { Form1, Form2 } from '#/blocks/forms'
+import { Menubar1 } from '#/blocks/menubar'
 import { Tabs1 } from '#/blocks/tabs'
+import { Toolbar1 } from '#/blocks/toolbar'
+import { Tree1 } from '#/blocks/tree'
 
 export interface ApiReference {
   name: string
@@ -165,6 +168,142 @@ export const blocks: Block[] = [
         ]
       }
     ]
+  },
+  {
+    title: 'Menubar',
+    description:
+      'Application menu bars with nested actions and keyboard navigation',
+    route: '/menubar',
+    image: '/thumbnails/menubar.svg',
+    darkImage: '/thumbnails/menubar-dark.svg',
+    components: [
+      {
+        title: 'Menubar',
+        slug: 'menubar',
+        path: 'menubar-1.ts',
+        component: Menubar1,
+        import: `import { Menubar1 } from 'ng-blocks/menubar/menubar-1'`,
+        usage: ` <Menubar1></Menubar1> `,
+        apiReference: [
+          {
+            name: 'values',
+            type: 'V[]',
+            required: false,
+            default: '[]',
+            description: 'Selected menu item values emitted by the menubar'
+          },
+          {
+            name: 'wrap',
+            type: 'boolean',
+            required: false,
+            default: 'true',
+            description: 'Whether keyboard navigation wraps between menu items'
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description: 'Whether the menubar is disabled'
+          }
+        ]
+      }
+    ],
+    badge: 'NEW'
+  },
+  {
+    title: 'Toolbar',
+    description:
+      'Grouped controls for editor actions, formatting, and commands',
+    route: '/toolbar',
+    image: '/thumbnails/toolbar.svg',
+    darkImage: '/thumbnails/toolbar-dark.svg',
+    components: [
+      {
+        title: 'Toolbar',
+        slug: 'toolbar',
+        path: 'toolbar-1.ts',
+        component: Toolbar1,
+        import: `import { Toolbar1 } from 'ng-blocks/toolbar/toolbar-1'`,
+        usage: ` <Toolbar1></Toolbar1> `,
+        apiReference: [
+          {
+            name: 'orientation',
+            type: "'horizontal' | 'vertical'",
+            required: false,
+            default: "'horizontal'",
+            description:
+              'Whether toolbar keyboard navigation is horizontal or vertical'
+          },
+          {
+            name: 'values',
+            type: 'V[]',
+            required: false,
+            default: '[]',
+            description: 'Selected toolbar widget values'
+          },
+          {
+            name: 'disabled',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description: 'Whether the toolbar is disabled'
+          }
+        ]
+      }
+    ],
+    badge: 'NEW'
+  },
+  {
+    title: 'Tree',
+    description:
+      'Hierarchical navigation with selection, expansion, and typeahead',
+    route: '/tree',
+    image: '/thumbnails/tree.svg',
+    darkImage: '/thumbnails/tree-dark.svg',
+    components: [
+      {
+        title: 'Tree',
+        slug: 'tree',
+        path: 'tree-1.ts',
+        component: Tree1,
+        import: `import { Tree1 } from 'ng-blocks/tree/tree-1'`,
+        usage: ` <Tree1></Tree1> `,
+        apiReference: [
+          {
+            name: 'values',
+            type: 'V[]',
+            required: false,
+            default: '[]',
+            description: 'Selected tree item values'
+          },
+          {
+            name: 'multi',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description: 'Whether multiple tree items can be selected'
+          },
+          {
+            name: 'selectionMode',
+            type: "'explicit' | 'follow'",
+            required: false,
+            default: "'explicit'",
+            description:
+              'Whether selection follows focus or is explicitly chosen'
+          },
+          {
+            name: 'nav',
+            type: 'boolean',
+            required: false,
+            default: 'false',
+            description:
+              'Whether the tree represents navigation instead of selection'
+          }
+        ]
+      }
+    ],
+    badge: 'NEW'
   },
   {
     title: 'Forms',
