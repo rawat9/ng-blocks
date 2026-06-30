@@ -18,6 +18,7 @@
       "#/blocks/ai": ["./libs/ai/index.ts"],
       "#/blocks/accordion": ["./libs/accordion/index.ts"],
       "#/blocks/forms": ["./libs/forms/index.ts"],
+      "#/blocks/menu": ["./libs/menu/index.ts"],
       "#/blocks/tabs": ["./libs/tabs/index.ts"]
     }
   },

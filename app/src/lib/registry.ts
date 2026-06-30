@@ -3,7 +3,7 @@ import { AiShimmer, AiChat } from '#/blocks/ai'
 import { Accordion1 } from '#/blocks/accordion'
 import { Form1, Form2 } from '#/blocks/forms'
 import { Tabs1 } from '#/blocks/tabs'
-import { Dropdown1 } from '../blocks/dropdown/dropdown-1'
+import { SimpleMenu } from '#/blocks/menu'
 
 export interface ApiReference {
   name: string
@@ -168,20 +168,21 @@ export const blocks: Block[] = [
     ]
   },
   {
-    title: 'Dropdown',
+    title: 'Menu',
     description:
       'Menu surfaces for actions, switching, and quick context tasks',
-    route: '/dropdown',
+    route: '/menu',
     image: '/thumbnails/dropdown.svg',
     darkImage: '/thumbnails/dropdown-dark.svg',
     components: [
       {
-        title: 'Dropdown Menu',
-        path: 'dropdown-1.ts',
-        component: Dropdown1,
-        import: `import { Dropdown1 } from 'ng-blocks/dropdown/dropdown-1'`,
+        title: 'Simple Menu',
+        path: 'simple.ts',
+        slug: 'simple-menu',
+        component: SimpleMenu,
+        import: `import { SimpleMenu } from 'ng-blocks/menu'`,
         usage: `
-      <Dropdown1></Dropdown1>
+      <SimpleMenu></SimpleMenu>
     `,
         apiReference: [
           {
