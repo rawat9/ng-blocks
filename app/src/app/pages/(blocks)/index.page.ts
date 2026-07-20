@@ -10,11 +10,11 @@ import {
   lucideArrowRight,
   lucideBox,
   lucideComponent,
-  lucideGithub,
   lucideLayers,
   lucideSparkles,
   lucideZap
 } from '@ng-icons/lucide'
+import { simpleGithub } from '@ng-icons/simple-icons'
 import { blocks } from '#lib/registry'
 import { BlocksLayout } from '../_components'
 
@@ -27,10 +27,10 @@ import { BlocksLayout } from '../_components'
       lucideArrowRight,
       lucideBox,
       lucideComponent,
-      lucideGithub,
       lucideLayers,
       lucideSparkles,
-      lucideZap
+      lucideZap,
+      simpleGithub
     })
   ],
   template: `
@@ -88,7 +88,7 @@ import { BlocksLayout } from '../_components'
             rel="noopener noreferrer"
             class="border-border bg-background text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-all duration-200 active:scale-[0.98]"
           >
-            <ng-icon name="lucideGithub" size="14" />
+            <ng-icon name="simpleGithub" size="14" />
             GitHub
           </a>
         </div>
