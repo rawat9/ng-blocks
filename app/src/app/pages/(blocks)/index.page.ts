@@ -11,16 +11,16 @@ import {
   lucideBox,
   lucideComponent,
   lucideLayers,
-  lucideSparkles,
   lucideZap
 } from '@ng-icons/lucide'
 import { simpleGithub } from '@ng-icons/simple-icons'
 import { blocks } from '#lib/registry'
 import { BlocksLayout } from '../_components'
+import { Button } from '#/ui/button'
 
 @Component({
   selector: 'app-blocks-root',
-  imports: [RouterLink, NgIcon, BlocksLayout],
+  imports: [RouterLink, NgIcon, BlocksLayout, Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [
     provideIcons({
@@ -28,127 +28,143 @@ import { BlocksLayout } from '../_components'
       lucideBox,
       lucideComponent,
       lucideLayers,
-      lucideSparkles,
       lucideZap,
       simpleGithub
     })
   ],
   template: `
     <app-blocks-layout
-      [description]="'A collection of beautifully designed, accessible, and copy-paste ready components. Built on Angular Aria with Tailwind CSS.'"
+      [description]="'Accessible Angular building blocks, ready to copy into real products. Built with Angular Aria and Tailwind CSS.'"
     >
-      <!-- Left column: Stats + Quick Links -->
-      <div left-column class="space-y-12">
-        <!-- Feature pills -->
+      <div left-column class="space-y-10">
         <div
-          class="flex flex-wrap gap-2"
+          class="border-border bg-border grid max-w-lg grid-cols-3 gap-px overflow-hidden rounded-lg border"
           [class.animate-blur-in-up]="isLoaded()"
           [style.--animation-delay]="'350ms'"
         >
-          <span
-            class="border-border/60 bg-background/70 text-muted-foreground hover:text-foreground hover:border-border inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
-          >
-            <ng-icon name="lucideZap" size="12" class="text-amber-500" />
-            Zoneless
-          </span>
-          <span
-            class="border-border/60 bg-background/70 text-muted-foreground hover:text-foreground hover:border-border inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
-          >
-            <ng-icon name="lucideSparkles" size="12" class="text-violet-500" />
-            Copy & Paste
-          </span>
-          <span
-            class="border-border/60 bg-background/70 text-muted-foreground hover:text-foreground hover:border-border inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
-          >
+          <div class="bg-background flex min-w-0 flex-col gap-2 p-3.5">
+            <ng-icon
+              name="lucideLayers"
+              size="15"
+              class="text-cyan-600 dark:text-cyan-400"
+            />
+            <span class="text-foreground text-sm font-semibold tabular-nums">
+              {{ blocks.length }}
+            </span>
+            <span class="text-muted-foreground text-xs leading-tight"
+              >Collections</span
+            >
+          </div>
+          <div class="bg-background flex min-w-0 flex-col gap-2 p-3.5">
             <ng-icon
               name="lucideComponent"
-              size="12"
-              class="text-emerald-500"
+              size="15"
+              class="text-cyan-600 dark:text-cyan-400"
             />
-            Accessible
-          </span>
+            <span class="text-foreground text-sm font-semibold tabular-nums"
+              >Copy</span
+            >
+            <span class="text-muted-foreground text-xs leading-tight"
+              >Ready source</span
+            >
+          </div>
+          <div class="bg-background flex min-w-0 flex-col gap-2 p-3.5">
+            <ng-icon
+              name="lucideZap"
+              size="15"
+              class="text-cyan-600 dark:text-cyan-400"
+            />
+            <span class="text-foreground text-sm font-semibold">Modern</span>
+            <span class="text-muted-foreground text-xs leading-tight"
+              >Angular APIs</span
+            >
+          </div>
         </div>
 
-        <!-- CTA -->
         <div
-          class="flex items-center gap-3"
+          class="border-border max-w-lg border-l pl-4"
           [class.animate-blur-in-up]="isLoaded()"
-          [style.--animation-delay]="'500ms'"
+          [style.--animation-delay]="'430ms'"
+        >
+          <p class="text-muted-foreground text-sm leading-relaxed">
+            Browse a collection, inspect its API, then bring only the code your
+            application needs.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-wrap items-center gap-3"
+          [class.animate-blur-in-up]="isLoaded()"
+          [style.--animation-delay]="'510ms'"
         >
           <a
+            appButton
+            [size]="'lg'"
             [routerLink]="blocks[0].title.toLowerCase()"
-            class="bg-foreground text-background inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
           >
-            Browse Components
+            Explore the library
             <ng-icon name="lucideArrowRight" size="14" />
           </a>
           <a
+            appButton
+            [size]="'lg'"
+            [variant]="'outline'"
             href="https://github.com/rawat9/ng-blocks"
             target="_blank"
             rel="noopener noreferrer"
-            class="border-border bg-background text-foreground hover:bg-muted inline-flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-medium transition-all duration-200 active:scale-[0.98]"
           >
             <ng-icon name="simpleGithub" size="14" />
-            GitHub
+            View source
           </a>
         </div>
       </div>
 
       <div
         right-column
-        class="group/cards grid gap-5 p-16 px-6 pb-10 sm:grid-cols-2 sm:px-10 xl:grid-cols-3"
+        class="group/cards mx-auto grid max-w-5xl grid-cols-1 gap-4 p-6 sm:grid-cols-2 sm:p-10 lg:content-center lg:p-12"
       >
         @for (block of blocks; track block.route; let i = $index) {
           <a
             [routerLink]="block.title.toLowerCase()"
-            class="group bg-muted/50 hover:border-border relative flex flex-col overflow-hidden rounded-2xl border shadow-xs/5 transition-all duration-500 not-dark:bg-clip-padding group-has-[a:hover]/cards:opacity-50 group-has-[a:hover]/cards:blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] hover:-translate-y-1 hover:!opacity-100 hover:shadow-lg hover:!blur-none dark:before:shadow-[0_-1px_--theme(--color-white/6%)] dark:hover:shadow-black/20"
+            class="group bg-background hover:border-foreground/10 border-border/80 relative flex flex-col overflow-hidden rounded-lg border shadow-sm transition-all duration-300 group-has-[a:hover]/cards:opacity-50 group-has-[a:hover]/cards:blur-[1px] hover:-translate-y-1 hover:!opacity-100 hover:shadow-lg hover:!blur-none dark:hover:shadow-black/20"
             [class.animate-blur-in-up]="isLoaded()"
-            [style.--animation-delay]="100 + i * 120 + 'ms'"
+            [style.--animation-delay]="120 + i * 100 + 'ms'"
           >
-            <!-- Thumbnail -->
-            <div class="relative aspect-16/10 overflow-hidden rounded-2xl p-1">
+            <div
+              class="border-border/70 relative aspect-16/10 overflow-hidden border-b p-1"
+            >
               <img
                 [src]="block.image"
                 [alt]="block.title"
                 width="600"
                 height="375"
-                class="h-full w-full rounded-2xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] dark:hidden"
+                class="h-full w-full rounded-md object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] dark:hidden"
               />
               <img
                 [src]="block.darkImage"
                 [alt]="block.title"
                 width="600"
                 height="375"
-                class="hidden h-full w-full rounded-2xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] dark:block"
+                class="hidden h-full w-full rounded-md object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] dark:block"
               />
-              <!-- Gradient overlay on hover -->
-              <div
-                class="absolute inset-0 bg-linear-to-t from-white/90 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-black/40"
-              ></div>
-
-              <!-- Badge -->
-              @if (block.badge) {
-                <span
-                  class="bg-foreground text-background absolute top-3 right-3 rounded-full px-2.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase shadow-sm"
-                >
-                  {{ block.badge }}
-                </span>
-              }
-
-              <!-- Floating arrow (appears on hover) -->
-              <div
-                class="text-foreground absolute right-3 bottom-3 flex size-8 translate-y-2 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 dark:bg-zinc-900/90"
-              >
-                <ng-icon name="lucideArrowRight" size="14" />
-              </div>
             </div>
 
-            <!-- Content -->
-            <div class="flex flex-col gap-1.5 p-4">
+            <div class="flex flex-1 flex-col gap-2 p-4">
               <div class="flex items-center justify-between">
-                <h3 class="text-foreground text-sm font-medium tracking-tight">
-                  {{ block.title }}
-                </h3>
+                <div class="flex items-center gap-2">
+                  <h3
+                    class="text-foreground text-sm font-semibold tracking-tight"
+                  >
+                    {{ block.title }}
+                  </h3>
+                  @if (block.badge) {
+                    <span
+                      class="rounded bg-cyan-600/10 px-1.5 py-0.5 text-[10px] font-semibold text-cyan-700 dark:text-cyan-300"
+                    >
+                      {{ block.badge }}
+                    </span>
+                  }
+                </div>
                 <span
                   class="text-muted-foreground inline-flex items-center gap-1 text-[11px] font-medium tabular-nums"
                 >
@@ -157,10 +173,20 @@ import { BlocksLayout } from '../_components'
                 </span>
               </div>
               <p
-                class="text-muted-foreground/80 line-clamp-2 text-xs leading-relaxed"
+                class="text-muted-foreground line-clamp-2 text-xs leading-relaxed"
               >
                 {{ block.description }}
               </p>
+              <span
+                class="text-foreground mt-auto inline-flex items-center gap-1.5 pt-1 text-xs font-medium"
+              >
+                View collection
+                <ng-icon
+                  name="lucideArrowRight"
+                  size="13"
+                  class="transition-transform duration-200 group-hover:translate-x-0.5"
+                />
+              </span>
             </div>
           </a>
         }

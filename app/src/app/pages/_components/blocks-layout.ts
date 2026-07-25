@@ -18,7 +18,7 @@ import { RouterLink } from '@angular/router'
   imports: [FloatingSidenav, RouterLink],
   template: `
     <div
-      class="bg-muted dark:bg-background flex h-full min-h-screen w-full flex-col lg:h-screen lg:flex-row"
+      class="bg-background flex min-h-dvh w-full flex-col lg:h-dvh lg:flex-row"
     >
       <div
         class="pointer-events-none fixed top-5 left-4 z-50 flex items-center gap-2.5 sm:left-6 lg:absolute lg:top-8 lg:left-16"
@@ -51,23 +51,23 @@ import { RouterLink } from '@angular/router'
       <!-- Column left -->
       <div
         #leftCol
-        class="bg-muted/40 dark:bg-muted/40 relative z-10 flex h-full w-full flex-col lg:max-w-1/2 lg:basis-1/2"
+        class="bg-background border-border/70 relative z-10 flex w-full flex-col border-b lg:h-full lg:max-w-1/2 lg:basis-1/2 lg:border-r lg:border-b-0"
       >
         <div
           class="scroll-mask-y flex-1 scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           <div
-            class="mx-auto max-w-3xl space-y-16 px-6 pt-12 pb-40 lg:space-y-20 lg:px-16 lg:pt-48"
+            class="mx-auto max-w-2xl space-y-12 px-6 pt-28 pb-16 sm:px-10 lg:space-y-16 lg:px-16 lg:pt-36 lg:pb-24"
           >
-            <header class="space-y-10">
-              <div class="space-y-6">
+            <header class="space-y-8">
+              <div class="space-y-5">
                 <h1
-                  class="animate-blur-in-up mb-2 bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 bg-clip-text pb-2 text-4xl leading-[1.1] font-bold tracking-tighter text-transparent lg:text-6xl dark:from-white dark:via-zinc-400 dark:to-white"
+                  class="animate-blur-in-up mb-2 max-w-xl bg-linear-to-br from-zinc-950 via-zinc-600 to-zinc-950 bg-clip-text pb-2 text-5xl leading-[1.05] font-bold tracking-tighter text-transparent sm:text-6xl dark:from-white dark:via-zinc-400 dark:to-white"
                 >
                   {{ title() || 'ng-blocks' }}
                 </h1>
                 <p
-                  class="animate-blur-in-up text-muted-foreground/90 max-w-2xl text-lg leading-relaxed font-normal"
+                  class="animate-blur-in-up text-muted-foreground max-w-xl text-base leading-relaxed font-normal sm:text-lg"
                   style="--animation-delay: 150ms"
                 >
                   {{ description() }}
@@ -83,11 +83,9 @@ import { RouterLink } from '@angular/router'
       <!-- Column right -->
       <div
         #rightCol
-        class="bg-muted/40 dark:bg-muted/40 z-20 order-first flex flex-1 flex-col lg:sticky lg:top-0 lg:order-last lg:h-full lg:max-w-1/2 lg:basis-1/2"
+        class="z-20 order-first flex flex-1 flex-col lg:sticky lg:top-0 lg:order-last lg:h-full lg:max-w-1/2 lg:basis-1/2 dark:bg-black/45"
       >
-        <div
-          class="relative h-[55vh] w-full overflow-hidden p-4 lg:h-full lg:py-2 lg:pr-2 lg:pl-2"
-        >
+        <div class="relative h-[58vh] w-full overflow-y-auto lg:h-full">
           <ng-content select="[right-column]"></ng-content>
         </div>
       </div>

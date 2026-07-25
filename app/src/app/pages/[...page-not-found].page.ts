@@ -1,7 +1,7 @@
 import type { RouteMeta } from '@analogjs/router'
 import { Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Button } from '#components/ui/button'
+import { Button } from '#/ui/button'
 
 export const routeMeta: RouteMeta = {
   title: 'Page not found'
