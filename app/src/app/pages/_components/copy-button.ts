@@ -6,8 +6,8 @@ import {
 } from '@angular/core'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import { lucideCheck, lucideCopy } from '@ng-icons/lucide'
-import { cn } from '../../../lib/utils'
-import { Button } from '../../../components/ui/button'
+import { cn } from 'cnfast'
+import { Button } from '#/ui/button'
 
 @Component({
   selector: 'app-copy-button',
@@ -22,7 +22,7 @@ import { Button } from '../../../components/ui/button'
   template: ` <button
     appButton
     variant="ghost"
-    class="absolute top-3 right-3 p-2 rounded-md transition-all duration-200 z-10"
+    class="absolute top-3 right-3 z-10 rounded-md p-2 transition-all duration-200"
     (click)="handleCopy()"
   >
     @if (copied()) {

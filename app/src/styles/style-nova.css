@@ -215,35 +215,23 @@
 
 /* MARK: Landing Page Animations */
 
-/* Fade in up animation */
-@keyframes fade-in-up {
+/* Blur in up animation */
+@keyframes blur-in-up {
   from {
     opacity: 0;
+    filter: blur(8px);
     transform: translateY(30px);
   }
   to {
     opacity: 1;
+    filter: blur(0);
     transform: translateY(0);
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+.animate-blur-in-up {
+  animation: blur-in-up 700ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
   animation-delay: var(--animation-delay, 0ms);
-}
-
-/* Slow bounce for scroll indicator */
-@keyframes bounce-slow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(8px);
-  }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s infinite ease-in-out;
 }
 
 /* Shimmer effect for badge */
@@ -266,80 +254,3 @@
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
-
-/* Reusable card view transitions - apply via inline style: style="view-transition-name: card-name" */
-[style*="view-transition-name:"] {
-  contain: layout;
-}
-
-/* Generic view transition timing for all named transitions */
-::view-transition-old(*),
-::view-transition-new(*) {
-  animation-duration: 350ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Swipe navigation transitions */
-@keyframes slide-out-left {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-out-right {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Apply slide animations during view transitions */
-.slide-left::view-transition-old(root) {
-  animation: slide-out-left 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.slide-left::view-transition-new(root) {
-  animation: slide-in-right 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.slide-right::view-transition-old(root) {
-  animation: slide-out-right 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.slide-right::view-transition-new(root) {
-  animation: slide-in-left 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/** endregion Landing Page Animations */
-

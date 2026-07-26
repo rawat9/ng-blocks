@@ -12,7 +12,15 @@
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "#/ui/*": ["./libs/ui/*"],
+      "#/blocks/ai": ["./libs/ai/index.ts"],
+      "#/blocks/accordion": ["./libs/accordion/index.ts"],
+      "#/blocks/forms": ["./libs/forms/index.ts"],
+      "#/blocks/tabs": ["./libs/tabs/index.ts"],
+      "#/blocks/diagram": ["./libs/diagram/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

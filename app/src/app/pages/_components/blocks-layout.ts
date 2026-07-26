@@ -9,8 +9,8 @@ import {
   viewChild
 } from '@angular/core'
 import { FloatingSidenav } from './floating-sidenav'
-import { ToolbarService } from '../../../services/toolbar.service'
-import { RouterLink } from '@angular/router'
+import { ToolbarService } from '#services/toolbar.service'
+import { Router, RouterLink, isActive } from '@angular/router'
 
 @Component({
   selector: 'app-blocks-layout',
@@ -18,10 +18,10 @@ import { RouterLink } from '@angular/router'
   imports: [FloatingSidenav, RouterLink],
   template: `
     <div
-      class="flex flex-col lg:flex-row w-full h-full min-h-screen lg:h-screen bg-muted dark:bg-background"
+      class="bg-background flex min-h-dvh w-full flex-col lg:h-dvh lg:flex-row"
     >
       <div
-        class="fixed top-5 left-4 sm:left-6 lg:absolute lg:top-8 lg:left-16 z-50 flex items-center gap-2.5 pointer-events-none"
+        class="pointer-events-none fixed top-5 left-4 z-50 flex items-center gap-2.5 sm:left-6 lg:absolute lg:top-8 lg:left-16"
       >
         <div class="pointer-events-auto">
           <div class="relative">
@@ -30,17 +30,17 @@ import { RouterLink } from '@angular/router'
         </div>
         @if (title()) {
           <div
-            class="inline-flex h-9 items-center gap-2 rounded-md bg-background/55 px-3.5 text-xs text-muted-foreground backdrop-blur-sm pointer-events-auto"
+            class="bg-background/55 text-muted-foreground pointer-events-auto inline-flex h-9 items-center gap-2 rounded-md px-3.5 text-xs backdrop-blur-sm"
           >
             <a
               routerLink="/"
-              class="text-sm font-medium transition-colors hover:text-foreground"
+              class="hover:text-foreground text-sm font-medium transition-colors"
             >
               Blocks
             </a>
             <span class="text-border">/</span>
             <span
-              class="max-w-25 sm:max-w-45 truncate text-sm font-semibold text-foreground"
+              class="text-foreground max-w-25 truncate text-sm font-semibold sm:max-w-45"
             >
               {{ title() }}
             </span>
@@ -51,23 +51,24 @@ import { RouterLink } from '@angular/router'
       <!-- Column left -->
       <div
         #leftCol
-        class="w-full lg:basis-1/2 lg:max-w-1/2 h-full flex flex-col relative z-10 bg-muted/40 dark:bg-muted/40"
+        class="bg-background border-border/70 relative z-10 flex w-full flex-col border-b lg:h-full lg:max-w-1/2 lg:basis-1/2 lg:border-r lg:border-b-0"
       >
         <div
-          class="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          class="scroll-mask-y flex-1 scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           <div
-            class="px-6 lg:px-16 pt-12 lg:pt-48 pb-40 space-y-16 lg:space-y-20 max-w-3xl mx-auto"
+            class="mx-auto max-w-2xl space-y-12 px-6 pt-28 pb-16 sm:px-10 lg:space-y-16 lg:px-16 lg:pt-36 lg:pb-24"
           >
-            <header class="space-y-10">
-              <div class="space-y-6">
+            <header class="space-y-8">
+              <div class="space-y-5">
                 <h1
-                  class="text-4xl lg:text-6xl font-bold tracking-tighter bg-linear-to-br from-zinc-900 via-zinc-500 to-zinc-900 dark:from-white dark:via-zinc-400 dark:to-white bg-clip-text text-transparent leading-[1.1] mb-2 pb-2"
+                  class="animate-blur-in-up mb-2 max-w-xl bg-linear-to-br from-zinc-950 via-zinc-600 to-zinc-950 bg-clip-text pb-2 text-5xl leading-[1.05] font-bold tracking-tighter text-transparent sm:text-6xl dark:from-white dark:via-zinc-400 dark:to-white"
                 >
                   {{ title() || 'ng-blocks' }}
                 </h1>
                 <p
-                  class="text-lg text-muted-foreground/90 leading-relaxed max-w-2xl font-normal"
+                  class="animate-blur-in-up text-muted-foreground max-w-xl text-base leading-relaxed font-normal sm:text-lg"
+                  style="--animation-delay: 150ms"
                 >
                   {{ description() }}
                 </p>
@@ -82,10 +83,11 @@ import { RouterLink } from '@angular/router'
       <!-- Column right -->
       <div
         #rightCol
-        class="flex-1 lg:basis-1/2 lg:max-w-1/2 lg:h-full lg:sticky lg:top-0 order-first lg:order-last flex flex-col z-20 bg-muted/40 dark:bg-muted/40"
+        class="z-20 order-first flex flex-1 flex-col lg:sticky lg:top-0 lg:order-last lg:h-full lg:max-w-1/2 lg:basis-1/2 dark:bg-black/45"
       >
         <div
-          class="relative w-full h-[55vh] lg:h-full p-4 lg:pr-2 lg:pl-2 lg:py-2 overflow-hidden"
+          class="relative h-[58vh] w-full overflow-y-auto lg:h-full"
+          [class.scroll-mask-y]="isRootRoute()"
         >
           <ng-content select="[right-column]"></ng-content>
         </div>
@@ -104,7 +106,13 @@ export class BlocksLayout {
 
   private readonly leftCol = viewChild<ElementRef<HTMLElement>>('leftCol')
 
+  private router = inject(Router)
+
   private readonly rightCol = viewChild<ElementRef<HTMLElement>>('rightCol')
+
+  protected readonly isRootRoute = isActive('/', this.router, {
+    paths: 'exact'
+  })
 
   constructor() {
     effect(() => {

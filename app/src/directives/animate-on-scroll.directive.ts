@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  signal,
+  signal
 } from '@angular/core'
 import { isPlatformBrowser } from '@angular/common'
 
@@ -14,8 +14,8 @@ import { isPlatformBrowser } from '@angular/common'
   selector: '[appAnimateOnScroll]',
   host: {
     '[class.animate-visible]': 'isVisible()',
-    '[style.--animation-delay]': 'delay()',
-  },
+    '[style.--animation-delay]': 'delay()'
+  }
 })
 export class AnimateOnScrollDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef)
@@ -23,10 +23,10 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
   private observer: IntersectionObserver | null = null
 
   /** Animation delay in milliseconds */
-  delay = input('0ms')
+  readonly delay = input('0ms')
 
   /** Threshold for triggering animation (0-1) */
-  threshold = input(0.1)
+  readonly threshold = input(0.1)
 
   isVisible = signal(false)
 
@@ -42,7 +42,7 @@ export class AnimateOnScrollDirective implements OnInit, OnDestroy {
           }
         })
       },
-      { threshold: this.threshold() },
+      { threshold: this.threshold() }
     )
 
     this.observer.observe(this.el.nativeElement)

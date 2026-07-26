@@ -6,7 +6,7 @@ import {
   output,
   signal
 } from '@angular/core'
-import { ToolbarService } from '../../../../services/toolbar.service'
+import { ToolbarService } from '#services/toolbar.service'
 import { NgIcon, provideIcons } from '@ng-icons/core'
 import {
   lucideCheck,

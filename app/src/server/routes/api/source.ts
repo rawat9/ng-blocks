@@ -1,5 +1,5 @@
 import { createError, defineEventHandler, getQuery } from 'h3'
-import { getComponentSource } from '../../../lib/get-component-source'
+import { getComponentSource } from '#lib/get-component-source'
 
 interface QueryParam {
   path: string

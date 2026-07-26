@@ -1,3 +1,8 @@
 {
-  "type": "module"
+  "type": "module",
+  "imports": {
+    "#components/*": "./src/components/*.ts",
+    "#services/*": "./src/services/*.ts",
+    "#lib/*": "./src/lib/*.ts"
+  }
 }
