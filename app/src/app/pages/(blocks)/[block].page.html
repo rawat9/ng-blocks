@@ -45,9 +45,7 @@
       class="no-scrollbar flex h-full w-full overflow-auto"
     >
       @if (activeTab() === 'preview') {
-      <div
-        class="mx-auto flex w-full max-w-[80%] items-center justify-center p-10"
-      >
+      <div class="mx-auto flex w-full items-center justify-center p-10">
         @let component = getBlockInfo().components.find((c) => c ===
         selectedComponent());
         <ng-container *ngComponentOutlet="component!.component"></ng-container>
