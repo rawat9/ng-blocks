@@ -1,0 +1,27 @@
+app/src/app/pages/(blocks)/index.page.ts
+  s_b3b52528f01933::t_1ff3d8a667a142 49,59,86,98,196,214,264,266,316
+  h_bd0d6a0dc32b3c 55,62,67,71-72,74-75,270,281
+  s_b3b52528f01933::t_ca3a844f178253 32,47-48,50-51,53-54,56-58,60,91-94,109-116,121-124,134-137,139,161-164,174,251,268-269,271-272,280,282,312,314-315,317-318
+  s_b3b52528f01933::t_df09fb286c6837 138,147,265,289,297
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "5e32803a1ef8d3affbe8a1d9332f3a8f14564a2b",
+  "prompts": {},
+  "humans": {
+    "h_bd0d6a0dc32b3c": {
+      "author": "Anurag Rawat <anurag.rawat0201@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_b3b52528f01933": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "2da9c114-a709-4150-946a-3b41d7ff83b1",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Anurag Rawat <anurag.rawat0201@gmail.com>"
+    }
+  }
+}
