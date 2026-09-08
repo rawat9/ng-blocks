@@ -29,6 +29,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
   selector: 'app-blocks-root',
   imports: [RouterLink, NgIcon, Button, AngularBlocks3d],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block' },
   viewProviders: [
     provideIcons({
       lucideArrowRight,
@@ -43,36 +44,35 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
     })
   ],
   template: `
-    <a href="#main-content" class="skip-link">Skip to content</a>
+    <a
+      href="#main-content"
+      class="bg-background focus-visible:outline-foreground absolute top-4 left-4 z-2 -translate-y-[200%] px-4 py-3 focus:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid"
+      >Skip to content</a
+    >
 
-    <header class="border-border border-b">
-      <div class="page-width flex h-18 items-center justify-between gap-6">
-        <a routerLink="/" class="text-xl font-bold tracking-tight">ng-blocks</a>
-        <nav
-          aria-label="Blocks navigation"
-          class="hidden items-center gap-7 md:flex"
+    <header>
+      <div
+        class="mx-auto flex h-18 w-[calc(100%-2rem)] items-center justify-between gap-6 md:w-[min(100%-3rem,1200px)]"
+      >
+        <a
+          routerLink="/"
+          class="focus-visible:outline-foreground text-xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid"
+          >ng-blocks</a
         >
-          @for (block of blocks; track block.route) {
-            <a
-              [routerLink]="block.route"
-              class="text-muted-foreground hover:text-foreground text-sm"
-              >{{ block.title }}</a
-            >
-          }
-        </nav>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center">
           <button
             appButton
             variant="ghost"
             size="icon"
+            class="focus-visible:outline-foreground focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid motion-reduce:animate-none! motion-reduce:transition-none!"
             aria-label="Toggle color theme"
             (click)="toolbar.toggleTheme()"
           >
-            <span class="dark:hidden">
-              <ng-icon name="lucideMoon" size="17" aria-hidden="true" />
+            <span class="flex dark:hidden">
+              <ng-icon name="lucideMoon" size="18" aria-hidden="true" />
             </span>
-            <span class="hidden dark:block">
-              <ng-icon name="lucideSun" size="17" aria-hidden="true" />
+            <span class="hidden dark:flex">
+              <ng-icon name="lucideSun" size="18" aria-hidden="true" />
             </span>
           </button>
           <details
@@ -83,16 +83,19 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
           >
             <summary
               #mobileMenuButton
-              class="flex size-10 cursor-pointer list-none items-center justify-center rounded-md"
+              class="focus-visible:outline-foreground flex size-10 cursor-pointer list-none items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid [&::-webkit-details-marker]:hidden"
               aria-label="Blocks navigation"
             >
               <ng-icon name="lucideMenu" size="20" aria-hidden="true" />
             </summary>
-            <nav aria-label="Mobile blocks navigation" class="mobile-nav">
+            <nav
+              aria-label="Mobile blocks navigation"
+              class="border-border bg-background absolute top-12 right-0 z-1 w-60 rounded-[12px] border p-2"
+            >
               @for (block of blocks; track block.route) {
                 <a
                   [routerLink]="block.route"
-                  class="hover:bg-muted block rounded-md px-4 py-3 text-sm"
+                  class="hover:bg-muted focus-visible:outline-foreground block rounded-md px-4 py-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid"
                   (click)="mobileMenu.open = false"
                   >{{ block.title }}</a
                 >
@@ -103,13 +106,22 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
       </div>
     </header>
 
-    <main id="main-content" class="page-width">
-      <section aria-labelledby="hero-title" class="hero-grid">
+    <main
+      id="main-content"
+      class="mx-auto w-[calc(100%-2rem)] md:w-[min(100%-3rem,1200px)]"
+    >
+      <section
+        aria-labelledby="hero-title"
+        class="grid grid-cols-1 items-center gap-10 py-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:gap-8 md:py-14 lg:gap-16 lg:py-20"
+      >
         <div class="min-w-0">
           <p class="mb-5 text-sm font-medium text-cyan-800 dark:text-cyan-300">
             Built with Angular Aria
           </p>
-          <h1 id="hero-title" class="hero-title">
+          <h1
+            id="hero-title"
+            class="text-[clamp(2.25rem,8vw,3.5rem)] leading-[1.08] font-[650] tracking-[-0.055em] md:text-[clamp(2.5rem,4.3vw,3.75rem)]"
+          >
             Angular blocks,<br />ready to build.
           </h1>
           <p
@@ -119,7 +131,12 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
             yours with Angular and Tailwind CSS.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-3">
-            <a appButton size="lg" href="#collections" class="hero-cta">
+            <a
+              appButton
+              size="lg"
+              href="#collections"
+              class="focus-visible:outline-foreground min-h-11 px-[1.1rem] focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid motion-safe:transition-[transform] motion-safe:duration-180 motion-safe:ease-[ease-out] motion-safe:active:[transform:scale(0.98)] motion-reduce:animate-none! motion-reduce:transition-none!"
+            >
               Explore the library
               <ng-icon name="lucideArrowRight" size="16" aria-hidden="true" />
             </a>
@@ -127,7 +144,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
               appButton
               size="lg"
               variant="outline"
-              class="hero-cta"
+              class="focus-visible:outline-foreground min-h-11 px-[1.1rem] focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid motion-safe:transition-[transform] motion-safe:duration-180 motion-safe:ease-[ease-out] motion-safe:active:[transform:scale(0.98)] motion-reduce:animate-none! motion-reduce:transition-none!"
               href="https://github.com/rawat9/ng-blocks"
               target="_blank"
               rel="noopener noreferrer"
@@ -141,7 +158,10 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
         <app-angular-blocks-3d />
       </section>
 
-      <section aria-label="Install a component" class="install-strip">
+      <section
+        aria-label="Install a component"
+        class="border-border grid grid-cols-1 items-center gap-4 border-y py-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-8"
+      >
         <div>
           <h2 class="text-sm font-semibold">One command. Your code.</h2>
           <p class="text-muted-foreground mt-1 text-sm">
@@ -151,7 +171,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
         @if (activeComponent(); as component) {
           <div class="min-w-0">
             <div
-              class="command-box"
+              class="border-border bg-background flex items-center rounded-[12px] border"
               (mouseenter)="commandHovered.set(true)"
               (mouseleave)="commandHovered.set(false)"
               (focusin)="commandFocused.set(true)"
@@ -173,6 +193,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
                   appButton
                   variant="ghost"
                   size="icon"
+                  class="focus-visible:outline-foreground focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid motion-reduce:animate-none! motion-reduce:transition-none!"
                   [attr.aria-label]="
                     rotationPaused()
                       ? 'Resume component rotation'
@@ -190,6 +211,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
                   appButton
                   variant="ghost"
                   size="icon"
+                  class="focus-visible:outline-foreground focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid motion-reduce:animate-none! motion-reduce:transition-none!"
                   aria-label="Copy install command"
                   (click)="copyCommand()"
                 >
@@ -226,7 +248,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
       <section
         id="collections"
         aria-labelledby="collections-title"
-        class="py-12 md:py-16"
+        class="scroll-mt-8 py-12 md:py-16"
       >
         <div class="mb-8">
           <h2
@@ -236,14 +258,18 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
             Find your next building block.
           </h2>
           <p class="text-muted-foreground mt-3 text-sm">
-            {{ blocks.length }} collections. {{ components.length }} components.
             Pick what your project needs.
           </p>
         </div>
-        <div class="collection-grid">
+        <div
+          class="grid grid-cols-1 gap-6 md:grid-cols-2 min-[75rem]:grid-cols-4"
+        >
           @for (block of blocks; track block.route) {
-            <a [routerLink]="block.route" class="collection-link">
-              <div class="collection-copy">
+            <a
+              [routerLink]="block.route"
+              class="group/collection border-border before:border-border focus-visible:outline-foreground relative flex min-w-0 flex-col overflow-hidden rounded-[20px] border p-[3px] before:pointer-events-none before:absolute before:inset-[3px] before:rounded-[16px] before:border before:content-[''] focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid"
+            >
+              <div class="min-h-24 px-6 py-4">
                 <h3 class="text-base font-semibold tracking-tight">
                   {{ block.title }}
                 </h3>
@@ -251,14 +277,16 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
                   {{ block.description }}
                 </p>
               </div>
-              <div class="collection-image">
+              <div
+                class="border-border bg-container mt-auto aspect-[1.45] overflow-hidden rounded-[14px] border"
+              >
                 <img
                   [src]="block.image"
                   alt=""
                   width="600"
                   height="375"
                   loading="lazy"
-                  class="h-full w-full object-contain dark:hidden"
+                  class="h-full w-full object-contain p-4 motion-safe:transition-[transform] motion-safe:duration-180 motion-safe:ease-[ease-out] motion-safe:group-hover/collection:[transform:scale(1.025)] dark:hidden"
                 />
                 <img
                   [src]="block.darkImage"
@@ -266,7 +294,7 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
                   width="600"
                   height="375"
                   loading="lazy"
-                  class="hidden h-full w-full object-contain dark:block"
+                  class="hidden h-full w-full object-contain p-4 motion-safe:transition-[transform] motion-safe:duration-180 motion-safe:ease-[ease-out] motion-safe:group-hover/collection:[transform:scale(1.025)] dark:block"
                 />
               </div>
             </a>
@@ -281,209 +309,18 @@ import { AngularBlocks3d } from '../_components/angular-blocks-3d'
 
     <footer class="border-border border-t">
       <div
-        class="page-width flex flex-col gap-2 py-7 text-sm sm:flex-row sm:items-center sm:justify-between"
+        class="mx-auto flex w-[calc(100%-2rem)] flex-col gap-2 py-7 text-sm sm:flex-row sm:items-center sm:justify-between md:w-[min(100%-3rem,1200px)]"
       >
-        <a routerLink="/" class="font-semibold tracking-tight">ng-blocks</a>
+        <a
+          routerLink="/"
+          class="focus-visible:outline-foreground font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-5 focus-visible:outline-solid"
+          >ng-blocks</a
+        >
         <p class="text-muted-foreground">
           Built with Angular Aria and Tailwind CSS.
         </p>
       </div>
     </footer>
-  `,
-  styles: `
-    :host {
-      display: block;
-    }
-
-    .page-width {
-      width: min(100% - 3rem, 1200px);
-      margin-inline: auto;
-    }
-
-    a:focus-visible,
-    button:focus-visible,
-    summary:focus-visible {
-      outline: 2px solid var(--foreground);
-      outline-offset: 5px;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      padding: 0.75rem 1rem;
-      background: var(--background);
-      transform: translateY(-200%);
-      z-index: 2;
-    }
-
-    .skip-link:focus {
-      transform: translateY(0);
-    }
-
-    /* The only overlay is the mobile menu; collection frames use nested radii. */
-    .mobile-nav {
-      position: absolute;
-      top: 3rem;
-      right: 0;
-      z-index: 1;
-      width: 15rem;
-      padding: 0.5rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--background);
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      align-items: center;
-      gap: 4rem;
-      padding-block: 5rem;
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 4.3vw, 3.75rem);
-      font-weight: 650;
-      letter-spacing: -0.055em;
-      line-height: 1.08;
-    }
-
-    .hero-cta {
-      min-height: 2.75rem;
-      padding-inline: 1.1rem;
-    }
-
-    .install-strip {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-      align-items: center;
-      gap: 2rem;
-      padding-block: 1.75rem;
-      border-block: 1px solid var(--border);
-    }
-
-    .command-box {
-      display: flex;
-      align-items: center;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--background);
-    }
-
-    #collections {
-      scroll-margin-top: 2rem;
-    }
-
-    .collection-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    .collection-link {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      overflow: hidden;
-      padding: 3px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--container);
-    }
-
-    .collection-link::before {
-      position: absolute;
-      inset: 3px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      content: '';
-      pointer-events: none;
-    }
-
-    .collection-link:hover {
-      border-color: var(--muted-foreground);
-    }
-
-    .collection-image {
-      aspect-ratio: 1.45;
-      margin-top: auto;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--container);
-    }
-
-    .collection-image img {
-      padding: 1rem;
-    }
-
-    .collection-copy {
-      min-height: 6rem;
-      padding: 1rem 1.5rem;
-    }
-
-    @media (max-width: 1199px) {
-      .collection-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .collection-image img,
-      .hero-cta {
-        transition: transform 180ms ease-out;
-      }
-      .collection-link:hover img {
-        transform: scale(1.025);
-      }
-      .hero-cta:active {
-        transform: scale(0.98);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    @media (max-width: 1023px) {
-      .hero-grid {
-        gap: 2rem;
-        padding-block: 3.5rem;
-      }
-      .install-strip {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-    }
-
-    @media (max-width: 767px) {
-      .page-width {
-        width: calc(100% - 2rem);
-      }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding-block: 2.5rem;
-      }
-      .hero-title {
-        font-size: clamp(2.25rem, 8vw, 3.5rem);
-      }
-      .collection-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-    }
   `
 })
 export default class Blocks {
